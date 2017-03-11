@@ -31,7 +31,7 @@ public class Shape {
 			rotation = 0;
 		}
 	}
-	
+
 	public void unrotate(){
 		rotation--;
 		if(rotation < 0){
@@ -74,72 +74,67 @@ public class Shape {
 
 	public void setShapeI(){
 		clear();
-		shape[0][0] = true;
 		if(rotation == 0 || rotation == 2){
 			shape[0][1] = true;
-			shape[0][2] = true;
-			shape[0][3] = true;
+			shape[1][1] = true;
+			shape[2][1] = true;
+			shape[3][1] = true;
 		}
 		else if(rotation == 1 || rotation == 3){
 			shape[1][0] = true;
-			shape[2][0] = true;
-			shape[3][0] = true;
+			shape[1][1] = true;
+			shape[1][2] = true;
+			shape[1][3] = true;
 		}
 	}
 	
 	public void setShapeJ(){
 		clear();
+		shape[1][1] = true;
 		if(rotation == 0){
-			shape[0][0] = true;
-			shape[1][0] = true;
-			shape[2][0] = true;
+			shape[0][1] = true;
 			shape[2][1] = true;
+			shape[2][2] = true;
 		}
 		else if(rotation == 1){
 			shape[1][0] = true;
-			shape[1][1] = true;
 			shape[1][2] = true;
 			shape[0][2] = true;
 		}
 		else if(rotation == 2){
 			shape[0][0] = true;
 			shape[0][1] = true;
-			shape[1][1] = true;
 			shape[2][1] = true;
 		}
 		else if(rotation == 3){
+			shape[2][0] = true;
 			shape[1][0] = true;
-			shape[0][0] = true;
-			shape[0][1] = true;
-			shape[0][2] = true;
+			shape[1][2] = true;
 		}
 	}
 	
 	public void setShapeL(){
 		clear();
+		shape[1][1] = true;
 		if(rotation == 0){
+			shape[0][2] = true;
 			shape[0][1] = true;
-			shape[0][0] = true;
-			shape[1][0] = true;
-			shape[2][0] = true;
+			shape[2][1] = true;
 		}
 		else if(rotation == 1){
 			shape[0][0] = true;
 			shape[1][0] = true;
-			shape[1][1] = true;
 			shape[1][2] = true;
 		}
 		else if(rotation == 2){
 			shape[0][1] = true;
-			shape[1][1] = true;
 			shape[2][1] = true;
 			shape[2][0] = true;
 		}
 		else if(rotation == 3){
-			shape[0][0] = true;
-			shape[0][1] = true;
-			shape[0][2] = true;
+			shape[1][0] = true;
 			shape[1][2] = true;
+			shape[2][2] = true;
 		}
 	}
 	
@@ -169,9 +164,9 @@ public class Shape {
 		clear();
 		shape[1][1] = true;
 		if(rotation == 0){
-			shape[0][0] = true;
-			shape[1][0] = true;
-			shape[2][0] = true;
+			shape[0][1] = true;
+			shape[1][2] = true;
+			shape[2][1] = true;
 		}
 		else if(rotation == 1){
 			shape[1][0] = true;
@@ -184,9 +179,9 @@ public class Shape {
 			shape[2][1] = true;
 		}
 		else if(rotation == 3){
-			shape[0][0] = true;
-			shape[0][1] = true;
-			shape[0][2] = true;
+			shape[1][0] = true;
+			shape[2][1] = true;
+			shape[1][2] = true;
 		}
 	}
 

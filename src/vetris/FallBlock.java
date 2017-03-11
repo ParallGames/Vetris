@@ -18,7 +18,6 @@ public class FallBlock {
 		for(int a = 0;a < 4;a++){
 			for(int b = 0;b < 4;b++){
 				if(collision[a][b] && a+x > 9){
-					System.out.println("Bonsoir");
 					return true;
 				}
 				else if(collision[a][b] && Grid.getSquare(a+x, b+y)){

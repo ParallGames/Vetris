@@ -6,7 +6,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import vetris.FallBlock;
 import vetris.Grid;
