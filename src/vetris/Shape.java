@@ -74,15 +74,14 @@ public class Shape {
 
 	public void setShapeI(){
 		clear();
+		shape[1][1] = true;
 		if(rotation == 0 || rotation == 2){
 			shape[0][1] = true;
-			shape[1][1] = true;
 			shape[2][1] = true;
 			shape[3][1] = true;
 		}
 		else if(rotation == 1 || rotation == 3){
 			shape[1][0] = true;
-			shape[1][1] = true;
 			shape[1][2] = true;
 			shape[1][3] = true;
 		}

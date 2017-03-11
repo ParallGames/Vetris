@@ -14,10 +14,15 @@ public class FallBlock {
 
 	private static long time = System.currentTimeMillis();
 	
+	private static long speed = 1000;
+	
 	private static boolean collision(boolean collision[][]){
 		for(int a = 0;a < 4;a++){
 			for(int b = 0;b < 4;b++){
 				if(collision[a][b] && a+x > 9){
+					return true;
+				}
+				else if(collision[a][b] && a+x < 0){
 					return true;
 				}
 				else if(collision[a][b] && Grid.getSquare(a+x, b+y)){
@@ -27,6 +32,10 @@ public class FallBlock {
 			}
 		}
 		return false;
+	}
+	
+	public static void addSpeed(){
+		speed-=speed/32;
 	}
 	
 	public static void rotate(){
@@ -48,13 +57,13 @@ public class FallBlock {
 
 	public static void tick(){
 		if(key.downDown()){
-			if(System.currentTimeMillis() > time + 100){
+			if(System.currentTimeMillis() > time + speed/8){
 				time = System.currentTimeMillis();
 				y++;
 			}
 		}
 		else{
-			if(System.currentTimeMillis() > time + 1000){
+			if(System.currentTimeMillis() > time + speed){
 				time = System.currentTimeMillis();
 				y++;
 			}

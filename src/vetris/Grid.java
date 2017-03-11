@@ -1,5 +1,7 @@
 package vetris;
 
+import vetris.FallBlock;
+
 public class Grid {
 	private static boolean grid[][] = new boolean[10][20];
 	private static int score = 0;
@@ -35,6 +37,7 @@ public class Grid {
 					grid[a][line] = false;
 				}
 				score += 10;
+				FallBlock.addSpeed();
 				for(int a = line - 1;a > 0;a--){
 					for(int b = 0;b < 10;b++){
 						if(!grid[b][a+1]){
