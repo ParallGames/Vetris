@@ -3,6 +3,7 @@ package vetris;
 import vetris.Grid;
 import vetris.Key;
 import vetris.Shape;
+import vetris.ValMath;
 
 public class FallBlock {
 	private static int x = 0;
@@ -13,9 +14,8 @@ public class FallBlock {
 	private static Key key = new Key();
 
 	private static long time = System.currentTimeMillis();
-	
 	private static long speed = 1000;
-	
+
 	private static boolean collision(boolean collision[][]){
 		for(int a = 0;a < 4;a++){
 			for(int b = 0;b < 4;b++){
@@ -33,11 +33,11 @@ public class FallBlock {
 		}
 		return false;
 	}
-	
+
 	public static void addSpeed(){
 		speed-=speed/32;
 	}
-	
+
 	public static void rotate(){
 		shape.rotate();
 		shape.update();
@@ -48,11 +48,13 @@ public class FallBlock {
 	}
 
 	public static void reset(){
-		x = 0;
-		y = 0;
-		time = System.currentTimeMillis();
 		shape.setRandomShape();
 		shape.update();
+
+		x = ValMath.randInt(0-shape.maxLeft(),10-shape.maxRight());
+		y = 0 - shape.maxUp();
+
+		time = System.currentTimeMillis();
 	}
 
 	public static void tick(){

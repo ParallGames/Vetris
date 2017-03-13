@@ -11,12 +11,39 @@ public class Shape {
 		clear();
 	}
 
-	Shape(boolean p_shape[][],int p_nShape,int p_rotation){
-		shape = p_shape;
-		nShape = p_nShape;
-		rotation = p_rotation;
+	public int maxLeft(){
+		for(int a = 0;a < 4;a++){
+			for(int b = 0;b < 4;b++){
+				if(shape[a][b]){
+					return a;
+				}
+			}
+		}
+		return 0;
 	}
-
+	
+	public int maxRight(){
+		for(int a = 3;a > 0;a--){
+			for(int b = 0;b < 4;b++){
+				if(shape[a][b]){
+					return a;
+				}
+			}
+		}
+		return 0;
+	}
+	
+	public int maxUp(){
+		for(int a = 0;a < 4;a++){
+			for(int b = 0;b < 4;b++){
+				if(shape[b][a]){
+					return a;
+				}
+			}
+		}
+		return 0;
+	}
+	
 	public void clear(){
 		for(int x = 0;x < 4;x++){
 			for(int y = 0;y < 4;y++){
