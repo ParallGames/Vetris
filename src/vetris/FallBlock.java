@@ -25,8 +25,13 @@ public class FallBlock {
 				else if(collision[a][b] && a+x < 0){
 					return true;
 				}
+				else if(collision[a][b] && b+y < 0){
+					return true;
+				}
+				else if(collision[a][b] && b+y > 19){
+					return true;
+				}
 				else if(collision[a][b] && Grid.getSquare(a+x, b+y)){
-					
 					return true;
 				}
 			}
