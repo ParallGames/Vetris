@@ -15,6 +15,9 @@ public class Key {
     private boolean upPressed = false;
     private boolean up = false;
     
+    private boolean enterPressed = false;
+    private boolean enter = false;
+    
     private boolean downPressed = false;
 
 	Key(){
@@ -40,7 +43,14 @@ public class Key {
                         		up = true;
                         	}
                         }
-                        if(ke.getKeyCode() == KeyEvent.VK_DOWN) {
+                        if(ke.getKeyCode() == KeyEvent.VK_ENTER){
+                        	if(!enterPressed){
+                        		enterPressed = true;
+                        		enter = true;
+                        	}
+                        }
+
+                        if(ke.getKeyCode() == KeyEvent.VK_DOWN){
                         	if(!downPressed){
                         		downPressed = true;
                         	}
@@ -56,6 +66,10 @@ public class Key {
                     	if(ke.getKeyCode() == KeyEvent.VK_UP){
                     		upPressed = false;
                     	}
+                    	if(ke.getKeyCode() == KeyEvent.VK_ENTER){
+                    		enterPressed = false;
+                    	}
+
                     	if(ke.getKeyCode() == KeyEvent.VK_DOWN){
                     		downPressed = false;
                     	}
@@ -85,6 +99,14 @@ public class Key {
 	public boolean upHitted(){
 		if(up){
 			up = false;
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean enterHitted(){
+		if(enter){
+			enter = false;
 			return true;
 		}
 		return false;

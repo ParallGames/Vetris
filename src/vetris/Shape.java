@@ -21,7 +21,7 @@ public class Shape {
 		}
 		return 0;
 	}
-	
+
 	public int maxRight(){
 		for(int a = 3;a > 0;a--){
 			for(int b = 0;b < 4;b++){
@@ -32,7 +32,7 @@ public class Shape {
 		}
 		return 0;
 	}
-	
+
 	public int maxUp(){
 		for(int a = 0;a < 4;a++){
 			for(int b = 0;b < 4;b++){
@@ -43,7 +43,7 @@ public class Shape {
 		}
 		return 0;
 	}
-	
+
 	public void clear(){
 		for(int x = 0;x < 4;x++){
 			for(int y = 0;y < 4;y++){
@@ -51,7 +51,7 @@ public class Shape {
 			}
 		}
 	}
-	
+
 	public void rotate(){
 		rotation++;
 		if(rotation > 3){
@@ -65,16 +65,16 @@ public class Shape {
 			rotation = 3;
 		}
 	}
-	
+
 	public void setNShape(int n){
 		nShape = n;
 	}
-	
+
 	public void setRandomShape(){
 		rotation = ValMath.randInt(0,4);
 		setNShape(ValMath.randInt(0, 7));
 	}
-	
+
 	public void update(){
 		if(nShape == 0){
 			setShapeI();
@@ -113,7 +113,7 @@ public class Shape {
 			shape[1][3] = true;
 		}
 	}
-	
+
 	public void setShapeJ(){
 		clear();
 		shape[1][1] = true;
@@ -138,7 +138,7 @@ public class Shape {
 			shape[1][2] = true;
 		}
 	}
-	
+
 	public void setShapeL(){
 		clear();
 		shape[1][1] = true;
@@ -163,7 +163,7 @@ public class Shape {
 			shape[2][2] = true;
 		}
 	}
-	
+
 	public void setShapeO(){
 		clear();
 		shape[0][0] = true;

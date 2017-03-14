@@ -60,6 +60,7 @@ public class FallBlock {
 		y = 0 - shape.maxUp();
 
 		time = System.currentTimeMillis();
+		speed = 1000;
 	}
 
 	public static void tick(){
@@ -125,6 +126,7 @@ public class FallBlock {
 	public static int getShapeX(int p_x){
 		return p_x + x;
 	}
+
 	public static int getShapeY(int p_y){
 		return p_y + y;
 	}

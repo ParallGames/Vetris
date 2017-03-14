@@ -10,7 +10,7 @@ public class Main {
 		Window window = new Window();
 		Key key = new Key();
 
-		Grid.clear();
+		Grid.reset();
 		FallBlock.reset();
 
 		while(window.isVisible()){
@@ -25,7 +25,16 @@ public class Main {
 			if(key.upHitted()){
 				FallBlock.rotate();
 			}
+
 			window.repaint();
+
+			if(Grid.isGameOver()){
+				while(window.isVisible() && !key.enterHitted()){
+					window.repaint();
+				}
+				Grid.reset();
+				FallBlock.reset();
+			}
 		}
 		window.close();
 	}

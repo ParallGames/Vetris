@@ -4,15 +4,22 @@ import vetris.FallBlock;
 
 public class Grid {
 	private static boolean grid[][] = new boolean[10][20];
+	private static boolean gameOver = false;
+
 	private static int score = 0;
-	
-	public static void clear(){
+
+	public static void reset(){
 		score = 0;
+		gameOver = false;
 		for(byte a = 0;a < 10;a++){
 			for(byte b = 0;b < 20;b++){
 				grid[a][b] = false;
 			}
 		}
+	}
+
+	public static boolean isGameOver(){
+		return gameOver;
 	}
 	
 	public static boolean getSquare(int x,int y){
@@ -22,7 +29,7 @@ public class Grid {
 	public static int getScore(){
 		return score;
 	}
-	
+
 	public static void update(){
 		boolean isLine;
 		for(int line = 0;line < 20;line++){
@@ -49,8 +56,13 @@ public class Grid {
 			}
 		}
 	}
-	
+
 	public static void setSquare(int x,int y){
-		grid[x][y] = true;
+		if(y > 0){
+			grid[x][y] = true;
+		}
+		else{
+			gameOver = true;
+		}
 	}
 }
