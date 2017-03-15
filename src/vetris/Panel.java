@@ -46,15 +46,20 @@ public class Panel extends JPanel{
 		g.setFont(new Font("Courier",Font.BOLD,32));
 		g.drawString("Score",8,32);
 		g.drawString(String.valueOf(Grid.getScore()),8,64);
+		g.drawString("Record",8,128);
+		g.drawString(String.valueOf(Grid.getRecord()),8,160);
 
 		if(Grid.isGameOver()){
-			g.setColor(new Color(0,0,0,127));
+			g.setColor(new Color(0,0,0,200));
 			g.fillRect(0,0,this.getWidth(),this.getHeight());
 
 			g.setColor(new Color(255,31,31));
 			g.setFont(new Font("Courier",Font.BOLD,100));
-			g.drawString("Game Over",50,100);
-			g.drawString("Score:"+String.valueOf(Grid.getScore()),50,200);
+			g.drawString("Game Over",50,200);
+
+			g.setFont(new Font("Courier",Font.BOLD,50));
+			g.drawString("Score:"+String.valueOf(Grid.getScore()),160,400);
+			g.drawString("Record:"+String.valueOf(Grid.getRecord()),160,500);
 		}
 	}
 }

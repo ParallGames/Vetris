@@ -1,15 +1,19 @@
 package vetris;
 
+import vetris.Save;
+
 public class Grid {
 	private static boolean grid[][] = new boolean[10][20];
 	private static boolean gameOver = false;
-	private static int speed = 1000;
 
+	private static int speed = 1000;
 	private static int score = 0;
+	private static int record = Save.loadScore();
 
 	public static void reset(){
-		score = 0;
 		speed = 1000;
+		score = 0;
+		record = Save.loadScore();
 		gameOver = false;
 		for(byte a = 0;a < 10;a++){
 			for(byte b = 0;b < 20;b++){
@@ -36,6 +40,10 @@ public class Grid {
 
 	public static int getScore(){
 		return score;
+	}
+	
+	public static int getRecord(){
+		return record;
 	}
 
 	public static void update(){
@@ -70,6 +78,9 @@ public class Grid {
 			grid[x][y] = true;
 		}
 		else{
+			if(score > record){
+				Save.saveScore(score);
+			}
 			gameOver = true;
 		}
 	}
