@@ -14,7 +14,6 @@ public class FallBlock {
 	private static Key key = new Key();
 
 	private static long time = System.currentTimeMillis();
-	private static long speed = 1000;
 
 	private static boolean collision(boolean collision[][]){
 		for(int a = 0;a < 4;a++){
@@ -39,14 +38,10 @@ public class FallBlock {
 		return false;
 	}
 
-	public static void addSpeed(){
-		speed-=speed/32;
-	}
-
 	public static void rotate(){
 		shape.rotate();
 		shape.update();
-		if(collision(shape.shape)){
+		if(collision(shape.getShape())){
 			shape.unrotate();
 			shape.update();
 		}
@@ -60,18 +55,17 @@ public class FallBlock {
 		y = 0 - shape.maxUp();
 
 		time = System.currentTimeMillis();
-		speed = 1000;
 	}
 
 	public static void tick(){
 		if(key.downDown()){
-			if(System.currentTimeMillis() > time + speed/8){
+			if(System.currentTimeMillis() > time + Grid.getSpeed()/8){
 				time = System.currentTimeMillis();
 				y++;
 			}
 		}
 		else{
-			if(System.currentTimeMillis() > time + speed){
+			if(System.currentTimeMillis() > time + Grid.getSpeed()){
 				time = System.currentTimeMillis();
 				y++;
 			}
@@ -79,11 +73,11 @@ public class FallBlock {
 
 		for(int b_x = 0;b_x < 4;b_x++){
 			for(int b_y = 0;b_y < 4;b_y++){
-				if(shape.shape[b_x][b_y]){
+				if(shape.getShape()[b_x][b_y]){
 					if(y >= 20-b_y || Grid.getSquare(x+b_x,y+b_y)){
 						for(int b_a = 0;b_a < 4;b_a++){
 							for(int b_b = 0;b_b < 4;b_b++){
-								if(shape.shape[b_a][b_b]){
+								if(shape.getShape()[b_a][b_b]){
 									Grid.setSquare(x+b_a,y+b_b-1);
 								}
 							}
@@ -100,7 +94,7 @@ public class FallBlock {
 	public static void goLeft(){
 		for(int b_x = 0;b_x < 4;b_x++){
 			for(int b_y = 0;b_y < 4;b_y++){
-				if(shape.shape[b_x][b_y] && ((x+b_x) < 1 || Grid.getSquare(x+b_x-1,y+b_y))){
+				if(shape.getShape()[b_x][b_y] && ((x+b_x) < 1 || Grid.getSquare(x+b_x-1,y+b_y))){
 					return;
 				}
 			}
@@ -111,7 +105,7 @@ public class FallBlock {
 	public static void goRight(){
 		for(int b_x = 0;b_x < 4;b_x++){
 			for(int b_y = 0;b_y < 4;b_y++){
-				if(shape.shape[b_x][b_y] && ((x + b_x) > 8 || Grid.getSquare(x+b_x+1,y+b_y))){
+				if(shape.getShape()[b_x][b_y] && ((x + b_x) > 8 || Grid.getSquare(x+b_x+1,y+b_y))){
 					return;
 				}
 			}
@@ -132,6 +126,6 @@ public class FallBlock {
 	}
 
 	public static boolean isSquare(int p_x,int p_y){
-		return shape.shape[p_x][p_y];
+		return shape.getShape()[p_x][p_y];
 	}
 }

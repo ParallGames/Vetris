@@ -3,14 +3,18 @@ package vetris;
 import vetris.ValMath;
 
 public class Shape {
-	public boolean shape[][] = new boolean[4][4];
-	public int nShape = 0;
-	public int rotation = 0;
+	private boolean shape[][] = new boolean[4][4];
+	private int nShape = 0;
+	private int rotation = 0;
 
 	Shape(){
 		clear();
 	}
 
+	public boolean[][] getShape(){
+		return shape;
+	}
+	
 	public int maxLeft(){
 		for(int a = 0;a < 4;a++){
 			for(int b = 0;b < 4;b++){
@@ -66,13 +70,9 @@ public class Shape {
 		}
 	}
 
-	public void setNShape(int n){
-		nShape = n;
-	}
-
 	public void setRandomShape(){
 		rotation = ValMath.randInt(0,4);
-		setNShape(ValMath.randInt(0, 7));
+		nShape = ValMath.randInt(0, 7);
 	}
 
 	public void update(){
