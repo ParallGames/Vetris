@@ -78,25 +78,24 @@ public class Shape {
 	public void update(){
 		if(nShape == 0){
 			setShapeI();
-		}
-		else if(nShape == 1){
+		}else if(nShape == 1){
 			setShapeJ();
-		}
-		else if(nShape == 2){
+		}else if(nShape == 2){
 			setShapeL();
-		}
-		else if(nShape == 3){
+		}else if(nShape == 3){
 			setShapeO();
-		}
-		else if(nShape == 4){
+		}else if(nShape == 4){
 			setShapeS();
-		}
-		else if(nShape == 5){
+		}else if(nShape == 5){
 			setShapeT();
-		}
-		else if(nShape == 6){
+		}else if(nShape == 6){
 			setShapeZ();
 		}
+	}
+	
+	public void setTinyShape(){
+		clear();
+		shape[0][0] = true;
 	}
 
 	public void setShapeI(){
@@ -106,8 +105,7 @@ public class Shape {
 			shape[0][1] = true;
 			shape[2][1] = true;
 			shape[3][1] = true;
-		}
-		else if(rotation == 1 || rotation == 3){
+		}else if(rotation == 1 || rotation == 3){
 			shape[1][0] = true;
 			shape[1][2] = true;
 			shape[1][3] = true;
@@ -121,18 +119,15 @@ public class Shape {
 			shape[0][1] = true;
 			shape[2][1] = true;
 			shape[2][2] = true;
-		}
-		else if(rotation == 1){
+		}else if(rotation == 1){
 			shape[1][0] = true;
 			shape[1][2] = true;
 			shape[0][2] = true;
-		}
-		else if(rotation == 2){
+		}else if(rotation == 2){
 			shape[0][0] = true;
 			shape[0][1] = true;
 			shape[2][1] = true;
-		}
-		else if(rotation == 3){
+		}else if(rotation == 3){
 			shape[2][0] = true;
 			shape[1][0] = true;
 			shape[1][2] = true;
@@ -146,18 +141,15 @@ public class Shape {
 			shape[0][2] = true;
 			shape[0][1] = true;
 			shape[2][1] = true;
-		}
-		else if(rotation == 1){
+		}else if(rotation == 1){
 			shape[0][0] = true;
 			shape[1][0] = true;
 			shape[1][2] = true;
-		}
-		else if(rotation == 2){
+		}else if(rotation == 2){
 			shape[0][1] = true;
 			shape[2][1] = true;
 			shape[2][0] = true;
-		}
-		else if(rotation == 3){
+		}else if(rotation == 3){
 			shape[1][0] = true;
 			shape[1][2] = true;
 			shape[2][2] = true;
@@ -179,8 +171,7 @@ public class Shape {
 		if(rotation == 0 || rotation == 2){
 			shape[1][0] = true;
 			shape[2][0] = true;
-		}
-		else if(rotation == 1 || rotation == 3){
+		}else if(rotation == 1 || rotation == 3){
 			shape[0][0] = true;
 			shape[1][2] = true;
 		}
@@ -193,18 +184,15 @@ public class Shape {
 			shape[0][1] = true;
 			shape[1][2] = true;
 			shape[2][1] = true;
-		}
-		else if(rotation == 1){
+		}else if(rotation == 1){
 			shape[1][0] = true;
 			shape[0][1] = true;
 			shape[1][2] = true;
-		}
-		else if(rotation == 2){
+		}else if(rotation == 2){
 			shape[0][1] = true;
 			shape[1][0] = true;
 			shape[2][1] = true;
-		}
-		else if(rotation == 3){
+		}else if(rotation == 3){
 			shape[1][0] = true;
 			shape[2][1] = true;
 			shape[1][2] = true;
@@ -218,8 +206,7 @@ public class Shape {
 		if(rotation == 0 || rotation == 2){
 			shape[0][0] = true;
 			shape[2][1] = true;
-		}
-		else if(rotation == 1 || rotation == 3){
+		}else if(rotation == 1 || rotation == 3){
 			shape[0][1] = true;
 			shape[0][2] = true;
 		}

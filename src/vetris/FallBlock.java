@@ -15,22 +15,10 @@ public class FallBlock {
 
 	private static long time = System.currentTimeMillis();
 
-	private static boolean collision(boolean collision[][]){
+	public static boolean collision(){
 		for(int a = 0;a < 4;a++){
 			for(int b = 0;b < 4;b++){
-				if(collision[a][b] && a+x > 9){
-					return true;
-				}
-				else if(collision[a][b] && a+x < 0){
-					return true;
-				}
-				else if(collision[a][b] && b+y < 0){
-					return true;
-				}
-				else if(collision[a][b] && b+y > 19){
-					return true;
-				}
-				else if(collision[a][b] && Grid.getSquare(a+x, b+y)){
+				if(shape.getShape()[a][b] && (a+x > 9 || a+x < 0 || b+y < 0 || b+y > 19 || Grid.getSquare(a+x,b+y))){
 					return true;
 				}
 			}
@@ -41,7 +29,7 @@ public class FallBlock {
 	public static void rotate(){
 		shape.rotate();
 		shape.update();
-		if(collision(shape.getShape())){
+		if(collision()){
 			shape.unrotate();
 			shape.update();
 		}
@@ -55,6 +43,10 @@ public class FallBlock {
 		y = 0 - shape.maxUp();
 
 		time = System.currentTimeMillis();
+	}
+	
+	public static void tinyShape(){
+		shape.setTinyShape();
 	}
 
 	public static void tick(){
@@ -114,6 +106,34 @@ public class FallBlock {
 	}
 
 	public static void goDown(){
+		y++;
+	}
+	
+	public static void moveLeft(){
+		if(x < 1){
+			return;
+		}
+		x--;
+	}
+	
+	public static void moveRight(){
+		if(x > 8){
+			return;
+		}
+		x++;
+	}
+	
+	public static void moveUp(){
+		if(y < 1){
+			return;
+		}
+		y--;
+	}
+	
+	public static void moveDown(){
+		if(y > 18){
+			return;
+		}
 		y++;
 	}
 

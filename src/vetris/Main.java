@@ -27,6 +27,42 @@ public class Main {
 			}
 
 			window.repaint();
+			
+			if(key.enterHitted() && Grid.hasEnoughEnergy()){
+				FallBlock.tinyShape();
+				while(window.isVisible()){
+					if(key.leftHitted()){
+						FallBlock.moveLeft();
+					}
+					if(key.rightHitted()){
+						FallBlock.moveRight();
+					}
+					if(key.upHitted()){
+						FallBlock.moveUp();
+					}
+					if(key.downHitted()){
+						FallBlock.moveDown();
+					}
+					if(key.enterHitted() && !FallBlock.collision()){
+						break;
+					}
+					window.repaint();
+				}
+				while(window.isVisible()){
+					FallBlock.moveDown();
+					if(FallBlock.collision()){
+						FallBlock.moveUp();
+						break;
+					}
+					if(FallBlock.getShapeY(0) > 18){
+						break;
+					}
+					window.repaint();
+				}
+				Grid.setSquare(FallBlock.getShapeX(0),FallBlock.getShapeY(0));
+				Grid.update();
+				FallBlock.reset();
+			}
 
 			if(Grid.isGameOver()){
 				while(window.isVisible() && !key.enterHitted()){

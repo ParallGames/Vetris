@@ -21,8 +21,7 @@ public class Window{
 	public void repaint(){
 		try{
 			Thread.sleep(10);
-		}
-		catch(InterruptedException e){
+		}catch(InterruptedException e){
 			e.printStackTrace();
 		}
 		jFrame.revalidate();

@@ -19,6 +19,7 @@ public class Key {
     private boolean enter = false;
     
     private boolean downPressed = false;
+    private boolean down = false;
 
 	Key(){
 		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
@@ -53,10 +54,10 @@ public class Key {
                         if(ke.getKeyCode() == KeyEvent.VK_DOWN){
                         	if(!downPressed){
                         		downPressed = true;
+                        		down = true;
                         	}
                         }
-                    }
-                    else if(ke.getID() == KeyEvent.KEY_RELEASED){
+                    }else if(ke.getID() == KeyEvent.KEY_RELEASED){
                     	if(ke.getKeyCode() == KeyEvent.VK_LEFT){
                     		leftPressed = false;
                     	}
@@ -99,6 +100,14 @@ public class Key {
 	public boolean upHitted(){
 		if(up){
 			up = false;
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean downHitted(){
+		if(down){
+			down = false;
 			return true;
 		}
 		return false;
