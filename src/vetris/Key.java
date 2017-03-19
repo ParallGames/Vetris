@@ -15,12 +15,24 @@ public class Key {
     private boolean upPressed = false;
     private boolean up = false;
     
+    private boolean downPressed = false;
+    private boolean down = false;
+    
     private boolean enterPressed = false;
     private boolean enter = false;
     
-    private boolean downPressed = false;
-    private boolean down = false;
-
+    private boolean pPressed = false;
+    private boolean p = false;
+    
+    public void reset(){
+    	left = false;
+    	right = false;
+    	up = false;
+    	down = false;
+    	enter = false;
+    	p = false;
+    }
+    
 	Key(){
 		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
             public boolean dispatchKeyEvent(KeyEvent ke) {
@@ -44,17 +56,22 @@ public class Key {
                         		up = true;
                         	}
                         }
+                        if(ke.getKeyCode() == KeyEvent.VK_DOWN){
+                        	if(!downPressed){
+                        		downPressed = true;
+                        		down = true;
+                        	}
+                        }
                         if(ke.getKeyCode() == KeyEvent.VK_ENTER){
                         	if(!enterPressed){
                         		enterPressed = true;
                         		enter = true;
                         	}
                         }
-
-                        if(ke.getKeyCode() == KeyEvent.VK_DOWN){
-                        	if(!downPressed){
-                        		downPressed = true;
-                        		down = true;
+                        if(ke.getKeyCode() == KeyEvent.VK_P){
+                        	if(!pPressed){
+                        		pPressed = true;
+                        		p = true;
                         	}
                         }
                     }else if(ke.getID() == KeyEvent.KEY_RELEASED){
@@ -67,12 +84,14 @@ public class Key {
                     	if(ke.getKeyCode() == KeyEvent.VK_UP){
                     		upPressed = false;
                     	}
+                    	if(ke.getKeyCode() == KeyEvent.VK_DOWN){
+                    		downPressed = false;
+                    	}
                     	if(ke.getKeyCode() == KeyEvent.VK_ENTER){
                     		enterPressed = false;
                     	}
-
-                    	if(ke.getKeyCode() == KeyEvent.VK_DOWN){
-                    		downPressed = false;
+                    	if(ke.getKeyCode() == KeyEvent.VK_P){
+                    		pPressed = false;
                     	}
                     }
                     return false;
@@ -116,6 +135,14 @@ public class Key {
 	public boolean enterHitted(){
 		if(enter){
 			enter = false;
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean pHitted(){
+		if(p){
+			p = false;
 			return true;
 		}
 		return false;

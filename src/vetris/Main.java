@@ -25,6 +25,9 @@ public class Main {
 			if(key.upHitted()){
 				FallBlock.rotate();
 			}
+			if(key.pHitted()){
+				Grid.pause();
+			}
 
 			window.repaint();
 			
@@ -63,6 +66,13 @@ public class Main {
 				Grid.update();
 				FallBlock.reset();
 			}
+			
+			if(Grid.isPause()){
+				while(window.isVisible() && !key.pHitted()){
+					window.repaint();
+				}
+				Grid.unpause();
+			}
 
 			if(Grid.isGameOver()){
 				while(window.isVisible() && !key.enterHitted()){
@@ -70,6 +80,7 @@ public class Main {
 				}
 				Grid.reset();
 				FallBlock.reset();
+				key.reset();
 			}
 		}
 		window.close();

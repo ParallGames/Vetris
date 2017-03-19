@@ -5,6 +5,7 @@ import vetris.Save;
 public class Grid {
 	private static boolean grid[][] = new boolean[10][20];
 	private static boolean gameOver = false;
+	private static boolean pause = false;
 
 	private static int speed = 1000;
 	private static int score = 0;
@@ -20,6 +21,7 @@ public class Grid {
 		gEnergy = 0;
 
 		gameOver = false;
+		pause = false;
 
 		for(byte a = 0;a < 10;a++){
 			for(byte b = 0;b < 20;b++){
@@ -62,6 +64,18 @@ public class Grid {
 			return true;
 		}
 		return false;
+	}
+	
+	public static boolean isPause(){
+		return pause;
+	}
+	
+	public static void pause(){
+		pause = true;
+	}
+	
+	public static void unpause(){
+		pause = false;
 	}
 
 	public static void update(){

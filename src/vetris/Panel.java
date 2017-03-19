@@ -62,6 +62,19 @@ public class Panel extends JPanel{
 				}
 			}
 		}
+		
+		if(Grid.isPause()){
+			g.setColor(new Color(0,0,0,200));
+			g.fillRect(0,0,this.getWidth(),this.getHeight());
+			
+			g.setColor(new Color(63,63,63));
+			g.fillRect(224,224,192,192);
+			
+			g.setColor(new Color(255,31,31));
+			g.fillRect(256,256,32,128);
+			g.fillRect(352,256,32,128);
+			
+		}
 
 		if(Grid.isGameOver()){
 			g.setColor(new Color(0,0,0,200));
