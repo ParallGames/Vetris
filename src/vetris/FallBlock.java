@@ -6,6 +6,9 @@ import vetris.Shape;
 import vetris.ValMath;
 
 public class FallBlock {
+	public static int gX = 0;
+	public static int gY = 0;
+	
 	private static int x = 0;
 	private static int y = 0;
 
@@ -41,6 +44,9 @@ public class FallBlock {
 
 		x = ValMath.randInt(0-shape.maxLeft(),10-shape.maxRight());
 		y = 0 - shape.maxUp();
+		
+		gX = x*32;
+		gY = y*32;
 
 		time = System.currentTimeMillis();
 	}
@@ -136,13 +142,13 @@ public class FallBlock {
 		}
 		y++;
 	}
-
-	public static int getShapeX(int p_x){
-		return p_x + x;
+	
+	public static int getX(){
+		return x;
 	}
-
-	public static int getShapeY(int p_y){
-		return p_y + y;
+	
+	public static int getY(){
+		return y;
 	}
 
 	public static boolean isSquare(int p_x,int p_y){

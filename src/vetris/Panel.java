@@ -42,6 +42,23 @@ public class Panel extends JPanel{
 			gEnergy--;
 		}
 		
+		if(FallBlock.getY()*32 > FallBlock.gY){
+			FallBlock.gY+=3200/Grid.getSpeed();
+		}else if(FallBlock.getY()*32 < FallBlock.gY){
+			FallBlock.gY-=3200/Grid.getSpeed();
+		}
+		if(Math.abs(FallBlock.gY-FallBlock.getY()*32) < 3200/Grid.getSpeed()){
+			FallBlock.gY = FallBlock.getY()*32;
+		}
+		
+		if(FallBlock.getX()*32 > FallBlock.gX){
+			FallBlock.gX+=4;
+		}else if(FallBlock.getX()*32 < FallBlock.gX){
+			FallBlock.gX-=4;
+		}
+		
+		
+		
 		g.fillRect(520,600-gEnergy,80,gEnergy);
 
 		g.setFont(new Font("Courier",Font.BOLD,32));
@@ -53,12 +70,12 @@ public class Panel extends JPanel{
 		for(int x = 0;x < 4;x++){
 			for(int y = 0;y < 4;y++){
 				if(FallBlock.isSquare(x,y)){
-					if(Grid.getSquare(FallBlock.getShapeX(x),FallBlock.getShapeY(y))){
+					if(Grid.getSquare(FallBlock.getX()+x,FallBlock.getY()+y)){
 						g.setColor(new Color(255,0,0));
 					}else{
 						g.setColor(new Color(63,63,63));
 					}
-					g.fillRect(FallBlock.getShapeX(x)*32+160,FallBlock.getShapeY(y)*32,32,32);
+					g.fillRect(FallBlock.gX+x*32+160,FallBlock.gY + y*32,32,32);
 				}
 			}
 		}

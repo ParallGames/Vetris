@@ -57,12 +57,12 @@ public class Main {
 						FallBlock.moveUp();
 						break;
 					}
-					if(FallBlock.getShapeY(0) > 18){
+					if(FallBlock.getY() > 18){
 						break;
 					}
 					window.repaint();
 				}
-				Grid.setSquare(FallBlock.getShapeX(0),FallBlock.getShapeY(0));
+				Grid.setSquare(FallBlock.getX(),FallBlock.getY());
 				Grid.update();
 				FallBlock.reset();
 			}
