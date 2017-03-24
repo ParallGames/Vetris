@@ -13,6 +13,7 @@ import vetris.Grid;
 public class Panel extends JPanel{
 	
 	private int gEnergy = 0;
+	private int alpha = 255;
 
 	Panel(){
 		this.setPreferredSize(new Dimension(640,640));
@@ -36,6 +37,7 @@ public class Panel extends JPanel{
 				}
 			}
 		}
+
 		if(Grid.getEnergy()*56 > gEnergy){
 			gEnergy++;
 		}else if(Grid.getEnergy()*56 < gEnergy){
@@ -56,8 +58,6 @@ public class Panel extends JPanel{
 		}else if(FallBlock.getX()*32 < FallBlock.gX){
 			FallBlock.gX-=4;
 		}
-		
-		
 		
 		g.fillRect(520,600-gEnergy,80,gEnergy);
 
@@ -80,10 +80,21 @@ public class Panel extends JPanel{
 			}
 		}
 		
+		if(Grid.isPause() || Grid.isGameOver()){
+			alpha+=2;
+			if(alpha > 200){
+				alpha = 200;
+			}
+		}else{
+			alpha-=2;
+			if(alpha < 0){
+				alpha = 0;
+			}
+		}
+		g.setColor(new Color(0,0,0,alpha));
+		g.fillRect(0,0,this.getWidth(),this.getHeight());
+		
 		if(Grid.isPause()){
-			g.setColor(new Color(0,0,0,200));
-			g.fillRect(0,0,this.getWidth(),this.getHeight());
-			
 			g.setColor(new Color(63,63,63));
 			g.fillRect(224,224,192,192);
 			
@@ -94,9 +105,6 @@ public class Panel extends JPanel{
 		}
 
 		if(Grid.isGameOver()){
-			g.setColor(new Color(0,0,0,200));
-			g.fillRect(0,0,this.getWidth(),this.getHeight());
-
 			g.setColor(new Color(255,31,31));
 			g.setFont(new Font("Courier",Font.BOLD,100));
 			g.drawString("Game Over",50,200);
