@@ -1,7 +1,5 @@
 package vetris;
 
-import vetris.Save;
-
 public class Grid {
 	private static boolean grid[][] = new boolean[10][20];
 	private static boolean gameOver = false;

@@ -2,8 +2,6 @@ package vetris;
 
 import javax.swing.JFrame;
 
-import vetris.Panel;
-
 public class Window{
 
 	private Panel panel = new Panel();

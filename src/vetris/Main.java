@@ -1,10 +1,5 @@
 package vetris;
 
-import vetris.FallBlock;
-import vetris.Grid;
-import vetris.Key;
-import vetris.Window;
-
 public class Main {
 	public static void main(String args[]){
 		Window window = new Window();

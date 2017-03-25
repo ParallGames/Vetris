@@ -1,7 +1,5 @@
 package vetris;
 
-import vetris.ValMath;
-
 public class Shape {
 	private boolean shape[][] = new boolean[4][4];
 	private int nShape = 0;

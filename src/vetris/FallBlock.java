@@ -1,10 +1,5 @@
 package vetris;
 
-import vetris.Grid;
-import vetris.Key;
-import vetris.Shape;
-import vetris.ValMath;
-
 public class FallBlock {
 	public static int gX = 0;
 	public static int gY = 0;

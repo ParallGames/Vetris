@@ -7,9 +7,6 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
-import vetris.FallBlock;
-import vetris.Grid;
-
 public class Panel extends JPanel{
 	
 	private int gEnergy = 0;
