@@ -9,14 +9,12 @@ public class Grid {
 	private static int score = 0;
 	private static int record = Save.loadScore();
 	private static int energy = 0;
-	private static int gEnergy = 0;
 
 	public static void reset(){
 		speed = 1000;
 		score = 0;
 		record = Save.loadScore();
 		energy = 0;
-		gEnergy = 0;
 
 		gameOver = false;
 		pause = false;
@@ -90,6 +88,7 @@ public class Grid {
 					grid[a][line] = false;
 				}
 
+				SoundPlayer.play("Line");
 				score += 10;
 				energy++;
 				if(energy > 10){

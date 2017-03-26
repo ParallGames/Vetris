@@ -23,7 +23,6 @@ public class Main {
 			if(key.pHitted()){
 				Grid.pause();
 			}
-
 			window.repaint();
 			
 			if(key.enterHitted() && Grid.hasEnoughEnergy()){
@@ -46,17 +45,10 @@ public class Main {
 					}
 					window.repaint();
 				}
-				while(window.isVisible()){
-					FallBlock.moveDown();
-					if(FallBlock.collision()){
-						FallBlock.moveUp();
-						break;
-					}
-					if(FallBlock.getY() > 18){
-						break;
-					}
+				while(window.isVisible() && FallBlock.fall()){
 					window.repaint();
 				}
+				SoundPlayer.play("Shock");
 				Grid.setSquare(FallBlock.getX(),FallBlock.getY());
 				Grid.update();
 				FallBlock.reset();
@@ -70,6 +62,7 @@ public class Main {
 			}
 
 			if(Grid.isGameOver()){
+				SoundPlayer.play("GameOver");
 				while(window.isVisible() && !key.enterHitted()){
 					window.repaint();
 				}

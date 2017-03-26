@@ -13,7 +13,7 @@ public class FallBlock {
 
 	private static long time = System.currentTimeMillis();
 
-	public static boolean collision(){
+	public static synchronized boolean collision(){
 		for(int a = 0;a < 4;a++){
 			for(int b = 0;b < 4;b++){
 				if(shape.getShape()[a][b] && (a+x > 9 || a+x < 0 || b+y < 0 || b+y > 19 || Grid.getSquare(a+x,b+y))){
@@ -24,16 +24,18 @@ public class FallBlock {
 		return false;
 	}
 
-	public static void rotate(){
+	public static synchronized void rotate(){
 		shape.rotate();
 		shape.update();
 		if(collision()){
 			shape.unrotate();
 			shape.update();
+		}else{
+			SoundPlayer.play("Move");
 		}
 	}
 
-	public static void reset(){
+	public static synchronized void reset(){
 		shape.setRandomShape();
 		shape.update();
 
@@ -46,11 +48,11 @@ public class FallBlock {
 		time = System.currentTimeMillis();
 	}
 	
-	public static void tinyShape(){
+	public static synchronized void tinyShape(){
 		shape.setTinyShape();
 	}
 
-	public static void tick(){
+	public static synchronized void tick(){
 		if(key.downDown()){
 			if(System.currentTimeMillis() > time + Grid.getSpeed()/8){
 				time = System.currentTimeMillis();
@@ -75,6 +77,7 @@ public class FallBlock {
 								}
 							}
 						}
+						SoundPlayer.play("Shock");
 						Grid.update();
 						reset();
 						return;
@@ -84,7 +87,7 @@ public class FallBlock {
 		}
 	}
 
-	public static void goLeft(){
+	public static synchronized void goLeft(){
 		for(int b_x = 0;b_x < 4;b_x++){
 			for(int b_y = 0;b_y < 4;b_y++){
 				if(shape.getShape()[b_x][b_y] && ((x+b_x) < 1 || Grid.getSquare(x+b_x-1,y+b_y))){
@@ -93,9 +96,10 @@ public class FallBlock {
 			}
 		}
 		x--;
+		SoundPlayer.play("Move");
 	}
 
-	public static void goRight(){
+	public static synchronized void goRight(){
 		for(int b_x = 0;b_x < 4;b_x++){
 			for(int b_y = 0;b_y < 4;b_y++){
 				if(shape.getShape()[b_x][b_y] && ((x + b_x) > 8 || Grid.getSquare(x+b_x+1,y+b_y))){
@@ -104,49 +108,58 @@ public class FallBlock {
 			}
 		}
 		x++;
-	}
-
-	public static void goDown(){
-		y++;
+		SoundPlayer.play("Move");
 	}
 	
-	public static void moveLeft(){
+	public static synchronized void moveLeft(){
 		if(x < 1){
 			return;
 		}
 		x--;
+		SoundPlayer.play("Move");
 	}
 	
-	public static void moveRight(){
+	public static synchronized void moveRight(){
 		if(x > 8){
 			return;
 		}
 		x++;
+		SoundPlayer.play("Move");
 	}
 	
-	public static void moveUp(){
+	public static synchronized void moveUp(){
 		if(y < 1){
 			return;
 		}
 		y--;
+		SoundPlayer.play("Move");
 	}
 	
-	public static void moveDown(){
+	public static synchronized void moveDown(){
 		if(y > 18){
 			return;
 		}
 		y++;
+		SoundPlayer.play("Move");
 	}
 	
-	public static int getX(){
+	public static synchronized boolean fall(){
+		if(y > 18 || Grid.getSquare(x,y+1)){
+			return false;
+		}
+		y++;
+		return true;
+	}
+	
+	public static synchronized int getX(){
 		return x;
 	}
 	
-	public static int getY(){
+	public static synchronized int getY(){
 		return y;
 	}
 
-	public static boolean isSquare(int p_x,int p_y){
+	public static synchronized boolean isSquare(int p_x,int p_y){
 		return shape.getShape()[p_x][p_y];
 	}
 }

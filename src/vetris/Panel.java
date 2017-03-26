@@ -91,7 +91,7 @@ public class Panel extends JPanel{
 		g.setColor(new Color(0,0,0,alpha));
 		g.fillRect(0,0,this.getWidth(),this.getHeight());
 		
-		if(Grid.isPause()){
+		if(Grid.isPause() && alpha == 200){
 			g.setColor(new Color(63,63,63));
 			g.fillRect(224,224,192,192);
 			
@@ -101,7 +101,7 @@ public class Panel extends JPanel{
 			
 		}
 
-		if(Grid.isGameOver()){
+		if(Grid.isGameOver() && alpha == 200){
 			g.setColor(new Color(255,31,31));
 			g.setFont(new Font("Courier",Font.BOLD,100));
 			g.drawString("Game Over",50,200);
