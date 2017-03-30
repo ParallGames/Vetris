@@ -23,6 +23,7 @@ public class Panel extends JPanel{
 		g.setColor(new Color(127,127,127));
 		g.fillRect(160,0,320,640);
 		g.fillRect(520,40,80,560);
+		g.fillRect(40,520,80,80);
 		
 		g.drawString("Bonsoir", 0, 0);
 		
@@ -73,6 +74,18 @@ public class Panel extends JPanel{
 						g.setColor(new Color(63,63,63));
 					}
 					g.fillRect(FallBlock.gX+x*32+160,FallBlock.gY + y*32,32,32);
+				}
+			}
+		}
+		
+		g.setColor(new Color(255,63,63));
+		for(int x = 0;x < 4;x++){
+			for(int y = 0;y < 4;y++){
+				if(FallBlock.isNextSquare(x,y)){
+					g.fillRect(
+							20*x+(FallBlock.getNextShape().maxLeft()-FallBlock.getNextShape().maxRight()+3)/2*20+40-20*FallBlock.getNextShape().maxLeft(),
+							20*y+(FallBlock.getNextShape().maxUp()-FallBlock.getNextShape().maxDown()+3)/2*20+520-20*FallBlock.getNextShape().maxUp(),
+							20,20);
 				}
 			}
 		}

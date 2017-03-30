@@ -8,6 +8,7 @@ public class FallBlock {
 	private static int y = 0;
 
 	private static Shape shape = new Shape();
+	private static Shape nextShape = new Shape();
 
 	private static Key key = new Key();
 
@@ -36,8 +37,11 @@ public class FallBlock {
 	}
 
 	public static synchronized void reset(){
-		shape.setRandomShape();
+		shape = nextShape;
 		shape.update();
+		nextShape = new Shape();
+		nextShape.setRandomShape();
+		nextShape.update();
 
 		x = ValMath.randInt(0-shape.maxLeft(),10-shape.maxRight());
 		y = 0 - shape.maxUp();
@@ -159,7 +163,15 @@ public class FallBlock {
 		return y;
 	}
 
+	public static synchronized Shape getNextShape(){
+		return nextShape;
+	}
+
 	public static synchronized boolean isSquare(int p_x,int p_y){
 		return shape.getShape()[p_x][p_y];
+	}
+	
+	public static synchronized boolean isNextSquare(int p_x,int p_y){
+		return nextShape.getShape()[p_x][p_y];
 	}
 }

@@ -12,7 +12,7 @@ public class Shape {
 	public boolean[][] getShape(){
 		return shape;
 	}
-	
+
 	public int maxLeft(){
 		for(int a = 0;a < 4;a++){
 			for(int b = 0;b < 4;b++){
@@ -37,6 +37,17 @@ public class Shape {
 
 	public int maxUp(){
 		for(int a = 0;a < 4;a++){
+			for(int b = 0;b < 4;b++){
+				if(shape[b][a]){
+					return a;
+				}
+			}
+		}
+		return 0;
+	}
+	
+	public int maxDown(){
+		for(int a = 3;a > 0;a--){
 			for(int b = 0;b < 4;b++){
 				if(shape[b][a]){
 					return a;
