@@ -1,7 +1,13 @@
 package vetris;
 
+import com.sun.javafx.application.PlatformImpl;
+
+import vetris.Key;
+
 public class Main {
 	public static void main(String args[]){
+		PlatformImpl.startup(() -> {});
+		SoundPlayer.loadSounds();
 		Window window = new Window();
 		Key key = new Key();
 
@@ -48,7 +54,7 @@ public class Main {
 				while(window.isVisible() && FallBlock.fall()){
 					window.repaint();
 				}
-				SoundPlayer.play("Shock");
+				SoundPlayer.playShock();
 				Grid.setSquare(FallBlock.getX(),FallBlock.getY());
 				Grid.update();
 				FallBlock.reset();
@@ -62,7 +68,7 @@ public class Main {
 			}
 
 			if(Grid.isGameOver()){
-				SoundPlayer.play("GameOver");
+				SoundPlayer.playGameOver();
 				while(window.isVisible() && !key.enterHitted()){
 					window.repaint();
 				}
@@ -72,5 +78,6 @@ public class Main {
 			}
 		}
 		window.close();
+		PlatformImpl.exit();
 	}
 }

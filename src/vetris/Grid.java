@@ -88,7 +88,7 @@ public class Grid {
 					grid[a][line] = false;
 				}
 
-				SoundPlayer.play("Line");
+				SoundPlayer.playLine();
 				score += 10;
 				energy++;
 				if(energy > 10){

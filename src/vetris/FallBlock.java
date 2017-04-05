@@ -32,7 +32,7 @@ public class FallBlock {
 			shape.unrotate();
 			shape.update();
 		}else{
-			SoundPlayer.play("Move");
+			SoundPlayer.playMove();
 		}
 	}
 
@@ -81,7 +81,7 @@ public class FallBlock {
 								}
 							}
 						}
-						SoundPlayer.play("Shock");
+						SoundPlayer.playShock();
 						Grid.update();
 						reset();
 						return;
@@ -100,7 +100,7 @@ public class FallBlock {
 			}
 		}
 		x--;
-		SoundPlayer.play("Move");
+		SoundPlayer.playMove();
 	}
 
 	public static synchronized void goRight(){
@@ -112,7 +112,7 @@ public class FallBlock {
 			}
 		}
 		x++;
-		SoundPlayer.play("Move");
+		SoundPlayer.playMove();
 	}
 	
 	public static synchronized void moveLeft(){
@@ -120,7 +120,7 @@ public class FallBlock {
 			return;
 		}
 		x--;
-		SoundPlayer.play("Move");
+		SoundPlayer.playMove();
 	}
 	
 	public static synchronized void moveRight(){
@@ -128,7 +128,7 @@ public class FallBlock {
 			return;
 		}
 		x++;
-		SoundPlayer.play("Move");
+		SoundPlayer.playMove();
 	}
 	
 	public static synchronized void moveUp(){
@@ -136,7 +136,7 @@ public class FallBlock {
 			return;
 		}
 		y--;
-		SoundPlayer.play("Move");
+		SoundPlayer.playMove();
 	}
 	
 	public static synchronized void moveDown(){
@@ -144,7 +144,7 @@ public class FallBlock {
 			return;
 		}
 		y++;
-		SoundPlayer.play("Move");
+		SoundPlayer.playMove();
 	}
 	
 	public static synchronized boolean fall(){

@@ -1,30 +1,69 @@
 package vetris;
 
-import java.io.BufferedInputStream;
+import java.net.URISyntaxException;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.DataLine;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
+class Player{
+	
+}
 
 public class SoundPlayer {
-    public static void play(String name){
-    	new Thread(){
-    		public void run(){
-    			try{
-    				BufferedInputStream bufferedIn = new BufferedInputStream(SoundPlayer.class.getResourceAsStream("/resources/sounds/"+name+".wav"));
-			        AudioInputStream ais = AudioSystem.getAudioInputStream(bufferedIn);
-			        DataLine.Info info = new DataLine.Info(Clip.class,ais.getFormat());
-			        Clip clip = (Clip)AudioSystem.getLine(info);
-			        clip.open(ais);
-			        clip.start();
-			        clip.close();
-			        ais.close();
-			        bufferedIn.close();
-			    }catch(Exception e){
-			    	e.printStackTrace();
-			    }
-    		}
-    	}.start();
-    }
+	
+	private static Media move;
+	private static Media shock;
+	private static Media gameOver;
+	private static Media line;
+	
+	public static void loadSounds(){
+		try {
+			move = new Media(SoundPlayer.class.getResource("/resources/sounds/Move.wav").toURI().toString());
+			shock = new Media(SoundPlayer.class.getResource("/resources/sounds/Shock.wav").toURI().toString());
+			gameOver = new Media(SoundPlayer.class.getResource("/resources/sounds/GameOver.wav").toURI().toString());
+			line = new Media(SoundPlayer.class.getResource("/resources/sounds/Line.wav").toURI().toString());
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void playMove(){
+		MediaPlayer mp = new MediaPlayer(move);
+		mp.setOnEndOfMedia(new Runnable(){
+			public void run(){
+				mp.dispose();
+			}
+		});
+		mp.play();
+	}
+	
+	public static void playShock(){
+		MediaPlayer mp = new MediaPlayer(shock);
+		mp.setOnEndOfMedia(new Runnable(){
+			public void run(){
+				mp.dispose();
+			}
+		});
+		mp.play();
+	}
+	
+	public static void playGameOver(){
+		MediaPlayer mp = new MediaPlayer(gameOver);
+		mp.setOnEndOfMedia(new Runnable(){
+			public void run(){
+				mp.dispose();
+			}
+		});
+		mp.play();
+	}
+	
+	public static void playLine(){
+		MediaPlayer mp = new MediaPlayer(line);
+		mp.setOnEndOfMedia(new Runnable(){
+			public void run(){
+				mp.dispose();
+			}
+		});
+		mp.play();
+	}
 }
