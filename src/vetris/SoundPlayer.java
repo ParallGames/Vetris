@@ -5,10 +5,6 @@ import java.net.URISyntaxException;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
-class Player{
-	
-}
-
 public class SoundPlayer {
 	
 	private static Media move;

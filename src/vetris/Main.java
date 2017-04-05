@@ -2,8 +2,6 @@ package vetris;
 
 import com.sun.javafx.application.PlatformImpl;
 
-import vetris.Key;
-
 public class Main {
 	public static void main(String args[]){
 		PlatformImpl.startup(() -> {});
