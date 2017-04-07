@@ -5,7 +5,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 public class Key extends Group{
-	
+
 	private static boolean leftPressed = false;
     private static boolean left = false;
     

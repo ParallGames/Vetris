@@ -16,8 +16,7 @@ public class Window extends Application{
 	private Key key = new Key();
 
 	public synchronized void start(Stage primaryStage){
-		
-		SoundPlayer.loadSounds();
+
 		Grid.reset();
 		FallBlock.reset();
 		
