@@ -5,4 +5,4 @@ A simple Tetris game
 - Enter to use tiny shape
 - P to pause
 
-Download: https://github.com/ValsTeam/Vetris/releases/download/v1.0/Vetris.jar
+Download: https://github.com/ValsTeam/Vetris/releases
