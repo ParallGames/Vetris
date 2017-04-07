@@ -7,32 +7,32 @@ import javafx.scene.input.KeyEvent;
 public class Key extends Group{
 
 	private static boolean leftPressed = false;
-    private static boolean left = false;
+	private static boolean left = false;
+
+	private static boolean rightPressed = false;
+	private static boolean right = false;
+
+	private static boolean upPressed = false;
+	private static boolean up = false;
     
-    private static boolean rightPressed = false;
-    private static boolean right = false;
-    
-    private static boolean upPressed = false;
-    private static boolean up = false;
-    
-    private static boolean downPressed = false;
-    private static boolean down = false;
-    
-    private static boolean enterPressed = false;
-    private static boolean enter = false;
-    
-    private static boolean pPressed = false;
-    private static boolean p = false;
-    
-    public void reset(){
-    	left = false;
-    	right = false;
-    	up = false;
-    	down = false;
-    	enter = false;
-    	p = false;
-    }
-    
+	private static boolean downPressed = false;
+	private static boolean down = false;
+
+	private static boolean enterPressed = false;
+	private static boolean enter = false;
+
+	private static boolean pPressed = false;
+	private static boolean p = false;
+
+	public void reset(){
+		left = false;
+		right = false;
+		up = false;
+		down = false;
+		enter = false;
+		p = false;
+	}
+
 	Key(){
 		this.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
 			if(key.getCode() == KeyCode.LEFT){
