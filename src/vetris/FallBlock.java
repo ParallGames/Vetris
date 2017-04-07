@@ -10,8 +10,6 @@ public class FallBlock {
 	private static Shape shape = new Shape();
 	private static Shape nextShape = new Shape();
 
-	private static Key key = new Key();
-
 	private static long time = System.currentTimeMillis();
 
 	public static synchronized boolean collision(){
@@ -56,8 +54,8 @@ public class FallBlock {
 		shape.setTinyShape();
 	}
 
-	public static synchronized void tick(){
-		if(key.downDown()){
+	public static synchronized void tick(){		
+		if(Key.downDown()){
 			if(System.currentTimeMillis() > time + Grid.getSpeed()/8){
 				time = System.currentTimeMillis();
 				y++;

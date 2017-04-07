@@ -1,36 +1,116 @@
 package vetris;
 
-import javax.swing.JFrame;
+import javafx.application.Application;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
-public class Window{
+public class Window extends Application{
 
 	private Panel panel = new Panel();
-	private JFrame jFrame = new JFrame();
+	private Foreground foreground = new Foreground();
+	
+	private Group root = new Group();
+	
+	private Key key = new Key();
 
-	Window(){
-		jFrame.setContentPane(panel);
-		jFrame.setResizable(false);
-		jFrame.pack();
-		jFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		jFrame.setTitle("Vetris");
-		jFrame.setVisible(true);
+	public synchronized void start(Stage primaryStage){
+		
+		SoundPlayer.loadSounds();
+		Grid.reset();
+		FallBlock.reset();
+		
+		Scene scene = new Scene(root,640,640);
+		scene.setFill(Color.rgb(31, 31, 31));
+		
+		root.getChildren().add(key);
+		key.requestFocus();
+		root.getChildren().add(new Background());
+		root.getChildren().add(panel);
+		root.getChildren().add(foreground);
+		
+		primaryStage.setTitle("Vetris");
+		primaryStage.setResizable(false);
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		
+		new Thread(){
+			public void run(){
+				while(primaryStage.isShowing()){
+					FallBlock.tick();
+					
+					if(Key.leftHitted()){
+						FallBlock.goLeft();
+					}
+					if(Key.rightHitted()){
+						FallBlock.goRight();
+					}
+					if(Key.upHitted()){
+						FallBlock.rotate();
+					}
+					if(Key.pHitted()){
+						Grid.pause();
+					}
+					Window.this.repaint();
+					
+					if(Key.enterHitted() && Grid.hasEnoughEnergy()){
+						FallBlock.tinyShape();
+						while(primaryStage.isShowing()){
+							if(Key.leftHitted()){
+								FallBlock.moveLeft();
+							}
+							if(Key.rightHitted()){
+								FallBlock.moveRight();
+							}
+							if(Key.upHitted()){
+								FallBlock.moveUp();
+							}
+							if(Key.downHitted()){
+								FallBlock.moveDown();
+							}
+							if(Key.enterHitted() && !FallBlock.collision()){
+								break;
+							}
+							Window.this.repaint();
+						}
+						while(primaryStage.isShowing() && FallBlock.fall()){
+							Window.this.repaint();
+						}
+						SoundPlayer.playShock();
+						Grid.setSquare(FallBlock.getX(),FallBlock.getY());
+						Grid.update();
+						FallBlock.reset();
+					}
+					
+					if(Grid.isPause()){
+						while(primaryStage.isShowing() && !Key.pHitted()){
+							Window.this.repaint();
+						}
+						Grid.unpause();
+						key.reset();
+					}
+
+					if(Grid.isGameOver()){
+						SoundPlayer.playGameOver();
+						while(primaryStage.isShowing() && !Key.enterHitted()){
+							Window.this.repaint();
+						}
+						Grid.reset();
+						FallBlock.reset();
+						key.reset();
+					}
+				}
+			}
+		}.start();
 	}
-
 	public void repaint(){
+		panel.update();
+		foreground.update();
 		try{
 			Thread.sleep(10);
 		}catch(InterruptedException e){
 			e.printStackTrace();
 		}
-		jFrame.revalidate();
-		jFrame.repaint();
-	}
-
-	public boolean isVisible(){
-		return jFrame.isVisible();
-	}
-
-	public void close(){
-		jFrame.dispose();
 	}
 }

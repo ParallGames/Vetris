@@ -1,28 +1,28 @@
 package vetris;
 
-import java.awt.event.KeyEvent;
-import java.awt.KeyboardFocusManager;
-import java.awt.KeyEventDispatcher;
+import javafx.scene.Group;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
-public class Key {
-
-	private boolean leftPressed = false;
-    private boolean left = false;
+public class Key extends Group{
+	
+	private static boolean leftPressed = false;
+    private static boolean left = false;
     
-    private boolean rightPressed = false;
-    private boolean right = false;
+    private static boolean rightPressed = false;
+    private static boolean right = false;
     
-    private boolean upPressed = false;
-    private boolean up = false;
+    private static boolean upPressed = false;
+    private static boolean up = false;
     
-    private boolean downPressed = false;
-    private boolean down = false;
+    private static boolean downPressed = false;
+    private static boolean down = false;
     
-    private boolean enterPressed = false;
-    private boolean enter = false;
+    private static boolean enterPressed = false;
+    private static boolean enter = false;
     
-    private boolean pPressed = false;
-    private boolean p = false;
+    private static boolean pPressed = false;
+    private static boolean p = false;
     
     public void reset(){
     	left = false;
@@ -34,73 +34,68 @@ public class Key {
     }
     
 	Key(){
-		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
-            public boolean dispatchKeyEvent(KeyEvent ke) {
-                synchronized (Key.class) {
-                    if(ke.getID() == KeyEvent.KEY_PRESSED){
-                        if(ke.getKeyCode() == KeyEvent.VK_LEFT) {
-                        	if(!leftPressed){
-                        		leftPressed = true;
-                        		left = true;
-                        	}
-                        }
-                        if(ke.getKeyCode() == KeyEvent.VK_RIGHT) {
-                        	if(!rightPressed){
-                        		rightPressed = true;
-                        		right = true;
-                        	}
-                        }
-                        if(ke.getKeyCode() == KeyEvent.VK_UP){
-                        	if(!upPressed){
-                        		upPressed = true;
-                        		up = true;
-                        	}
-                        }
-                        if(ke.getKeyCode() == KeyEvent.VK_DOWN){
-                        	if(!downPressed){
-                        		downPressed = true;
-                        		down = true;
-                        	}
-                        }
-                        if(ke.getKeyCode() == KeyEvent.VK_ENTER){
-                        	if(!enterPressed){
-                        		enterPressed = true;
-                        		enter = true;
-                        	}
-                        }
-                        if(ke.getKeyCode() == KeyEvent.VK_P){
-                        	if(!pPressed){
-                        		pPressed = true;
-                        		p = true;
-                        	}
-                        }
-                    }else if(ke.getID() == KeyEvent.KEY_RELEASED){
-                    	if(ke.getKeyCode() == KeyEvent.VK_LEFT){
-                    		leftPressed = false;
-                    	}
-                    	if(ke.getKeyCode() == KeyEvent.VK_RIGHT){
-                    		rightPressed = false;
-                    	}
-                    	if(ke.getKeyCode() == KeyEvent.VK_UP){
-                    		upPressed = false;
-                    	}
-                    	if(ke.getKeyCode() == KeyEvent.VK_DOWN){
-                    		downPressed = false;
-                    	}
-                    	if(ke.getKeyCode() == KeyEvent.VK_ENTER){
-                    		enterPressed = false;
-                    	}
-                    	if(ke.getKeyCode() == KeyEvent.VK_P){
-                    		pPressed = false;
-                    	}
-                    }
-                    return false;
-                }
-            }
-        });
+		this.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+			if(key.getCode() == KeyCode.LEFT){
+				if(!leftPressed){
+              		leftPressed = true;
+              		left = true;
+              	}
+			}
+		    if(key.getCode() == KeyCode.RIGHT){
+		    	if(!rightPressed){
+            		rightPressed = true;
+            		right = true;
+            	}
+		    }
+		    if(key.getCode() == KeyCode.UP){
+            	if(!upPressed){
+            		upPressed = true;
+            		up = true;
+            	}
+		    }
+		    if(key.getCode() == KeyCode.DOWN){
+            	if(!downPressed){
+            		downPressed = true;
+            		down = true;
+            	}
+		    }
+		    if(key.getCode() == KeyCode.ENTER){
+            	if(!enterPressed){
+            		enterPressed = true;
+            		enter = true;
+            	}
+		    }
+		    if(key.getCode() == KeyCode.P){
+            	if(!pPressed){
+            		pPressed = true;
+            		p = true;
+            	}
+		    }
+		});
+		
+		this.addEventHandler(KeyEvent.KEY_RELEASED, (key) -> {
+		      if(key.getCode() == KeyCode.LEFT){
+		          leftPressed = false;
+		      }
+		      if(key.getCode() == KeyCode.RIGHT){
+		    	  rightPressed = false;
+		      }
+		      if(key.getCode() == KeyCode.UP){
+		    	  upPressed = false;
+		      }
+		      if(key.getCode() == KeyCode.DOWN){
+		    	  downPressed = false;
+		      }
+		      if(key.getCode() == KeyCode.ENTER){
+		    	  enterPressed = false;
+		      }
+		      if(key.getCode() == KeyCode.P){
+		    	  pPressed = false;
+		      }
+		});
 	}
 	
-	public boolean leftHitted(){
+	public static boolean leftHitted(){
 		if(left){
 			left = false;
 			return true;
@@ -108,7 +103,7 @@ public class Key {
 		return false;
 	}
 	
-	public boolean rightHitted(){
+	public static boolean rightHitted(){
 		if(right){
 			right = false;
 			return true;
@@ -116,7 +111,7 @@ public class Key {
 		return false;
 	}
 	
-	public boolean upHitted(){
+	public static boolean upHitted(){
 		if(up){
 			up = false;
 			return true;
@@ -124,7 +119,7 @@ public class Key {
 		return false;
 	}
 	
-	public boolean downHitted(){
+	public static boolean downHitted(){
 		if(down){
 			down = false;
 			return true;
@@ -132,7 +127,7 @@ public class Key {
 		return false;
 	}
 	
-	public boolean enterHitted(){
+	public static boolean enterHitted(){
 		if(enter){
 			enter = false;
 			return true;
@@ -140,7 +135,7 @@ public class Key {
 		return false;
 	}
 	
-	public boolean pHitted(){
+	public static boolean pHitted(){
 		if(p){
 			p = false;
 			return true;
@@ -148,7 +143,7 @@ public class Key {
 		return false;
 	}
 	
-	public boolean downDown(){
+	public static boolean downDown(){
 		return downPressed;
 	}
 }
