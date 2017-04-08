@@ -14,6 +14,10 @@ public class Window extends Application{
 	private Group root = new Group();
 	
 	private Key key = new Key();
+	
+	private static long time = System.nanoTime();
+	public static int fps = 60;
+	private static long interval = 1_000_000_000 / fps;
 
 	public synchronized void start(Stage primaryStage){
 
@@ -106,10 +110,16 @@ public class Window extends Application{
 	public void repaint(){
 		panel.update();
 		foreground.update();
-		try{
-			Thread.sleep(10);
-		}catch(InterruptedException e){
-			e.printStackTrace();
+		
+		long sleep = time - System.nanoTime() + interval;
+
+		if(sleep > 0){
+			try{
+				Thread.sleep(sleep/1000000,(int) (sleep%1000000));
+			}catch(InterruptedException e){
+				e.printStackTrace();
+			}
 		}
+		time = System.nanoTime();
 	}
 }

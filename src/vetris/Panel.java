@@ -27,11 +27,11 @@ public class Panel extends Group{
 				}
 
 				if(FallBlock.getY()*32 > FallBlock.gY){
-					FallBlock.gY+=3200/Grid.getSpeed();
+					FallBlock.gY+=320000/Window.fps/Grid.getSpeed();
 				}else if(FallBlock.getY()*32 < FallBlock.gY){
-					FallBlock.gY-=3200/Grid.getSpeed();
+					FallBlock.gY-=320000/Window.fps/Grid.getSpeed();
 				}
-				if(Math.abs(FallBlock.gY-FallBlock.getY()*32) < 3200/Grid.getSpeed()){
+				if(Math.abs(FallBlock.gY-FallBlock.getY()*32) < 320000/Window.fps/Grid.getSpeed()){
 					FallBlock.gY = FallBlock.getY()*32;
 				}
 
