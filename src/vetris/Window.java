@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 public class Window extends Application {
 
 	private static long time = System.nanoTime();
-	public static int fps = 60;
+	public static int fps = 100;
 
 	private static long interval = 1_000_000_000 / fps;
 

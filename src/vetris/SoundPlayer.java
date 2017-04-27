@@ -1,48 +1,42 @@
 package vetris;
 
-import java.io.BufferedInputStream;
+import java.net.URISyntaxException;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.DataLine;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
+class Player{
+	
+}
 
 public class SoundPlayer {
-	private static void play(String name) {
-		new Thread() {
-			@Override
-			public void run() {
-				try {
-					BufferedInputStream bufferedIn = new BufferedInputStream(
-							SoundPlayer.class.getResourceAsStream("/resources/sounds/" + name + ".wav"));
-					AudioInputStream ais = AudioSystem.getAudioInputStream(bufferedIn);
-					DataLine.Info info = new DataLine.Info(Clip.class, ais.getFormat());
-					Clip clip = (Clip) AudioSystem.getLine(info);
-					clip.open(ais);
-					clip.start();
-					clip.close();
-					ais.close();
-					bufferedIn.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}.start();
+	
+	private static AudioClip move;
+	private static AudioClip shock;
+	private static AudioClip gameOver;
+	private static AudioClip line;
+	
+	public static void loadSounds(){
+		move = new AudioClip(SoundPlayer.class.getResource("/resources/sounds/Move.wav").toExternalForm());
+		shock = new AudioClip(SoundPlayer.class.getResource("/resources/sounds/Shock.wav").toExternalForm());
+		gameOver = new AudioClip(SoundPlayer.class.getResource("/resources/sounds/GameOver.wav").toExternalForm());
+		line = new AudioClip(SoundPlayer.class.getResource("/resources/sounds/Line.wav").toExternalForm());
 	}
-
-	public static void playGameOver() {
-		play("GameOver");
+	
+	public static void playMove(){
+		move.play();
 	}
-
-	public static void playLine() {
-		play("Line");
+	
+	public static void playShock(){
+		shock.play();
 	}
-
-	public static void playMove() {
-		play("Move");
+	
+	public static void playGameOver(){
+		gameOver.play();
 	}
-
-	public static void playShock() {
-		play("Shock");
+	
+	public static void playLine(){
+		line.play();
 	}
 }
