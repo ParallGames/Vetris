@@ -1,10 +1,6 @@
 package vetris;
 
-import java.net.URISyntaxException;
-
 import javafx.scene.media.AudioClip;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 
 class Player{
 	
