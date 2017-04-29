@@ -16,19 +16,19 @@ public class SoundPlayer {
 		line = new AudioClip(SoundPlayer.class.getResource("/resources/sounds/Line.wav").toExternalForm());
 	}
 
-	public static void playMove() {
-		move.play();
-	}
-
-	public static void playShock() {
-		shock.play();
-	}
-
 	public static void playGameOver() {
 		gameOver.play();
 	}
 
 	public static void playLine() {
 		line.play();
+	}
+
+	public static void playMove() {
+		move.play();
+	}
+
+	public static void playShock() {
+		shock.play();
 	}
 }

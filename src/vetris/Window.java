@@ -59,7 +59,7 @@ public class Window extends Application {
 			@Override
 			public void run() {
 				while (primaryStage.isShowing()) {
-					if(!Grid.isPause()){
+					if (!Grid.isPause()) {
 						FallBlock.tick();
 					}
 					Window.this.repaint();

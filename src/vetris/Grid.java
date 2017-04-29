@@ -51,16 +51,8 @@ public class Grid {
 		return pause;
 	}
 
-	public static boolean isTinyShape(){
+	public static boolean isTinyShape() {
 		return tinyShape;
-	}
-	
-	public static void setPause(boolean p) {
-		pause = p;
-	}
-	
-	public static void setTinyShape(boolean t){
-		tinyShape = t;
 	}
 
 	public static void reset() {
@@ -79,6 +71,10 @@ public class Grid {
 		}
 	}
 
+	public static void setPause(boolean p) {
+		pause = p;
+	}
+
 	public static void setSquare(int x, int y) {
 		if (y > 0) {
 			grid[x][y] = true;
@@ -88,6 +84,10 @@ public class Grid {
 			}
 			gameOver = true;
 		}
+	}
+
+	public static void setTinyShape(boolean t) {
+		tinyShape = t;
 	}
 
 	public static void update() {

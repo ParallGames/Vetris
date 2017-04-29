@@ -4,8 +4,6 @@ import javafx.scene.Group;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
-import vetris.FallBlock;
-
 public class Key extends Group {
 
 	private static boolean downPressed = false;
@@ -17,40 +15,40 @@ public class Key extends Group {
 	Key() {
 		this.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
 			if (key.getCode() == KeyCode.LEFT && !Grid.isPause()) {
-				if(Grid.isTinyShape()){
+				if (Grid.isTinyShape()) {
 					FallBlock.moveLeft();
 				} else {
 					FallBlock.goLeft();
 				}
 			}
 			if (key.getCode() == KeyCode.RIGHT && !Grid.isPause()) {
-				if(Grid.isTinyShape()){
+				if (Grid.isTinyShape()) {
 					FallBlock.moveRight();
 				} else {
 					FallBlock.goRight();
 				}
 			}
 			if (key.getCode() == KeyCode.UP && !Grid.isPause()) {
-				if(Grid.isTinyShape()){
+				if (Grid.isTinyShape()) {
 					FallBlock.moveUp();
-				}else{
+				} else {
 					FallBlock.rotate();
 				}
 			}
 			if (key.getCode() == KeyCode.DOWN && !Grid.isPause()) {
-				if(Grid.isTinyShape()){
+				if (Grid.isTinyShape()) {
 					FallBlock.moveDown();
 				} else {
 					downPressed = true;
 				}
 			}
 			if (key.getCode() == KeyCode.ENTER && !Grid.isPause()) {
-				if(Grid.isGameOver()){
+				if (Grid.isGameOver()) {
 					Grid.reset();
 					FallBlock.reset();
-				} else if(Grid.isTinyShape() && !FallBlock.collision()){
+				} else if (Grid.isTinyShape() && !FallBlock.collision()) {
 					Grid.setTinyShape(false);
-				} else if(Grid.hasEnoughEnergy()){
+				} else if (Grid.hasEnoughEnergy()) {
 					Grid.setTinyShape(true);
 					FallBlock.tinyShape();
 				}
