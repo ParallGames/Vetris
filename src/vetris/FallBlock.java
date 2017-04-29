@@ -171,5 +171,15 @@ public class FallBlock {
 
 	public static synchronized void tinyShape() {
 		shape.setTinyShape();
+		if (y < 0) {
+			y = 0;
+		} else if (y > 19) {
+			y = 19;
+		}
+		if (x < 0) {
+			x = 0;
+		} else if (x > 9) {
+			x = 9;
+		}
 	}
 }
