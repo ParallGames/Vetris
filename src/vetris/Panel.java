@@ -75,13 +75,13 @@ public class Panel extends Group {
 				for (int x = 0; x < 4; x++) {
 					for (int y = 0; y < 4; y++) {
 						if (FallBlock.isNextSquare(x, y)) {
-							rectangle = new Rectangle(20 * x
-									+ (FallBlock.getNextShape().maxLeft() - FallBlock.getNextShape().maxRight() + 3) / 2
-											* 20
-									+ 40 - 20 * FallBlock.getNextShape().maxLeft(),
-									20 * y + (FallBlock.getNextShape().maxUp() - FallBlock.getNextShape().maxDown() + 3)
-											/ 2 * 20 + 520 - 20 * FallBlock.getNextShape().maxUp(),
+							rectangle = new Rectangle(
+									20 * x - 10 * FallBlock.getNextShape().maxLeft()
+											- 10 * FallBlock.getNextShape().maxRight() + 70,
+									20 * y - 10 * FallBlock.getNextShape().maxUp()
+											- 10 * FallBlock.getNextShape().maxDown() + 550,
 									20, 20);
+
 							rectangle.setFill(Color.rgb(255, 63, 63));
 							Panel.this.getChildren().add(rectangle);
 						}
