@@ -59,40 +59,13 @@ public class Window extends Application {
 			@Override
 			public void run() {
 				while (primaryStage.isShowing()) {
-					FallBlock.tick();
-
-					if (Key.leftHitted()) {
-						FallBlock.goLeft();
-					}
-					if (Key.rightHitted()) {
-						FallBlock.goRight();
-					}
-					if (Key.upHitted()) {
-						FallBlock.rotate();
-					}
-					if (Key.pHitted()) {
-						Grid.pause();
+					if(!Grid.isPause()){
+						FallBlock.tick();
 					}
 					Window.this.repaint();
 
-					if (Key.enterHitted() && Grid.hasEnoughEnergy()) {
-						FallBlock.tinyShape();
-						while (primaryStage.isShowing()) {
-							if (Key.leftHitted()) {
-								FallBlock.moveLeft();
-							}
-							if (Key.rightHitted()) {
-								FallBlock.moveRight();
-							}
-							if (Key.upHitted()) {
-								FallBlock.moveUp();
-							}
-							if (Key.downHitted()) {
-								FallBlock.moveDown();
-							}
-							if (Key.enterHitted() && !FallBlock.collision()) {
-								break;
-							}
+					if (Grid.isTinyShape()) {
+						while (primaryStage.isShowing() && Grid.isTinyShape()) {
 							Window.this.repaint();
 						}
 						while (primaryStage.isShowing() && FallBlock.fall()) {
@@ -104,22 +77,11 @@ public class Window extends Application {
 						FallBlock.reset();
 					}
 
-					if (Grid.isPause()) {
-						while (primaryStage.isShowing() && !Key.pHitted()) {
-							Window.this.repaint();
-						}
-						Grid.unpause();
-						key.reset();
-					}
-
 					if (Grid.isGameOver()) {
 						SoundPlayer.playGameOver();
-						while (primaryStage.isShowing() && !Key.enterHitted()) {
+						while (primaryStage.isShowing() && Grid.isGameOver()) {
 							Window.this.repaint();
 						}
-						Grid.reset();
-						FallBlock.reset();
-						key.reset();
 					}
 				}
 			}

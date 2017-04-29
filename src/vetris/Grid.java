@@ -4,6 +4,7 @@ public class Grid {
 	private static boolean grid[][] = new boolean[10][20];
 	private static boolean gameOver = false;
 	private static boolean pause = false;
+	private static boolean tinyShape = false;
 
 	private static int speed = 1000;
 	private static int score = 0;
@@ -35,7 +36,7 @@ public class Grid {
 	}
 
 	public static boolean hasEnoughEnergy() {
-		if (energy >= 5) {
+		if (energy >= 5 && !tinyShape) {
 			energy -= 5;
 			return true;
 		}
@@ -50,8 +51,16 @@ public class Grid {
 		return pause;
 	}
 
-	public static void pause() {
-		pause = true;
+	public static boolean isTinyShape(){
+		return tinyShape;
+	}
+	
+	public static void setPause(boolean p) {
+		pause = p;
+	}
+	
+	public static void setTinyShape(boolean t){
+		tinyShape = t;
 	}
 
 	public static void reset() {
@@ -79,10 +88,6 @@ public class Grid {
 			}
 			gameOver = true;
 		}
-	}
-
-	public static void unpause() {
-		pause = false;
 	}
 
 	public static void update() {
