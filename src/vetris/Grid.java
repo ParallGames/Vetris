@@ -6,13 +6,14 @@ public class Grid {
 	private static boolean pause = false;
 	private static boolean tinyShape = false;
 
-	private static int speed = 1000;
+	private static double speed = 1000.D;
+
 	private static int score = 0;
 	private static int record = Save.loadScore();
 	private static int energy = 0;
 
 	public static void addSpeed() {
-		speed -= speed / 32;
+		speed -= speed / 16384;
 	}
 
 	public static int getEnergy() {
@@ -28,7 +29,7 @@ public class Grid {
 	}
 
 	public static int getSpeed() {
-		return speed;
+		return (int) speed;
 	}
 
 	public static boolean getSquare(int x, int y) {
@@ -56,7 +57,7 @@ public class Grid {
 	}
 
 	public static void reset() {
-		speed = 1000;
+		speed = 1000.D;
 		score = 0;
 		record = Save.loadScore();
 		energy = 0;
@@ -110,8 +111,6 @@ public class Grid {
 				if (energy > 10) {
 					energy = 10;
 				}
-
-				addSpeed();
 				for (int a = line - 1; a > 0; a--) {
 					for (int b = 0; b < 10; b++) {
 						if (!grid[b][a + 1]) {

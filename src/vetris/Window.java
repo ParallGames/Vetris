@@ -61,6 +61,7 @@ public class Window extends Application {
 				while (primaryStage.isShowing()) {
 					if (!Grid.isPause() && !Grid.isTinyShape()) {
 						FallBlock.tick();
+						Grid.addSpeed();
 					}
 
 					Window.this.repaint();
