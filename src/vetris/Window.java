@@ -59,23 +59,11 @@ public class Window extends Application {
 			@Override
 			public void run() {
 				while (primaryStage.isShowing()) {
-					if (!Grid.isPause()) {
+					if (!Grid.isPause() && !Grid.isTinyShape()) {
 						FallBlock.tick();
 					}
-					Window.this.repaint();
 
-					if (Grid.isTinyShape()) {
-						while (primaryStage.isShowing() && Grid.isTinyShape()) {
-							Window.this.repaint();
-						}
-						while (primaryStage.isShowing() && FallBlock.fall()) {
-							Window.this.repaint();
-						}
-						SoundPlayer.playShock();
-						Grid.setSquare(FallBlock.getX(), FallBlock.getY());
-						Grid.update();
-						FallBlock.reset();
-					}
+					Window.this.repaint();
 
 					if (Grid.isGameOver()) {
 						SoundPlayer.playGameOver();

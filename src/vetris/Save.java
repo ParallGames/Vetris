@@ -14,7 +14,7 @@ public class Save {
 		DataInputStream in;
 		int score;
 		try {
-			in = new DataInputStream(new FileInputStream(new File(".VetrisScore")));
+			in = new DataInputStream(new FileInputStream(new File(System.getProperty("user.home")+"/.vetris/score")));
 			score = in.readInt();
 			in.close();
 		} catch (FileNotFoundException e) {
@@ -29,7 +29,9 @@ public class Save {
 	public static void saveScore(int score) {
 		DataOutputStream out;
 		try {
-			out = new DataOutputStream(new FileOutputStream(new File(".VetrisScore")));
+			File file = new File(System.getProperty("user.home")+"/.vetris");
+			file.mkdirs();
+			out = new DataOutputStream(new FileOutputStream(new File(System.getProperty("user.home")+"/.vetris/score")));
 			out.writeInt(score);
 			out.close();
 		} catch (IOException e) {

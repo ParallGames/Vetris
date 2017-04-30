@@ -48,6 +48,10 @@ public class Key extends Group {
 					FallBlock.reset();
 				} else if (Grid.isTinyShape() && !FallBlock.collision()) {
 					Grid.setTinyShape(false);
+					Grid.setSquare(FallBlock.getX(), FallBlock.getY());
+					Grid.update();
+					SoundPlayer.playShock();
+					FallBlock.reset();
 				} else if (Grid.hasEnoughEnergy()) {
 					Grid.setTinyShape(true);
 					FallBlock.tinyShape();
