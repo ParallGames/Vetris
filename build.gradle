@@ -1,0 +1,26 @@
+apply plugin: "java"
+apply plugin: "eclipse"
+
+archivesBaseName = "Vetris"
+version = "1.1.1"
+sourceCompatibility = 1.8
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ["src/vetris"]
+        }
+    }
+}
+jar {
+	into "resources", {
+		from "src/resources"
+	}
+    manifest {
+        attributes(
+			"Implementation-Title": "Vetris",
+			"Implementation-Version": version,
+			"Main-Class": "vetris.Main"
+		)
+    }
+}
