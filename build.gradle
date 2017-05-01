@@ -9,18 +9,19 @@ sourceSets {
     main {
         java {
             srcDirs = ["src/vetris"]
-        }
-    }
+		}
+	}
 }
+
 jar {
 	into "resources", {
 		from "src/resources"
 	}
-    manifest {
-        attributes(
+	manifest {
+		attributes(
 			"Implementation-Title": "Vetris",
 			"Implementation-Version": version,
 			"Main-Class": "vetris.Main"
 		)
-    }
+	}
 }
