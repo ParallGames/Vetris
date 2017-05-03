@@ -1,5 +1,7 @@
 package vetris;
 
+import javafx.scene.paint.Color;
+
 public class Grid {
 	private static boolean grid[][] = new boolean[10][20];
 	private static boolean gameOver = false;
@@ -11,9 +13,15 @@ public class Grid {
 	private static int score = 0;
 	private static int record = Save.loadScore();
 	private static int energy = 0;
+	
+	private static Color color = Color.rgb(255,63,63);
 
 	public static void addSpeed() {
 		speed -= speed / 16384;
+	}
+	
+	public static Color getColor(){
+		return color;
 	}
 
 	public static int getEnergy() {
@@ -70,6 +78,10 @@ public class Grid {
 				grid[a][b] = false;
 			}
 		}
+	}
+	
+	public static void setColor(Color c){
+		color = c;
 	}
 
 	public static void setPause(boolean p) {

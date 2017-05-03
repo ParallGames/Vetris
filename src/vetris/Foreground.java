@@ -34,21 +34,23 @@ public class Foreground extends Group {
 				Rectangle rectangle = new Rectangle(0, 0, 640, 640);
 				rectangle.setFill(Color.rgb(0, 0, 0, opacity));
 				Foreground.this.getChildren().add(rectangle);
+				
+				Color color = Color.color(Grid.getColor().getRed(),Grid.getColor().getGreen(),Grid.getColor().getBlue(),opacity);
 
 				if (Grid.isGameOver()) {
 					Text text = new Text(50, 200, "Game Over");
 					text.setFont(new Font("Noto Mono", 100));
-					text.setFill(Color.rgb(255, 63, 63, opacity));
+					text.setFill(color);
 					Foreground.this.getChildren().add(text);
 
 					text = new Text(160, 400, "Score:" + String.valueOf(Grid.getScore()));
 					text.setFont(new Font("Noto Mono", 50));
-					text.setFill(Color.rgb(255, 63, 63, opacity));
+					text.setFill(color);
 					Foreground.this.getChildren().add(text);
 
 					text = new Text(160, 500, "Record:" + String.valueOf(Grid.getRecord()));
 					text.setFont(new Font("Noto Mono", 50));
-					text.setFill(Color.rgb(255, 63, 63, opacity));
+					text.setFill(color);
 					Foreground.this.getChildren().add(text);
 				} else if (Grid.isPause()) {
 					rectangle = new Rectangle(224, 224, 192, 192);
@@ -56,11 +58,11 @@ public class Foreground extends Group {
 					Foreground.this.getChildren().add(rectangle);
 
 					rectangle = new Rectangle(256, 256, 32, 128);
-					rectangle.setFill(Color.rgb(255, 63, 63, opacity));
+					rectangle.setFill(color);
 					Foreground.this.getChildren().add(rectangle);
 
 					rectangle = new Rectangle(352, 256, 32, 128);
-					rectangle.setFill(Color.rgb(255, 63, 63, opacity));
+					rectangle.setFill(color);
 					Foreground.this.getChildren().add(rectangle);
 				}
 			}

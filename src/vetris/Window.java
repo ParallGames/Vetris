@@ -7,19 +7,20 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class Window extends Application {
-
-	private static long time = System.nanoTime();
 	public static int fps = 100;
-
+	
+	private static long time = System.nanoTime();
 	private static long interval = 1_000_000_000 / fps;
 
-	private Panel panel = new Panel();
-
+	private Background background = new Background();
+	private Panel panel = new Panel();	
 	private Foreground foreground = new Foreground();
+
 	private Group root = new Group();
 	private Key key = new Key();
 
 	public void repaint() {
+		background.update();
 		panel.update();
 		foreground.update();
 
@@ -46,7 +47,7 @@ public class Window extends Application {
 
 		root.getChildren().add(key);
 		key.requestFocus();
-		root.getChildren().add(new Background());
+		root.getChildren().add(background);
 		root.getChildren().add(panel);
 		root.getChildren().add(foreground);
 
