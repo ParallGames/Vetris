@@ -8,9 +8,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class Background extends Group {
-	
+
 	private Group updateGroup = new Group();
-	
+
 	Background() {
 		Rectangle rectangle = new Rectangle(160, 0, 320, 640);
 		rectangle.setFill(Color.rgb(127, 127, 127));
@@ -23,16 +23,18 @@ public class Background extends Group {
 		rectangle = new Rectangle(40, 520, 80, 80);
 		rectangle.setFill(Color.rgb(127, 127, 127));
 		this.getChildren().add(rectangle);
-		
+
 		this.getChildren().add(updateGroup);
-		
+
 		this.update();
 	}
-	public void update(){
-		Platform.runLater(new Runnable(){
-			public void run(){
+
+	public void update() {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
 				updateGroup.getChildren().clear();
-				
+
 				Text text = new Text(8, 32, "Score");
 				text.setFont(new Font("Noto Mono", 32));
 				text.setFill(Grid.getColor());

@@ -8,12 +8,12 @@ import javafx.stage.Stage;
 
 public class Window extends Application {
 	public static int fps = 100;
-	
+
 	private static long time = System.nanoTime();
 	private static long interval = 1_000_000_000 / fps;
 
 	private Background background = new Background();
-	private Panel panel = new Panel();	
+	private Panel panel = new Panel();
 	private Foreground foreground = new Foreground();
 
 	private Group root = new Group();

@@ -13,7 +13,7 @@ public class Key extends Group {
 	private static boolean downDown = false;
 
 	private static boolean enterDown = false;
-	
+
 	private static boolean cDown = false;
 	private static boolean pDown = false;
 
@@ -69,8 +69,9 @@ public class Key extends Group {
 				}
 				enterDown = true;
 			}
-			if(key.getCode() == KeyCode.C && !cDown){
-				Grid.setColor(Color.color(Grid.getColor().getBlue(), Grid.getColor().getRed(), Grid.getColor().getGreen()));
+			if (key.getCode() == KeyCode.C && !cDown) {
+				Grid.setColor(
+						Color.color(Grid.getColor().getBlue(), Grid.getColor().getRed(), Grid.getColor().getGreen()));
 				cDown = true;
 			}
 			if (key.getCode() == KeyCode.P && !pDown) {
@@ -80,27 +81,27 @@ public class Key extends Group {
 		});
 
 		this.addEventHandler(KeyEvent.KEY_RELEASED, (key) -> {
-			if(key.getCode() == KeyCode.LEFT){
+			if (key.getCode() == KeyCode.LEFT) {
 				leftDown = false;
 			}
-			if(key.getCode() == KeyCode.RIGHT){
+			if (key.getCode() == KeyCode.RIGHT) {
 				rightDown = false;
 			}
-			if(key.getCode() == KeyCode.UP){
+			if (key.getCode() == KeyCode.UP) {
 				upDown = false;
 			}
 			if (key.getCode() == KeyCode.DOWN) {
 				downDown = false;
 			}
-			
-			if(key.getCode() == KeyCode.ENTER){
+
+			if (key.getCode() == KeyCode.ENTER) {
 				enterDown = false;
 			}
-			
-			if(key.getCode() == KeyCode.C){
+
+			if (key.getCode() == KeyCode.C) {
 				cDown = false;
 			}
-			if(key.getCode() == KeyCode.P){
+			if (key.getCode() == KeyCode.P) {
 				pDown = false;
 			}
 		});

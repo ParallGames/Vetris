@@ -34,8 +34,9 @@ public class Foreground extends Group {
 				Rectangle rectangle = new Rectangle(0, 0, 640, 640);
 				rectangle.setFill(Color.rgb(0, 0, 0, opacity));
 				Foreground.this.getChildren().add(rectangle);
-				
-				Color color = Color.color(Grid.getColor().getRed(),Grid.getColor().getGreen(),Grid.getColor().getBlue(),opacity);
+
+				Color color = Color.color(Grid.getColor().getRed(), Grid.getColor().getGreen(),
+						Grid.getColor().getBlue(), opacity);
 
 				if (Grid.isGameOver()) {
 					Text text = new Text(50, 200, "Game Over");

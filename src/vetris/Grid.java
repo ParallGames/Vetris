@@ -13,14 +13,14 @@ public class Grid {
 	private static int score = 0;
 	private static int record = Save.loadScore();
 	private static int energy = 0;
-	
-	private static Color color = Color.rgb(255,63,63);
+
+	private static Color color = Color.rgb(255, 63, 63);
 
 	public static void addSpeed() {
 		speed -= speed / 16384;
 	}
-	
-	public static Color getColor(){
+
+	public static Color getColor() {
 		return color;
 	}
 
@@ -79,8 +79,8 @@ public class Grid {
 			}
 		}
 	}
-	
-	public static void setColor(Color c){
+
+	public static void setColor(Color c) {
 		color = c;
 	}
 

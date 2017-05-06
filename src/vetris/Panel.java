@@ -63,7 +63,9 @@ public class Panel extends Group {
 						if (FallBlock.isSquare(x, y)) {
 							rectangle = new Rectangle(FallBlock.gX + x * 32 + 160, FallBlock.gY + y * 32, 32, 32);
 							if (Grid.getSquare(FallBlock.getX() + x, FallBlock.getY() + y)) {
-								rectangle.setFill(Color.rgb((int)(Grid.getColor().getRed()*255)-63,(int)(Grid.getColor().getGreen()*255)-63,(int)(Grid.getColor().getBlue()*255)-63));
+								rectangle.setFill(Color.rgb((int) (Grid.getColor().getRed() * 255) - 63,
+										(int) (Grid.getColor().getGreen() * 255) - 63,
+										(int) (Grid.getColor().getBlue() * 255) - 63));
 							} else {
 								rectangle.setFill(Color.rgb(63, 63, 63));
 							}
