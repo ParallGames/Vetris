@@ -14,7 +14,7 @@ public class Grid {
 	private static int record = Save.loadScore();
 	private static int energy = 0;
 
-	private static Color color = Color.rgb(255, 63, 63);
+	private static Color color = Save.loadColor();
 
 	public static void addSpeed() {
 		speed -= speed / 16384;
@@ -91,7 +91,7 @@ public class Grid {
 	public static void setSquare(int x, int y) {
 		if (y > 0) {
 			grid[x][y] = true;
-		} else {
+		} else if(!gameOver){
 			if (score > record) {
 				Save.saveScore(score);
 			}

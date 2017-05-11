@@ -69,11 +69,16 @@ public class Window extends Application {
 
 					if (Grid.isGameOver()) {
 						SoundPlayer.playGameOver();
+						
 						while (primaryStage.isShowing() && Grid.isGameOver()) {
 							Window.this.repaint();
 						}
 					}
 				}
+				if(Grid.getScore() > Grid.getRecord()){
+					Save.saveScore(Grid.getScore());
+				}
+				Save.saveColor(Grid.getColor());
 			}
 		}.start();
 	}
