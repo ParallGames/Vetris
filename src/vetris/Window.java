@@ -61,6 +61,11 @@ public class Window extends Application {
 			public void run() {
 				while (primaryStage.isShowing()) {
 					if (!Grid.isPause() && !Grid.isTinyShape()) {
+						for (int a = 0; a < Grid.getFallingShapes().size(); a++) {
+							if (Grid.getFallingShapes().get(a).tick()) {
+								Grid.getFallingShapes().remove(a);
+							}
+						}
 						FallBlock.tick();
 						Grid.addSpeed();
 					}
@@ -69,13 +74,13 @@ public class Window extends Application {
 
 					if (Grid.isGameOver()) {
 						SoundPlayer.playGameOver();
-						
+
 						while (primaryStage.isShowing() && Grid.isGameOver()) {
 							Window.this.repaint();
 						}
 					}
 				}
-				if(Grid.getScore() > Grid.getRecord()){
+				if (Grid.getScore() > Grid.getRecord()) {
 					Save.saveScore(Grid.getScore());
 				}
 				Save.saveColor(Grid.getColor());

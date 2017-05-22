@@ -32,6 +32,10 @@ public class FallBlock {
 		return true;
 	}
 
+	public static synchronized Shape getShape() {
+		return shape;
+	}
+
 	public static synchronized Shape getNextShape() {
 		return nextShape;
 	}

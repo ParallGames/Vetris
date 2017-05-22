@@ -27,18 +27,18 @@ public class Save {
 		}
 		return score;
 	}
-	
+
 	public static Color loadColor() {
 		DataInputStream in;
 		Color color;
-		try{
+		try {
 			in = new DataInputStream(new FileInputStream(new File(System.getProperty("user.home") + "/.vetris/color")));
 			color = Color.color(in.readDouble(), in.readDouble(), in.readDouble());
 			in.close();
-		} catch (FileNotFoundException e){
+		} catch (FileNotFoundException e) {
 			saveColor(Color.rgb(255, 63, 63));
 			return Color.rgb(255, 63, 63);
-		} catch (IOException e){
+		} catch (IOException e) {
 			return Color.rgb(255, 63, 63);
 		}
 		return color;
@@ -57,8 +57,8 @@ public class Save {
 			return;
 		}
 	}
-	
-	public static void saveColor(Color color){
+
+	public static void saveColor(Color color) {
 		DataOutputStream out;
 		try {
 			File file = new File(System.getProperty("user.home") + "/.vetris");

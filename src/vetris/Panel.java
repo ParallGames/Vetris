@@ -90,6 +90,19 @@ public class Panel extends Group {
 					}
 				}
 
+				for (int a = 0; a < Grid.getFallingShapes().size(); a++) {
+					for (int x = 0; x < 10; x++) {
+						for (int y = 0; y < 20; y++) {
+							if (Grid.getFallingShapes().get(a).get(x, y)) {
+								rectangle = new Rectangle(x * 32 + 160, y * 32 + Grid.getFallingShapes().get(a).getGY(),
+										32, 32);
+								rectangle.setFill(Color.rgb(63, 63, 63));
+								Panel.this.getChildren().add(rectangle);
+							}
+						}
+					}
+				}
+
 				Text text = new Text(8, 64, String.valueOf(Grid.getScore()));
 				text.setFont(new Font("Noto Mono", 32));
 				text.setFill(Grid.getColor());

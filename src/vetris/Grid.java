@@ -1,5 +1,7 @@
 package vetris;
 
+import java.util.Vector;
+
 import javafx.scene.paint.Color;
 
 public class Grid {
@@ -15,6 +17,12 @@ public class Grid {
 	private static int energy = 0;
 
 	private static Color color = Save.loadColor();
+
+	private static Vector<FallingShape> fallingShapes = new Vector<FallingShape>();
+
+	public static Vector<FallingShape> getFallingShapes() {
+		return fallingShapes;
+	}
 
 	public static void addSpeed() {
 		speed -= speed / 16384;
@@ -91,7 +99,7 @@ public class Grid {
 	public static void setSquare(int x, int y) {
 		if (y > 0) {
 			grid[x][y] = true;
-		} else if(!gameOver){
+		} else if (!gameOver) {
 			if (score > record) {
 				Save.saveScore(score);
 			}

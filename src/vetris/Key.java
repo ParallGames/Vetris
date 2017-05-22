@@ -13,6 +13,7 @@ public class Key extends Group {
 	private static boolean downDown = false;
 
 	private static boolean enterDown = false;
+	private static boolean spaceDown = false;
 
 	private static boolean cDown = false;
 	private static boolean pDown = false;
@@ -69,6 +70,12 @@ public class Key extends Group {
 				}
 				enterDown = true;
 			}
+			if (key.getCode() == KeyCode.SPACE && !spaceDown) {
+				Grid.getFallingShapes()
+						.add(new FallingShape(FallBlock.getShape().getShape(), FallBlock.getX(), FallBlock.getY()));
+				FallBlock.reset();
+				spaceDown = true;
+			}
 			if (key.getCode() == KeyCode.C && !cDown) {
 				Grid.setColor(
 						Color.color(Grid.getColor().getBlue(), Grid.getColor().getRed(), Grid.getColor().getGreen()));
@@ -97,7 +104,9 @@ public class Key extends Group {
 			if (key.getCode() == KeyCode.ENTER) {
 				enterDown = false;
 			}
-
+			if (key.getCode() == KeyCode.SPACE) {
+				spaceDown = false;
+			}
 			if (key.getCode() == KeyCode.C) {
 				cDown = false;
 			}
