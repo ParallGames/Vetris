@@ -4,7 +4,7 @@ public class FallingShape {
 	private boolean m_shape[][] = new boolean[10][20];
 
 	private int m_y = 0;
-	private int m_gY = 0;
+	private double m_gY = 0;
 
 	FallingShape(boolean shape[][]) {
 		clear();
@@ -35,12 +35,12 @@ public class FallingShape {
 	}
 
 	public int getGY() {
-		return m_gY;
+		return (int) m_gY;
 	}
 
 	public boolean tick() {
-		m_gY += 2;
-		m_y = m_gY / 32 + 1;
+		m_gY += Grid.getSpeed() * 4;
+		m_y = (int) m_gY / 32 + 1;
 
 		for (int b_x = 0; b_x < 10; b_x++) {
 			for (int b_y = 0; b_y < 20; b_y++) {

@@ -60,9 +60,8 @@ public class Key extends Group {
 					FallBlock.reset();
 				} else if (Grid.isTinyShape() && !FallBlock.collision()) {
 					Grid.setTinyShape(false);
-					Grid.setSquare(FallBlock.getX(), FallBlock.getY());
-					Grid.update();
-					SoundPlayer.playShock();
+					Grid.getFallingShapes()
+							.add(new FallingShape(FallBlock.getShape().getShape(), FallBlock.getX(), FallBlock.getY()));
 					FallBlock.reset();
 				} else if (Grid.hasEnoughEnergy()) {
 					Grid.setTinyShape(true);
@@ -70,7 +69,8 @@ public class Key extends Group {
 				}
 				enterDown = true;
 			}
-			if (key.getCode() == KeyCode.SPACE && !spaceDown) {
+			if (key.getCode() == KeyCode.SPACE && !spaceDown && !Grid.isPause() && !Grid.isTinyShape()
+					&& !Grid.isGameOver()) {
 				Grid.getFallingShapes()
 						.add(new FallingShape(FallBlock.getShape().getShape(), FallBlock.getX(), FallBlock.getY()));
 				FallBlock.reset();

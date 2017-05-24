@@ -1,16 +1,14 @@
 package vetris;
 
 public class FallBlock {
-	public static int gX = 0;
-	public static int gY = 0;
+	private static double gX = 0;
+	private static double gY = 0;
 
 	private static int x = 0;
 	private static int y = 0;
 
 	private static Shape shape = new Shape();
 	private static Shape nextShape = new Shape();
-
-	private static long time = System.currentTimeMillis();
 
 	public static synchronized boolean collision() {
 		for (int a = 0; a < 4; a++) {
@@ -32,12 +30,20 @@ public class FallBlock {
 		return true;
 	}
 
-	public static synchronized Shape getShape() {
-		return shape;
+	public static synchronized int getGX() {
+		return (int) gX;
+	}
+
+	public static synchronized int getGY() {
+		return (int) gY;
 	}
 
 	public static synchronized Shape getNextShape() {
 		return nextShape;
+	}
+
+	public static synchronized Shape getShape() {
+		return shape;
 	}
 
 	public static synchronized int getX() {
@@ -124,8 +130,6 @@ public class FallBlock {
 
 		gX = x * 32;
 		gY = y * 32;
-
-		time = System.currentTimeMillis();
 	}
 
 	public static synchronized void rotate() {
@@ -141,15 +145,17 @@ public class FallBlock {
 
 	public static synchronized void tick() {
 		if (Key.downDown()) {
-			if (System.currentTimeMillis() > time + Grid.getSpeed() / 8) {
-				time = System.currentTimeMillis();
-				y++;
-			}
+			gY += Grid.getSpeed() * 4;
 		} else {
-			if (System.currentTimeMillis() > time + Grid.getSpeed()) {
-				time = System.currentTimeMillis();
-				y++;
-			}
+			gY += Grid.getSpeed();
+		}
+
+		y = (int) gY / 32 + 1;
+
+		if (FallBlock.getX() * 32 > FallBlock.gX) {
+			FallBlock.gX += 4;
+		} else if (FallBlock.getX() * 32 < FallBlock.gX) {
+			FallBlock.gX -= 4;
 		}
 
 		for (int b_x = 0; b_x < 4; b_x++) {
@@ -170,6 +176,22 @@ public class FallBlock {
 					}
 				}
 			}
+		}
+	}
+
+	public static synchronized void tickTinyShape() {
+		if (x * 32 > gX) {
+			gX += 4;
+		} else if (x * 32 < gX) {
+			gX -= 4;
+		}
+		if (y * 32 > gY) {
+			gY += 4;
+		} else if (y * 32 < gY) {
+			gY -= 4;
+		}
+		if (Math.abs(gY - y * 32) < 4) {
+			gY = y * 32;
 		}
 	}
 

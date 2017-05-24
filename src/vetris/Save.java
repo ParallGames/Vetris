@@ -12,22 +12,6 @@ import javafx.scene.paint.Color;
 
 public class Save {
 
-	public static int loadScore() {
-		DataInputStream in;
-		int score;
-		try {
-			in = new DataInputStream(new FileInputStream(new File(System.getProperty("user.home") + "/.vetris/score")));
-			score = in.readInt();
-			in.close();
-		} catch (FileNotFoundException e) {
-			saveScore(0);
-			return 0;
-		} catch (IOException e) {
-			return 0;
-		}
-		return score;
-	}
-
 	public static Color loadColor() {
 		DataInputStream in;
 		Color color;
@@ -44,18 +28,20 @@ public class Save {
 		return color;
 	}
 
-	public static void saveScore(int score) {
-		DataOutputStream out;
+	public static int loadScore() {
+		DataInputStream in;
+		int score;
 		try {
-			File file = new File(System.getProperty("user.home") + "/.vetris");
-			file.mkdirs();
-			out = new DataOutputStream(
-					new FileOutputStream(new File(System.getProperty("user.home") + "/.vetris/score")));
-			out.writeInt(score);
-			out.close();
+			in = new DataInputStream(new FileInputStream(new File(System.getProperty("user.home") + "/.vetris/score")));
+			score = in.readInt();
+			in.close();
+		} catch (FileNotFoundException e) {
+			saveScore(0);
+			return 0;
 		} catch (IOException e) {
-			return;
+			return 0;
 		}
+		return score;
 	}
 
 	public static void saveColor(Color color) {
@@ -68,6 +54,20 @@ public class Save {
 			out.writeDouble(color.getRed());
 			out.writeDouble(color.getGreen());
 			out.writeDouble(color.getBlue());
+			out.close();
+		} catch (IOException e) {
+			return;
+		}
+	}
+
+	public static void saveScore(int score) {
+		DataOutputStream out;
+		try {
+			File file = new File(System.getProperty("user.home") + "/.vetris");
+			file.mkdirs();
+			out = new DataOutputStream(
+					new FileOutputStream(new File(System.getProperty("user.home") + "/.vetris/score")));
+			out.writeInt(score);
 			out.close();
 		} catch (IOException e) {
 			return;

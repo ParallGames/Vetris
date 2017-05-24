@@ -10,7 +10,7 @@ public class Grid {
 	private static boolean pause = false;
 	private static boolean tinyShape = false;
 
-	private static double speed = 1000.D;
+	private static double speed = 1;
 
 	private static int score = 0;
 	private static int record = Save.loadScore();
@@ -20,12 +20,8 @@ public class Grid {
 
 	private static Vector<FallingShape> fallingShapes = new Vector<FallingShape>();
 
-	public static Vector<FallingShape> getFallingShapes() {
-		return fallingShapes;
-	}
-
 	public static void addSpeed() {
-		speed -= speed / 16384;
+		speed += speed / 16384;
 	}
 
 	public static Color getColor() {
@@ -36,6 +32,10 @@ public class Grid {
 		return energy;
 	}
 
+	public static Vector<FallingShape> getFallingShapes() {
+		return fallingShapes;
+	}
+
 	public static int getRecord() {
 		return record;
 	}
@@ -44,8 +44,8 @@ public class Grid {
 		return score;
 	}
 
-	public static int getSpeed() {
-		return (int) speed;
+	public static double getSpeed() {
+		return speed;
 	}
 
 	public static boolean getSquare(int x, int y) {
@@ -73,7 +73,7 @@ public class Grid {
 	}
 
 	public static void reset() {
-		speed = 1000.D;
+		speed = 1;
 		score = 0;
 		record = Save.loadScore();
 		energy = 0;

@@ -27,21 +27,6 @@ public class Panel extends Group {
 					gEnergy--;
 				}
 
-				if (FallBlock.getY() * 32 > FallBlock.gY) {
-					FallBlock.gY += 320000 / Window.fps / Grid.getSpeed();
-				} else if (FallBlock.getY() * 32 < FallBlock.gY) {
-					FallBlock.gY -= 320000 / Window.fps / Grid.getSpeed();
-				}
-				if (Math.abs(FallBlock.gY - FallBlock.getY() * 32) < 320000 / Window.fps / Grid.getSpeed()) {
-					FallBlock.gY = FallBlock.getY() * 32;
-				}
-
-				if (FallBlock.getX() * 32 > FallBlock.gX) {
-					FallBlock.gX += 4;
-				} else if (FallBlock.getX() * 32 < FallBlock.gX) {
-					FallBlock.gX -= 4;
-				}
-
 				Rectangle rectangle;
 
 				for (int x = 0; x < 10; x++) {
@@ -61,7 +46,8 @@ public class Panel extends Group {
 				for (int x = 0; x < 4; x++) {
 					for (int y = 0; y < 4; y++) {
 						if (FallBlock.isSquare(x, y)) {
-							rectangle = new Rectangle(FallBlock.gX + x * 32 + 160, FallBlock.gY + y * 32, 32, 32);
+							rectangle = new Rectangle(FallBlock.getGX() + x * 32 + 160, FallBlock.getGY() + y * 32, 32,
+									32);
 							if (Grid.getSquare(FallBlock.getX() + x, FallBlock.getY() + y)) {
 								rectangle.setFill(Color.rgb((int) (Grid.getColor().getRed() * 255) - 63,
 										(int) (Grid.getColor().getGreen() * 255) - 63,
