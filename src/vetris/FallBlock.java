@@ -144,7 +144,7 @@ public class FallBlock {
 	}
 
 	public static synchronized void tick() {
-		if (Key.downDown()) {
+		if (Key.isDownDown()) {
 			gY += Grid.getSpeed() * 4;
 		} else {
 			gY += Grid.getSpeed();
@@ -153,9 +153,16 @@ public class FallBlock {
 		y = (int) gY / 32 + 1;
 
 		if (FallBlock.getX() * 32 > FallBlock.gX) {
-			FallBlock.gX += 4;
+			FallBlock.gX += 2;
 		} else if (FallBlock.getX() * 32 < FallBlock.gX) {
-			FallBlock.gX -= 4;
+			FallBlock.gX -= 2;
+		}
+
+		if (Key.isLeftDown() && x * 32 == gX) {
+			goLeft();
+		}
+		if (Key.isRightDown() && x * 32 == gX) {
+			goRight();
 		}
 
 		for (int b_x = 0; b_x < 4; b_x++) {
@@ -181,17 +188,30 @@ public class FallBlock {
 
 	public static synchronized void tickTinyShape() {
 		if (x * 32 > gX) {
-			gX += 4;
+			gX += 2;
 		} else if (x * 32 < gX) {
-			gX -= 4;
+			gX -= 2;
 		}
 		if (y * 32 > gY) {
-			gY += 4;
+			gY += 2;
 		} else if (y * 32 < gY) {
-			gY -= 4;
+			gY -= 2;
 		}
 		if (Math.abs(gY - y * 32) < 4) {
 			gY = y * 32;
+		}
+
+		if (Key.isLeftDown() && x * 32 == gX) {
+			moveLeft();
+		}
+		if (Key.isRightDown() && x * 32 == gX) {
+			moveRight();
+		}
+		if (Key.isDownDown() && y * 32 == gY) {
+			moveDown();
+		}
+		if (Key.isUpDown() && y * 32 == gY) {
+			moveUp();
 		}
 	}
 

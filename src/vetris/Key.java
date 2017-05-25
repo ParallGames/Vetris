@@ -18,8 +18,20 @@ public class Key extends Group {
 	private static boolean cDown = false;
 	private static boolean pDown = false;
 
-	public static boolean downDown() {
+	public static boolean isDownDown() {
 		return downDown;
+	}
+
+	public static boolean isLeftDown() {
+		return leftDown;
+	}
+
+	public static boolean isRightDown() {
+		return rightDown;
+	}
+
+	public static boolean isUpDown() {
+		return upDown;
 	}
 
 	Key() {

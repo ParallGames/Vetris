@@ -131,14 +131,14 @@ public class Grid {
 				if (energy > 10) {
 					energy = 10;
 				}
-				
+
 				boolean fall[][] = new boolean[10][20];
-				for (int a = 0; a < 10; a++){
-					for (int b = 0; b < 20; b++){
+				for (int a = 0; a < 10; a++) {
+					for (int b = 0; b < 20; b++) {
 						fall[a][b] = false;
 					}
 				}
-				
+
 				for (int a = 0; a < line; a++) {
 					for (int b = 0; b < 10; b++) {
 						fall[b][a] = grid[b][a];
