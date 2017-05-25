@@ -1,8 +1,11 @@
 package vetris;
 
+import java.io.InputStream;
+
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -52,6 +55,7 @@ public class Window extends Application {
 		root.getChildren().add(foreground);
 
 		primaryStage.setTitle("Vetris");
+		primaryStage.getIcons().add(new Image(Window.class.getResourceAsStream("/resources/images/Icon.png")));
 		primaryStage.setResizable(false);
 		primaryStage.setScene(scene);
 		primaryStage.show();
