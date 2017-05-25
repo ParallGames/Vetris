@@ -10,7 +10,7 @@ public class Grid {
 	private static boolean pause = false;
 	private static boolean tinyShape = false;
 
-	private static double speed = 1;
+	private static double speed = 0.5;
 
 	private static int score = 0;
 	private static int record = Save.loadScore();
@@ -73,7 +73,7 @@ public class Grid {
 	}
 
 	public static void reset() {
-		speed = 1;
+		speed = 0.5;
 		score = 0;
 		record = Save.loadScore();
 		energy = 0;
@@ -121,7 +121,7 @@ public class Grid {
 				}
 			}
 			if (isLine) {
-				for (byte a = 0; a < 10; a++) {
+				for (int a = 0; a < 10; a++) {
 					grid[a][line] = false;
 				}
 
@@ -131,14 +131,22 @@ public class Grid {
 				if (energy > 10) {
 					energy = 10;
 				}
-				for (int a = line - 1; a > 0; a--) {
-					for (int b = 0; b < 10; b++) {
-						if (!grid[b][a + 1]) {
-							grid[b][a + 1] = grid[b][a];
-							grid[b][a] = false;
-						}
+				
+				boolean fall[][] = new boolean[10][20];
+				for (int a = 0; a < 10; a++){
+					for (int b = 0; b < 20; b++){
+						fall[a][b] = false;
 					}
 				}
+				
+				for (int a = 0; a < line; a++) {
+					for (int b = 0; b < 10; b++) {
+						fall[b][a] = grid[b][a];
+						grid[b][a] = false;
+					}
+				}
+				fallingShapes.add(new FallingShape(fall));
+				return;
 			}
 		}
 	}
