@@ -49,6 +49,9 @@ public class Grid {
 	}
 
 	public static boolean getSquare(int x, int y) {
+		if (y > 19) {
+			return true;
+		}
 		return grid[x][y];
 	}
 
