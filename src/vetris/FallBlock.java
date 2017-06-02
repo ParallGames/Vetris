@@ -7,6 +7,8 @@ public class FallBlock {
 	private static int x = 0;
 	private static int y = 0;
 
+	private static int frameBeforeFall = 50;
+
 	private static Shape shape = new Shape();
 	private static Shape nextShape = new Shape();
 
@@ -119,6 +121,7 @@ public class FallBlock {
 	}
 
 	public static synchronized void reset() {
+		frameBeforeFall = 50;
 		shape = nextShape;
 		shape.update();
 		nextShape = new Shape();
@@ -129,7 +132,7 @@ public class FallBlock {
 		y = 0 - shape.maxUp();
 
 		gX = x * 32;
-		gY = y * 32;
+		gY = y * 32 - 1;
 	}
 
 	public static synchronized void rotate() {
@@ -145,12 +148,15 @@ public class FallBlock {
 
 	public static synchronized void tick() {
 		if (Key.isDownDown()) {
+			frameBeforeFall = 0;
 			gY += Grid.getSpeed() * 4;
+		} else if (frameBeforeFall > 0) {
+			frameBeforeFall--;
 		} else {
 			gY += Grid.getSpeed();
 		}
 
-		y = (int) gY / 32 + 1;
+		y = (int) (gY + 32) / 32;
 
 		if (FallBlock.getX() * 32 > FallBlock.gX) {
 			FallBlock.gX += 2;
