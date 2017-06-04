@@ -39,7 +39,6 @@ public class Window extends Application {
 
 	@Override
 	public synchronized void start(Stage primaryStage) {
-
 		Grid.reset();
 		FallBlock.reset();
 
@@ -84,6 +83,8 @@ public class Window extends Application {
 						while (primaryStage.isShowing() && Grid.isGameOver()) {
 							Window.this.repaint();
 						}
+					} else if (!primaryStage.isFocused()) {
+						Grid.setPause(true);
 					}
 				}
 				if (Grid.getScore() > Grid.getRecord()) {
