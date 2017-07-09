@@ -128,7 +128,7 @@ public class FallBlock {
 		nextShape.setRandomShape();
 		nextShape.update();
 
-		x = ValMath.randInt(0 - shape.maxLeft(), 10 - shape.maxRight());
+		x = 6 - shape.maxLeft() - shape.maxRight();
 		y = 0 - shape.maxUp();
 
 		gX = x * 32;
@@ -158,10 +158,18 @@ public class FallBlock {
 
 		y = (int) (gY + 32) / 32;
 
+		int speed = 2;
+		if (Key.isShiftDown()) {
+			speed *= 2;
+		}
+		if (Key.isControlDown()) {
+			speed /= 2;
+		}
+		speed += gX % speed;
 		if (FallBlock.getX() * 32 > FallBlock.gX) {
-			FallBlock.gX += 2;
+			FallBlock.gX += speed;
 		} else if (FallBlock.getX() * 32 < FallBlock.gX) {
-			FallBlock.gX -= 2;
+			FallBlock.gX -= speed;
 		}
 
 		if (Key.isLeftDown() && x * 32 == gX) {
