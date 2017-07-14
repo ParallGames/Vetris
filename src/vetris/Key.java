@@ -14,7 +14,7 @@ public class Key extends Group {
 
 	private static boolean enterDown = false;
 	private static boolean spaceDown = false;
-	
+
 	private static boolean shiftDown = false;
 	private static boolean controlDown = false;
 
@@ -36,11 +36,11 @@ public class Key extends Group {
 	public static boolean isUpDown() {
 		return upDown;
 	}
-	
+
 	public static boolean isShiftDown() {
 		return shiftDown;
 	}
-	
+
 	public static boolean isControlDown() {
 		return controlDown;
 	}
