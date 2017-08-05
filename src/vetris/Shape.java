@@ -1,7 +1,7 @@
 package vetris;
 
 public class Shape {
-	private boolean shape[][] = new boolean[4][4];
+	private final boolean shape[][] = new boolean[4][4];
 	private int nShape = 0;
 	private int rotation = 0;
 

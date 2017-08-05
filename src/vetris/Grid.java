@@ -5,7 +5,7 @@ import java.util.Vector;
 import javafx.scene.paint.Color;
 
 public class Grid {
-	private static boolean grid[][] = new boolean[10][20];
+	private static final boolean grid[][] = new boolean[10][20];
 	private static boolean gameOver = false;
 	private static boolean pause = false;
 	private static boolean tinyShape = false;
@@ -18,7 +18,7 @@ public class Grid {
 
 	private static Color color = Save.loadColor();
 
-	private static Vector<FallingShape> fallingShapes = new Vector<FallingShape>();
+	private static final Vector<FallingShape> fallingShapes = new Vector<FallingShape>();
 
 	public static void addSpeed() {
 		speed += speed / 16384;

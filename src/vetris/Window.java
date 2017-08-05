@@ -8,17 +8,17 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class Window extends Application {
-	public static int fps = 100;
+	private static final int fps = 100;
 
 	private static long time = System.nanoTime();
-	private static long interval = 1_000_000_000 / fps;
+	private static final long interval = 1_000_000_000 / fps;
 
-	private Background background = new Background();
-	private Panel panel = new Panel();
-	private Foreground foreground = new Foreground();
+	private final Background background = new Background();
+	private final Panel panel = new Panel();
+	private final Foreground foreground = new Foreground();
 
-	private Group root = new Group();
-	private Key key = new Key();
+	private final Group root = new Group();
+	private final Key key = new Key();
 
 	public void repaint() {
 		background.update();
