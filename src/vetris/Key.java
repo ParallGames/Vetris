@@ -16,7 +16,6 @@ public class Key extends Group {
 	private static boolean spaceDown = false;
 
 	private static boolean shiftDown = false;
-	private static boolean controlDown = false;
 
 	private static boolean cDown = false;
 	private static boolean pDown = false;
@@ -39,10 +38,6 @@ public class Key extends Group {
 
 	public static boolean isShiftDown() {
 		return shiftDown;
-	}
-
-	public static boolean isControlDown() {
-		return controlDown;
 	}
 
 	Key() {
@@ -102,9 +97,6 @@ public class Key extends Group {
 			if (key.getCode() == KeyCode.SHIFT) {
 				shiftDown = true;
 			}
-			if (key.getCode() == KeyCode.CONTROL) {
-				controlDown = true;
-			}
 			if (key.getCode() == KeyCode.C && !cDown) {
 				Grid.setColor(
 						Color.color(Grid.getColor().getBlue(), Grid.getColor().getRed(), Grid.getColor().getGreen()));
@@ -138,9 +130,6 @@ public class Key extends Group {
 			}
 			if (key.getCode() == KeyCode.SHIFT) {
 				shiftDown = false;
-			}
-			if (key.getCode() == KeyCode.CONTROL) {
-				controlDown = false;
 			}
 			if (key.getCode() == KeyCode.C) {
 				cDown = false;

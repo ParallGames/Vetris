@@ -1,6 +1,8 @@
 package vetris;
 
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -53,10 +55,21 @@ public class Window extends Application {
 
 		primaryStage.setTitle("Vetris");
 		primaryStage.getIcons().add(new Image(Window.class.getResourceAsStream("/resources/images/Icon.png")));
-		primaryStage.setResizable(false);
+		primaryStage.setResizable(true);
 		primaryStage.setScene(scene);
-		primaryStage.show();
+		
+		ChangeListener<Number> resizeListener = new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> a, Number b, Number c) {
 
+			}
+		};
+
+		primaryStage.widthProperty().addListener(resizeListener);
+		primaryStage.heightProperty().addListener(resizeListener);
+		
+		primaryStage.show();
+		
 		new Thread() {
 			@Override
 			public void run() {
