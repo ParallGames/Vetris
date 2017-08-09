@@ -44,7 +44,7 @@ public class Window extends Application {
 		Grid.reset();
 		FallBlock.reset();
 
-		Scene scene = new Scene(root, 640, 640);
+		Scene scene = new Scene(root, 22 * Grid.getSquareSize(), 20 * Grid.getSquareSize());
 		scene.setFill(Color.rgb(31, 31, 31));
 
 		root.getChildren().add(key);
@@ -57,7 +57,7 @@ public class Window extends Application {
 		primaryStage.getIcons().add(new Image(Window.class.getResourceAsStream("/resources/images/Icon.png")));
 		primaryStage.setResizable(true);
 		primaryStage.setScene(scene);
-		
+
 		ChangeListener<Number> resizeListener = new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> a, Number b, Number c) {
@@ -67,9 +67,9 @@ public class Window extends Application {
 
 		primaryStage.widthProperty().addListener(resizeListener);
 		primaryStage.heightProperty().addListener(resizeListener);
-		
+
 		primaryStage.show();
-		
+
 		new Thread() {
 			@Override
 			public void run() {

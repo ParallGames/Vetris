@@ -8,7 +8,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class Foreground extends Group {
-	private double opacity = 0.8;
+	private double opacity = 0.9;
 
 	Foreground() {
 		this.update();
@@ -20,8 +20,8 @@ public class Foreground extends Group {
 			public void run() {
 				if (Grid.isGameOver() || Grid.isPause()) {
 					opacity += 0.01;
-					if (opacity > 0.8) {
-						opacity = 0.8;
+					if (opacity > 0.9) {
+						opacity = 0.9;
 					}
 				} else {
 					opacity -= 0.01;
@@ -31,7 +31,7 @@ public class Foreground extends Group {
 				}
 
 				Foreground.this.getChildren().clear();
-				Rectangle rectangle = new Rectangle(0, 0, 640, 640);
+				Rectangle rectangle = new Rectangle(0, 0, Grid.getSquareSize() * 22, Grid.getSquareSize() * 20);
 				rectangle.setFill(Color.rgb(0, 0, 0, opacity));
 				Foreground.this.getChildren().add(rectangle);
 
@@ -39,30 +39,35 @@ public class Foreground extends Group {
 						Grid.getColor().getBlue(), opacity);
 
 				if (Grid.isGameOver()) {
-					Text text = new Text(50, 200, "Game Over");
-					text.setFont(new Font("Noto Mono", 100));
+					Text text = new Text(Grid.getSquareSize() * 3, Grid.getSquareSize() * 6, "Game Over");
+					text.setFont(new Font("Noto Mono", Grid.getSquareSize() * 3));
 					text.setFill(color);
 					Foreground.this.getChildren().add(text);
 
-					text = new Text(160, 400, "Score:" + String.valueOf(Grid.getScore()));
-					text.setFont(new Font("Noto Mono", 50));
+					text = new Text(Grid.getSquareSize() * 6, Grid.getSquareSize() * 10,
+							"Score:" + String.valueOf(Grid.getScore()));
+					text.setFont(new Font("Noto Mono", Grid.getSquareSize() * 2));
 					text.setFill(color);
 					Foreground.this.getChildren().add(text);
 
-					text = new Text(160, 500, "Record:" + String.valueOf(Grid.getRecord()));
-					text.setFont(new Font("Noto Mono", 50));
+					text = new Text(Grid.getSquareSize() * 5, Grid.getSquareSize() * 13,
+							"Record:" + String.valueOf(Grid.getRecord()));
+					text.setFont(new Font("Noto Mono", Grid.getSquareSize() * 2));
 					text.setFill(color);
 					Foreground.this.getChildren().add(text);
 				} else if (Grid.isPause()) {
-					rectangle = new Rectangle(224, 224, 192, 192);
+					rectangle = new Rectangle(Grid.getSquareSize() * 8, Grid.getSquareSize() * 7,
+							Grid.getSquareSize() * 6, Grid.getSquareSize() * 6);
 					rectangle.setFill(Color.rgb(63, 63, 63, opacity));
 					Foreground.this.getChildren().add(rectangle);
 
-					rectangle = new Rectangle(256, 256, 32, 128);
+					rectangle = new Rectangle(Grid.getSquareSize() * 9, Grid.getSquareSize() * 8, Grid.getSquareSize(),
+							Grid.getSquareSize() * 4);
 					rectangle.setFill(color);
 					Foreground.this.getChildren().add(rectangle);
 
-					rectangle = new Rectangle(352, 256, 32, 128);
+					rectangle = new Rectangle(Grid.getSquareSize() * 12, Grid.getSquareSize() * 8, Grid.getSquareSize(),
+							Grid.getSquareSize() * 4);
 					rectangle.setFill(color);
 					Foreground.this.getChildren().add(rectangle);
 				}

@@ -15,7 +15,8 @@ public class Save {
 	public static Color loadColor() {
 		Color color;
 		try {
-			DataInputStream in = new DataInputStream(new FileInputStream(new File(System.getProperty("user.home") + "/.vetris/color")));
+			DataInputStream in = new DataInputStream(
+					new FileInputStream(new File(System.getProperty("user.home") + "/.vetris/color")));
 			color = Color.color(in.readDouble(), in.readDouble(), in.readDouble());
 			in.close();
 		} catch (FileNotFoundException e) {
@@ -30,7 +31,8 @@ public class Save {
 	public static int loadScore() {
 		int score;
 		try {
-			DataInputStream in = new DataInputStream(new FileInputStream(new File(System.getProperty("user.home") + "/.vetris/score")));
+			DataInputStream in = new DataInputStream(
+					new FileInputStream(new File(System.getProperty("user.home") + "/.vetris/score")));
 			score = in.readInt();
 			in.close();
 		} catch (FileNotFoundException e) {

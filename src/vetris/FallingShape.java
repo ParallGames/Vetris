@@ -34,13 +34,13 @@ public class FallingShape {
 		return m_shape[x][y];
 	}
 
-	public int getGY() {
-		return (int) m_gY;
+	public double getGY() {
+		return m_gY;
 	}
 
 	public boolean tick() {
 		m_gY += Grid.getSpeed() * 4;
-		m_y = (int) m_gY / 32 + 1;
+		m_y = (int) m_gY + 1;
 
 		for (int b_x = 0; b_x < 10; b_x++) {
 			for (int b_y = 0; b_y < 20; b_y++) {

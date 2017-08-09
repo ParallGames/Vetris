@@ -32,12 +32,12 @@ public class FallBlock {
 		return true;
 	}
 
-	public static synchronized int getGX() {
-		return (int) gX;
+	public static synchronized double getGX() {
+		return gX;
 	}
 
-	public static synchronized int getGY() {
-		return (int) gY;
+	public static synchronized double getGY() {
+		return gY;
 	}
 
 	public static synchronized Shape getNextShape() {
@@ -131,8 +131,8 @@ public class FallBlock {
 		x = 6 - shape.maxLeft() - shape.maxRight();
 		y = 0 - shape.maxUp();
 
-		gX = x * 32;
-		gY = y * 32 - 1;
+		gX = x;
+		gY = y;
 	}
 
 	public static synchronized void rotate() {
@@ -156,27 +156,27 @@ public class FallBlock {
 			gY += Grid.getSpeed();
 		}
 
-		y = (int) (gY + 32) / 32;
+		y = (int) gY + 1;
 
-		int speed = 2;
+		double speed = 0.0625;
 		if (Key.isShiftDown()) {
-			speed = 4;
+			speed = 0.125;
 		}
 
-		if (x * 32 > gX) {
+		if (x > gX) {
 			gX += speed;
-		} else if (x * 32 < gX) {
+		} else if (x < gX) {
 			gX -= speed;
 		}
-		
-		if (Math.abs(gX - x * 32) <= 2) {
-			gX = x * 32;
+
+		if (Math.abs(gX - x) <= 0.0625) {
+			gX = x;
 		}
 
-		if (Key.isLeftDown() && !Key.isRightDown() && x * 32 == gX) {
+		if (Key.isLeftDown() && !Key.isRightDown() && x == gX) {
 			goLeft();
 		}
-		if (Key.isRightDown() && !Key.isLeftDown() && x * 32 == gX) {
+		if (Key.isRightDown() && !Key.isLeftDown() && x == gX) {
 			goRight();
 		}
 
@@ -202,39 +202,39 @@ public class FallBlock {
 	}
 
 	public static synchronized void tickTinyShape() {
-		int speed = 2;
-		if(Key.isShiftDown()) {
-			speed = 4;
+		double speed = 0.0625;
+		if (Key.isShiftDown()) {
+			speed = 0.125;
 		}
-		
-		if (x * 32 > gX) {
+
+		if (x > gX) {
 			gX += speed;
-		} else if (x * 32 < gX) {
+		} else if (x < gX) {
 			gX -= speed;
 		}
-		if (y * 32 > gY) {
+		if (y > gY) {
 			gY += speed;
-		} else if (y * 32 < gY) {
+		} else if (y < gY) {
 			gY -= speed;
 		}
 
-		if (Math.abs(gY - y * 32) <= 2) {
-			gY = y * 32;
+		if (Math.abs(gY - y) <= 0.0625) {
+			gY = y;
 		}
-		if (Math.abs(gX - x * 32) <= 2) {
-			gX = x * 32;
+		if (Math.abs(gX - x) <= 0.0625) {
+			gX = x;
 		}
 
-		if (Key.isLeftDown() && !Key.isRightDown() && x * 32 == gX) {
+		if (Key.isLeftDown() && !Key.isRightDown() && x == gX) {
 			moveLeft();
 		}
-		if (Key.isRightDown() && !Key.isLeftDown() && x * 32 == gX) {
+		if (Key.isRightDown() && !Key.isLeftDown() && x == gX) {
 			moveRight();
 		}
-		if (Key.isDownDown() && !Key.isUpDown() && y * 32 == gY) {
+		if (Key.isDownDown() && !Key.isUpDown() && y == gY) {
 			moveDown();
 		}
-		if (Key.isUpDown() && !Key.isDownDown() && y * 32 == gY) {
+		if (Key.isUpDown() && !Key.isDownDown() && y == gY) {
 			moveUp();
 		}
 	}

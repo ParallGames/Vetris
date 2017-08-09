@@ -10,7 +10,9 @@ public class Grid {
 	private static boolean pause = false;
 	private static boolean tinyShape = false;
 
-	private static double speed = 0.5;
+	private static double speed = 0.01;
+
+	private static int squareSize = 32;
 
 	private static int score = 0;
 	private static int record = Save.loadScore();
@@ -55,6 +57,10 @@ public class Grid {
 		return grid[x][y];
 	}
 
+	public static int getSquareSize() {
+		return squareSize;
+	}
+
 	public static boolean hasEnoughEnergy() {
 		if (energy >= 5 && !tinyShape) {
 			energy -= 5;
@@ -76,7 +82,7 @@ public class Grid {
 	}
 
 	public static void reset() {
-		speed = 0.5;
+		speed = 0.01;
 		score = 0;
 		record = Save.loadScore();
 		energy = 0;
@@ -112,6 +118,10 @@ public class Grid {
 
 	public static void setTinyShape(boolean t) {
 		tinyShape = t;
+	}
+
+	public static void setSquareSize(int size) {
+		squareSize = size;
 	}
 
 	public static void update() {

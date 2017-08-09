@@ -9,7 +9,7 @@ import javafx.scene.text.Text;
 
 public class Panel extends Group {
 
-	private int gEnergy = 0;
+	private double gEnergy = 0;
 
 	Panel() {
 		this.update();
@@ -21,10 +21,10 @@ public class Panel extends Group {
 			public void run() {
 				Panel.this.getChildren().clear();
 
-				if (Grid.getEnergy() * 56 > gEnergy) {
-					gEnergy++;
-				} else if (Grid.getEnergy() * 56 < gEnergy) {
-					gEnergy--;
+				if (Grid.getEnergy() > gEnergy) {
+					gEnergy += 0.01;
+				} else if (Grid.getEnergy() < gEnergy) {
+					gEnergy -= 0.01;
 				}
 
 				Rectangle rectangle;
@@ -32,22 +32,28 @@ public class Panel extends Group {
 				for (int x = 0; x < 10; x++) {
 					for (int y = 0; y < 20; y++) {
 						if (Grid.getSquare(x, y)) {
-							rectangle = new Rectangle(x * 32 + 160, y * 32, 32, 32);
+							rectangle = new Rectangle(x * Grid.getSquareSize() + Grid.getSquareSize() * 6,
+									y * Grid.getSquareSize(), Grid.getSquareSize(), Grid.getSquareSize());
 							rectangle.setFill(Grid.getColor());
 							Panel.this.getChildren().add(rectangle);
 						}
 					}
 				}
 
-				rectangle = new Rectangle(520, 600 - gEnergy, 80, gEnergy);
+				rectangle = new Rectangle(Grid.getSquareSize() * 17,
+						Grid.getSquareSize() * 19 - gEnergy * Grid.getSquareSize() * 1.8, Grid.getSquareSize() * 4,
+						gEnergy * Grid.getSquareSize() * 1.8);
 				rectangle.setFill(Grid.getColor());
 				Panel.this.getChildren().add(rectangle);
 
 				for (int x = 0; x < 4; x++) {
 					for (int y = 0; y < 4; y++) {
 						if (FallBlock.isSquare(x, y)) {
-							rectangle = new Rectangle(FallBlock.getGX() + x * 32 + 160, FallBlock.getGY() + y * 32, 32,
-									32);
+							rectangle = new Rectangle(
+									(int) (FallBlock.getGX() * Grid.getSquareSize() + x * Grid.getSquareSize()
+											+ Grid.getSquareSize() * 6),
+									(int) (FallBlock.getGY() * Grid.getSquareSize() + y * Grid.getSquareSize()),
+									Grid.getSquareSize(), Grid.getSquareSize());
 							if (Grid.getSquare(FallBlock.getX() + x, FallBlock.getY() + y)) {
 								rectangle.setFill(Color.rgb((int) (Grid.getColor().getRed() * 255) - 63,
 										(int) (Grid.getColor().getGreen() * 255) - 63,
@@ -64,11 +70,13 @@ public class Panel extends Group {
 					for (int y = 0; y < 4; y++) {
 						if (FallBlock.isNextSquare(x, y)) {
 							rectangle = new Rectangle(
-									20 * x - 10 * FallBlock.getNextShape().maxLeft()
-											- 10 * FallBlock.getNextShape().maxRight() + 70,
-									20 * y - 10 * FallBlock.getNextShape().maxUp()
-											- 10 * FallBlock.getNextShape().maxDown() + 550,
-									20, 20);
+									Grid.getSquareSize() * x - 10 * FallBlock.getNextShape().maxLeft()
+											- Grid.getSquareSize() / 2 * FallBlock.getNextShape().maxRight()
+											+ Grid.getSquareSize() * 2.5,
+									Grid.getSquareSize() * y - 10 * FallBlock.getNextShape().maxUp()
+											- Grid.getSquareSize() / 2 * FallBlock.getNextShape().maxDown()
+											+ Grid.getSquareSize() * 16.5,
+									Grid.getSquareSize(), Grid.getSquareSize());
 
 							rectangle.setFill(Grid.getColor());
 							Panel.this.getChildren().add(rectangle);
@@ -80,8 +88,10 @@ public class Panel extends Group {
 					for (int x = 0; x < 10; x++) {
 						for (int y = 0; y < 20; y++) {
 							if (Grid.getFallingShapes().get(a).get(x, y)) {
-								rectangle = new Rectangle(x * 32 + 160, y * 32 + Grid.getFallingShapes().get(a).getGY(),
-										32, 32);
+								rectangle = new Rectangle(x * Grid.getSquareSize() + Grid.getSquareSize() * 6,
+										(int) (y * Grid.getSquareSize()
+												+ Grid.getFallingShapes().get(a).getGY() * Grid.getSquareSize()),
+										Grid.getSquareSize(), Grid.getSquareSize());
 								rectangle.setFill(Color.rgb(63, 63, 63));
 								Panel.this.getChildren().add(rectangle);
 							}
@@ -89,13 +99,14 @@ public class Panel extends Group {
 					}
 				}
 
-				Text text = new Text(8, 64, String.valueOf(Grid.getScore()));
-				text.setFont(new Font("Noto Mono", 32));
+				Text text = new Text(Grid.getSquareSize() / 4, Grid.getSquareSize() * 2,
+						String.valueOf(Grid.getScore()));
+				text.setFont(new Font("Noto Mono", Grid.getSquareSize()));
 				text.setFill(Grid.getColor());
 				Panel.this.getChildren().add(text);
 
-				text = new Text(8, 160, String.valueOf(Grid.getRecord()));
-				text.setFont(new Font("Noto Mono", 32));
+				text = new Text(Grid.getSquareSize() / 4, Grid.getSquareSize() * 5, String.valueOf(Grid.getRecord()));
+				text.setFont(new Font("Noto Mono", Grid.getSquareSize()));
 				text.setFill(Grid.getColor());
 				Panel.this.getChildren().add(text);
 			}
