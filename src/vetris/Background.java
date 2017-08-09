@@ -12,24 +12,7 @@ public class Background extends Group {
 	private Group updateGroup = new Group();
 
 	Background() {
-		Rectangle rectangle = new Rectangle(Grid.getSquareSize() * 6, 0, Grid.getSquareSize() * 10,
-				Grid.getSquareSize() * 20);
-		rectangle.setFill(Color.rgb(127, 127, 127));
-		this.getChildren().add(rectangle);
-
-		rectangle = new Rectangle(Grid.getSquareSize() * 17, Grid.getSquareSize(), Grid.getSquareSize() * 4,
-				Grid.getSquareSize() * 18);
-		rectangle.setFill(Color.rgb(127, 127, 127));
-		this.getChildren().add(rectangle);
-
-		rectangle = new Rectangle(Grid.getSquareSize(), Grid.getSquareSize() * 15, Grid.getSquareSize() * 4,
-				Grid.getSquareSize() * 4);
-		rectangle.setFill(Color.rgb(127, 127, 127));
-		this.getChildren().add(rectangle);
-
-		this.getChildren().add(updateGroup);
-
-		this.update();
+		updateSize();
 	}
 
 	public void update() {
@@ -47,6 +30,33 @@ public class Background extends Group {
 				text.setFont(new Font("Noto Mono", Grid.getSquareSize()));
 				text.setFill(Grid.getColor());
 				updateGroup.getChildren().add(text);
+			}
+		});
+	}
+
+	public void updateSize() {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				Background.this.getChildren().clear();
+				Rectangle rectangle = new Rectangle(Grid.getSquareSize() * 6, 0, Grid.getSquareSize() * 10,
+						Grid.getSquareSize() * 20);
+				rectangle.setFill(Color.rgb(127, 127, 127));
+				Background.this.getChildren().add(rectangle);
+
+				rectangle = new Rectangle(Grid.getSquareSize() * 17, Grid.getSquareSize(), Grid.getSquareSize() * 4,
+						Grid.getSquareSize() * 18);
+				rectangle.setFill(Color.rgb(127, 127, 127));
+				Background.this.getChildren().add(rectangle);
+
+				rectangle = new Rectangle(Grid.getSquareSize(), Grid.getSquareSize() * 15, Grid.getSquareSize() * 4,
+						Grid.getSquareSize() * 4);
+				rectangle.setFill(Color.rgb(127, 127, 127));
+				Background.this.getChildren().add(rectangle);
+
+				Background.this.getChildren().add(updateGroup);
+
+				Background.this.update();
 			}
 		});
 	}

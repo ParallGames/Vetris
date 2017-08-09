@@ -129,7 +129,7 @@ public class FallBlock {
 		nextShape.update();
 
 		x = 6 - shape.maxLeft() - shape.maxRight();
-		y = 0 - shape.maxUp();
+		y = -shape.maxUp();
 
 		gX = x;
 		gY = y;

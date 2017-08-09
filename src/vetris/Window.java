@@ -6,6 +6,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -15,12 +16,18 @@ public class Window extends Application {
 	private static long time = System.nanoTime();
 	private static final long interval = 1_000_000_000 / fps;
 
-	private final Background background = new Background();
-	private final Panel panel = new Panel();
-	private final Foreground foreground = new Foreground();
+	private static Stage primaryStage;
 
-	private final Group root = new Group();
-	private final Key key = new Key();
+	private static final Background background = new Background();
+	private static final Panel panel = new Panel();
+	private static final Foreground foreground = new Foreground();
+
+	private static final Group root = new Group();
+	private static final Key key = new Key();
+
+	public static Stage getPrimaryStage() {
+		return primaryStage;
+	}
 
 	public void repaint() {
 		background.update();
@@ -40,7 +47,8 @@ public class Window extends Application {
 	}
 
 	@Override
-	public synchronized void start(Stage primaryStage) {
+	public synchronized void start(Stage p) {
+		primaryStage = p;
 		Grid.reset();
 		FallBlock.reset();
 
@@ -58,17 +66,29 @@ public class Window extends Application {
 		primaryStage.setResizable(true);
 		primaryStage.setScene(scene);
 
+		primaryStage.setFullScreenExitHint("");
+		primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+
+		primaryStage.show();
+
 		ChangeListener<Number> resizeListener = new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> a, Number b, Number c) {
+				int height = (int) (scene.getHeight() / 20);
+				int width = (int) (scene.getWidth() / 22);
 
+				if (height < width) {
+					Grid.setSquareSize(height);
+				} else {
+					Grid.setSquareSize(width);
+				}
+
+				background.updateSize();
 			}
 		};
 
-		primaryStage.widthProperty().addListener(resizeListener);
-		primaryStage.heightProperty().addListener(resizeListener);
-
-		primaryStage.show();
+		scene.widthProperty().addListener(resizeListener);
+		scene.heightProperty().addListener(resizeListener);
 
 		new Thread() {
 			@Override

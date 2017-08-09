@@ -70,12 +70,12 @@ public class Panel extends Group {
 					for (int y = 0; y < 4; y++) {
 						if (FallBlock.isNextSquare(x, y)) {
 							rectangle = new Rectangle(
-									Grid.getSquareSize() * x - 10 * FallBlock.getNextShape().maxLeft()
+									(int) (Grid.getSquareSize() * x - 10 * FallBlock.getNextShape().maxLeft()
 											- Grid.getSquareSize() / 2 * FallBlock.getNextShape().maxRight()
-											+ Grid.getSquareSize() * 2.5,
-									Grid.getSquareSize() * y - 10 * FallBlock.getNextShape().maxUp()
+											+ Grid.getSquareSize() * 2.5),
+									(int) (Grid.getSquareSize() * y - 10 * FallBlock.getNextShape().maxUp()
 											- Grid.getSquareSize() / 2 * FallBlock.getNextShape().maxDown()
-											+ Grid.getSquareSize() * 16.5,
+											+ Grid.getSquareSize() * 16.5),
 									Grid.getSquareSize(), Grid.getSquareSize());
 
 							rectangle.setFill(Grid.getColor());
