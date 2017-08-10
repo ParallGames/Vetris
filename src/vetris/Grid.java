@@ -13,6 +13,7 @@ public class Grid {
 	private static double speed = 0.01;
 
 	private static int squareSize = 32;
+	private static int translate = 0;
 
 	private static int score = 0;
 	private static int record = Save.loadScore();
@@ -59,6 +60,10 @@ public class Grid {
 
 	public static int getSquareSize() {
 		return squareSize;
+	}
+
+	public static int getTranslate() {
+		return translate;
 	}
 
 	public static boolean hasEnoughEnergy() {
@@ -122,6 +127,10 @@ public class Grid {
 
 	public static void setSquareSize(int size) {
 		squareSize = size;
+	}
+
+	public static void setTranslate(int t) {
+		translate = t;
 	}
 
 	public static void update() {

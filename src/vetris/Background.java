@@ -39,13 +39,13 @@ public class Background extends Group {
 			@Override
 			public void run() {
 				Background.this.getChildren().clear();
-				Rectangle rectangle = new Rectangle(Grid.getSquareSize() * 6, 0, Grid.getSquareSize() * 10,
-						Grid.getSquareSize() * 20);
+				Rectangle rectangle = new Rectangle(Grid.getSquareSize() * 6 + Grid.getTranslate(), 0,
+						Grid.getSquareSize() * 10, Grid.getSquareSize() * 20);
 				rectangle.setFill(Color.rgb(127, 127, 127));
 				Background.this.getChildren().add(rectangle);
 
-				rectangle = new Rectangle(Grid.getSquareSize() * 17, Grid.getSquareSize(), Grid.getSquareSize() * 4,
-						Grid.getSquareSize() * 18);
+				rectangle = new Rectangle(Grid.getSquareSize() * 17 + Grid.getTranslate() * 2, Grid.getSquareSize(),
+						Grid.getSquareSize() * 4, Grid.getSquareSize() * 18);
 				rectangle.setFill(Color.rgb(127, 127, 127));
 				Background.this.getChildren().add(rectangle);
 

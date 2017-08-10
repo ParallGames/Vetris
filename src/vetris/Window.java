@@ -16,17 +16,22 @@ public class Window extends Application {
 	private static long time = System.nanoTime();
 	private static final long interval = 1_000_000_000 / fps;
 
+	private static final Group root = new Group();
+	private static final Key key = new Key();
+
 	private static Stage primaryStage;
+	private static final Scene scene = new Scene(root, 22 * Grid.getSquareSize(), 20 * Grid.getSquareSize());
 
 	private static final Background background = new Background();
 	private static final Panel panel = new Panel();
 	private static final Foreground foreground = new Foreground();
 
-	private static final Group root = new Group();
-	private static final Key key = new Key();
-
 	public static Stage getPrimaryStage() {
 		return primaryStage;
+	}
+
+	public static Scene getScene() {
+		return scene;
 	}
 
 	public void repaint() {
@@ -52,7 +57,6 @@ public class Window extends Application {
 		Grid.reset();
 		FallBlock.reset();
 
-		Scene scene = new Scene(root, 22 * Grid.getSquareSize(), 20 * Grid.getSquareSize());
 		scene.setFill(Color.rgb(31, 31, 31));
 
 		root.getChildren().add(key);
@@ -76,12 +80,16 @@ public class Window extends Application {
 			public void changed(ObservableValue<? extends Number> a, Number b, Number c) {
 				int height = (int) (scene.getHeight() / 20);
 				int width = (int) (scene.getWidth() / 22);
+				int size;
 
 				if (height < width) {
-					Grid.setSquareSize(height);
+					size = height;
 				} else {
-					Grid.setSquareSize(width);
+					size = width;
 				}
+
+				Grid.setSquareSize(size);
+				Grid.setTranslate(((int) scene.getWidth() - 22 * size) / 2);
 
 				background.updateSize();
 			}
