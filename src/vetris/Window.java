@@ -131,7 +131,7 @@ public class Window extends Application {
 				if (Grid.getScore() > Grid.getRecord()) {
 					Save.saveScore(Grid.getScore());
 				}
-				Save.saveColor(Grid.getColor());
+				ColorManager.saveColor();
 			}
 		}.start();
 	}

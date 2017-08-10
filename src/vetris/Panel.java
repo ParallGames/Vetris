@@ -22,9 +22,9 @@ public class Panel extends Group {
 				Panel.this.getChildren().clear();
 
 				if (Grid.getEnergy() > gEnergy) {
-					gEnergy += 0.01;
+					gEnergy += 0.015625;
 				} else if (Grid.getEnergy() < gEnergy) {
-					gEnergy -= 0.01;
+					gEnergy -= 0.015625;
 				}
 
 				Rectangle rectangle;
@@ -35,16 +35,23 @@ public class Panel extends Group {
 							rectangle = new Rectangle(
 									x * Grid.getSquareSize() + Grid.getSquareSize() * 6 + Grid.getTranslate(),
 									y * Grid.getSquareSize(), Grid.getSquareSize(), Grid.getSquareSize());
-							rectangle.setFill(Grid.getColor());
+							rectangle.setFill(ColorManager.getColor());
 							Panel.this.getChildren().add(rectangle);
 						}
 					}
 				}
 
+				double gEnergy1 = (gEnergy < 5) ? gEnergy * Grid.getSquareSize() * 3.6 : 5 * Grid.getSquareSize() * 3.6;
+				double gEnergy2 = (gEnergy > 5) ? (gEnergy - 5) * Grid.getSquareSize() * 3.6 : 0;
+
 				rectangle = new Rectangle(Grid.getSquareSize() * 17 + Grid.getTranslate() * 2,
-						Grid.getSquareSize() * 19 - gEnergy * Grid.getSquareSize() * 1.8, Grid.getSquareSize() * 4,
-						gEnergy * Grid.getSquareSize() * 1.8);
-				rectangle.setFill(Grid.getColor());
+						Grid.getSquareSize() * 19 - gEnergy1, Grid.getSquareSize() * 2, gEnergy1);
+				rectangle.setFill((gEnergy < 5) ? ColorManager.getColor() : ColorManager.getDarkColor());
+				Panel.this.getChildren().add(rectangle);
+
+				rectangle = new Rectangle(Grid.getSquareSize() * 19 + Grid.getTranslate() * 2,
+						Grid.getSquareSize() * 19 - gEnergy2, Grid.getSquareSize() * 2, gEnergy2);
+				rectangle.setFill((gEnergy < 10) ? ColorManager.getColor() : ColorManager.getDarkColor());
 				Panel.this.getChildren().add(rectangle);
 
 				for (int x = 0; x < 4; x++) {
@@ -56,9 +63,7 @@ public class Panel extends Group {
 									(int) (FallBlock.getGY() * Grid.getSquareSize() + y * Grid.getSquareSize()),
 									Grid.getSquareSize(), Grid.getSquareSize());
 							if (Grid.getSquare(FallBlock.getX() + x, FallBlock.getY() + y)) {
-								rectangle.setFill(Color.rgb((int) (Grid.getColor().getRed() * 255) - 63,
-										(int) (Grid.getColor().getGreen() * 255) - 63,
-										(int) (Grid.getColor().getBlue() * 255) - 63));
+								rectangle.setFill(ColorManager.getDarkColor());
 							} else {
 								rectangle.setFill(Color.rgb(63, 63, 63));
 							}
@@ -81,7 +86,7 @@ public class Panel extends Group {
 							rectangle = new Rectangle(translateX + x * Grid.getSquareSize(),
 									translateY + y * Grid.getSquareSize(), Grid.getSquareSize(), Grid.getSquareSize());
 
-							rectangle.setFill(Grid.getColor());
+							rectangle.setFill(ColorManager.getColor());
 							Panel.this.getChildren().add(rectangle);
 						}
 					}
@@ -103,15 +108,14 @@ public class Panel extends Group {
 					}
 				}
 
-				Text text = new Text(Grid.getSquareSize() / 4, Grid.getSquareSize() * 2,
-						String.valueOf(Grid.getScore()));
+				Text text = new Text(Grid.getSquareSize(), Grid.getSquareSize() * 2, String.valueOf(Grid.getScore()));
 				text.setFont(new Font("Noto Mono", Grid.getSquareSize()));
-				text.setFill(Grid.getColor());
+				text.setFill(ColorManager.getColor());
 				Panel.this.getChildren().add(text);
 
-				text = new Text(Grid.getSquareSize() / 4, Grid.getSquareSize() * 5, String.valueOf(Grid.getRecord()));
+				text = new Text(Grid.getSquareSize(), Grid.getSquareSize() * 5, String.valueOf(Grid.getRecord()));
 				text.setFont(new Font("Noto Mono", Grid.getSquareSize()));
-				text.setFill(Grid.getColor());
+				text.setFill(ColorManager.getColor());
 				Panel.this.getChildren().add(text);
 			}
 		});

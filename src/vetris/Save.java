@@ -8,25 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import javafx.scene.paint.Color;
-
 public class Save {
-
-	public static Color loadColor() {
-		Color color;
-		try {
-			DataInputStream in = new DataInputStream(
-					new FileInputStream(new File(System.getProperty("user.home") + "/.vetris/color")));
-			color = Color.color(in.readDouble(), in.readDouble(), in.readDouble());
-			in.close();
-		} catch (FileNotFoundException e) {
-			saveColor(Color.rgb(255, 63, 63));
-			return Color.rgb(255, 63, 63);
-		} catch (IOException e) {
-			return Color.rgb(255, 63, 63);
-		}
-		return color;
-	}
 
 	public static int loadScore() {
 		int score;
@@ -42,21 +24,6 @@ public class Save {
 			return 0;
 		}
 		return score;
-	}
-
-	public static void saveColor(Color color) {
-		try {
-			File file = new File(System.getProperty("user.home") + "/.vetris");
-			file.mkdirs();
-			DataOutputStream out = new DataOutputStream(
-					new FileOutputStream(new File(System.getProperty("user.home") + "/.vetris/color")));
-			out.writeDouble(color.getRed());
-			out.writeDouble(color.getGreen());
-			out.writeDouble(color.getBlue());
-			out.close();
-		} catch (IOException e) {
-			return;
-		}
 	}
 
 	public static void saveScore(int score) {

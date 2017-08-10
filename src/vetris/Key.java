@@ -4,7 +4,6 @@ import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.paint.Color;
 
 public class Key extends Group {
 
@@ -99,8 +98,7 @@ public class Key extends Group {
 				shiftDown = true;
 			}
 			if (key.getCode() == KeyCode.C && !cDown) {
-				Grid.setColor(
-						Color.color(Grid.getColor().getBlue(), Grid.getColor().getRed(), Grid.getColor().getGreen()));
+				ColorManager.nextColor();
 				cDown = true;
 			}
 			if (key.getCode() == KeyCode.P && !pDown) {

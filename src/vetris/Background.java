@@ -21,14 +21,14 @@ public class Background extends Group {
 			public void run() {
 				updateGroup.getChildren().clear();
 
-				Text text = new Text(Grid.getSquareSize() / 4, Grid.getSquareSize(), "Score");
+				Text text = new Text(Grid.getSquareSize(), Grid.getSquareSize(), "Score");
 				text.setFont(new Font("Noto Mono", Grid.getSquareSize()));
-				text.setFill(Grid.getColor());
+				text.setFill(ColorManager.getColor());
 				updateGroup.getChildren().add(text);
 
-				text = new Text(Grid.getSquareSize() / 4, Grid.getSquareSize() * 4, "Record");
+				text = new Text(Grid.getSquareSize(), Grid.getSquareSize() * 4, "Record");
 				text.setFont(new Font("Noto Mono", Grid.getSquareSize()));
-				text.setFill(Grid.getColor());
+				text.setFill(ColorManager.getColor());
 				updateGroup.getChildren().add(text);
 			}
 		});
