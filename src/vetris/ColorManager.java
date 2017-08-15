@@ -29,6 +29,8 @@ public class ColorManager {
 			colorNumber = 0;
 		}
 		updateColor();
+
+		Window.updateColor();
 	}
 
 	private static void updateColor() {

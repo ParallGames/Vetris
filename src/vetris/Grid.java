@@ -8,7 +8,7 @@ public class Grid {
 	private static boolean pause = false;
 	private static boolean tinyShape = false;
 
-	private static double speed = 0.01;
+	private static double speed = 0.02;
 
 	private static int squareSize = 32;
 	private static int translate = 0;
@@ -79,7 +79,7 @@ public class Grid {
 	}
 
 	public static void reset() {
-		speed = 0.01;
+		speed = 0.02;
 		score = 0;
 		record = Save.loadScore();
 		energy = 0;

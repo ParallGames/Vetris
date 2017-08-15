@@ -34,8 +34,17 @@ public class Window extends Application {
 		return scene;
 	}
 
+	public static void updateColor() {
+		background.updateColor();
+	}
+
+	private static void updateSize() {
+		background.updateSize();
+
+		foreground.updateSize();
+	}
+
 	public void repaint() {
-		background.update();
 		panel.update();
 		foreground.update();
 
@@ -91,7 +100,7 @@ public class Window extends Application {
 				Grid.setSquareSize(size);
 				Grid.setTranslate(((int) scene.getWidth() - 22 * size) / 2);
 
-				background.updateSize();
+				Window.updateSize();
 			}
 		};
 
@@ -120,6 +129,7 @@ public class Window extends Application {
 
 					if (Grid.isGameOver()) {
 						SoundPlayer.playGameOver();
+						foreground.updateGameOver();
 
 						while (primaryStage.isShowing() && Grid.isGameOver()) {
 							Window.this.repaint();

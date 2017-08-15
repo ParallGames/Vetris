@@ -101,7 +101,7 @@ public class Key extends Group {
 				ColorManager.nextColor();
 				cDown = true;
 			}
-			if (key.getCode() == KeyCode.P && !pDown) {
+			if (key.getCode() == KeyCode.P && !pDown && !Grid.isGameOver()) {
 				Grid.setPause(!Grid.isPause());
 				pDown = true;
 			}

@@ -1,6 +1,5 @@
 package vetris;
 
-import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -9,55 +8,58 @@ import javafx.scene.text.Text;
 
 public class Background extends Group {
 
-	private Group updateGroup = new Group();
+	private final Text score = new Text("Score");
+	private final Text record = new Text("Record");
+
+	private final Rectangle rectangles[] = new Rectangle[4];
 
 	Background() {
+		this.getChildren().add(score);
+		this.getChildren().add(record);
+
+		rectangles[0] = new Rectangle();
+		rectangles[0].setTranslateY(0);
+		rectangles[0].setFill(Color.rgb(127, 127, 127));
+		this.getChildren().add(rectangles[0]);
+
+		rectangles[1] = new Rectangle();
+		rectangles[1].setFill(Color.rgb(127, 127, 127));
+		this.getChildren().add(rectangles[1]);
+
+		rectangles[2] = new Rectangle();
+		rectangles[2].setFill(Color.rgb(127, 127, 127));
+		this.getChildren().add(rectangles[2]);
+
 		updateSize();
-	}
-
-	public void update() {
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				updateGroup.getChildren().clear();
-
-				Text text = new Text(Grid.getSquareSize(), Grid.getSquareSize(), "Score");
-				text.setFont(new Font("Noto Mono", Grid.getSquareSize()));
-				text.setFill(ColorManager.getColor());
-				updateGroup.getChildren().add(text);
-
-				text = new Text(Grid.getSquareSize(), Grid.getSquareSize() * 4, "Record");
-				text.setFont(new Font("Noto Mono", Grid.getSquareSize()));
-				text.setFill(ColorManager.getColor());
-				updateGroup.getChildren().add(text);
-			}
-		});
+		updateColor();
 	}
 
 	public void updateSize() {
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				Background.this.getChildren().clear();
-				Rectangle rectangle = new Rectangle(Grid.getSquareSize() * 6 + Grid.getTranslate(), 0,
-						Grid.getSquareSize() * 10, Grid.getSquareSize() * 20);
-				rectangle.setFill(Color.rgb(127, 127, 127));
-				Background.this.getChildren().add(rectangle);
+		score.setTranslateX(Grid.getSquareSize());
+		score.setTranslateY(Grid.getSquareSize());
+		score.setFont(Font.font("Noto Mono", Grid.getSquareSize()));
 
-				rectangle = new Rectangle(Grid.getSquareSize() * 17 + Grid.getTranslate() * 2, Grid.getSquareSize(),
-						Grid.getSquareSize() * 4, Grid.getSquareSize() * 18);
-				rectangle.setFill(Color.rgb(127, 127, 127));
-				Background.this.getChildren().add(rectangle);
+		record.setTranslateX(Grid.getSquareSize());
+		record.setTranslateY(Grid.getSquareSize() * 4);
+		record.setFont(Font.font("Noto Mono", Grid.getSquareSize()));
 
-				rectangle = new Rectangle(Grid.getSquareSize(), Grid.getSquareSize() * 15, Grid.getSquareSize() * 4,
-						Grid.getSquareSize() * 4);
-				rectangle.setFill(Color.rgb(127, 127, 127));
-				Background.this.getChildren().add(rectangle);
+		rectangles[0].setTranslateX(Grid.getSquareSize() * 6 + Grid.getTranslate());
+		rectangles[0].setWidth(Grid.getSquareSize() * 10);
+		rectangles[0].setHeight(Grid.getSquareSize() * 20);
 
-				Background.this.getChildren().add(updateGroup);
+		rectangles[1].setTranslateX(Grid.getSquareSize() * 17 + Grid.getTranslate() * 2);
+		rectangles[1].setTranslateY(Grid.getSquareSize());
+		rectangles[1].setWidth(Grid.getSquareSize() * 4);
+		rectangles[1].setHeight(Grid.getSquareSize() * 18);
 
-				Background.this.update();
-			}
-		});
+		rectangles[2].setTranslateX(Grid.getSquareSize());
+		rectangles[2].setTranslateY(Grid.getSquareSize() * 15);
+		rectangles[2].setWidth(Grid.getSquareSize() * 4);
+		rectangles[2].setHeight(Grid.getSquareSize() * 4);
+	}
+
+	public void updateColor() {
+		score.setFill(ColorManager.getColor());
+		record.setFill(ColorManager.getColor());
 	}
 }
