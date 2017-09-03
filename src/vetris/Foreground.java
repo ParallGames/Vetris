@@ -78,8 +78,8 @@ public class Foreground extends Group {
 	}
 
 	public void updateGameOver() {
-		score.setText("score:" + String.valueOf(Grid.getScore()));
-		record.setText("score:" + String.valueOf(Grid.getRecord()));
+		score.setText("Score:" + String.valueOf(Grid.getScore()));
+		record.setText("Record:" + String.valueOf(Grid.getRecord()));
 	}
 
 	public void update() {
