@@ -75,6 +75,7 @@ public class Key extends Group {
 			if (key.getCode() == KeyCode.ENTER && !Grid.isPause() && !enterDown) {
 				if (Grid.isGameOver()) {
 					Grid.reset();
+					Grid.getFallingShapes().clear();
 					FallBlock.reset();
 				} else if (Grid.isTinyShape() && !FallBlock.collision()) {
 					Grid.setTinyShape(false);
