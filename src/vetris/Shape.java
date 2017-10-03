@@ -9,7 +9,7 @@ public class Shape {
 		clear();
 	}
 
-	public void clear() {
+	private void clear() {
 		for (int x = 0; x < 4; x++) {
 			for (int y = 0; y < 4; y++) {
 				shape[x][y] = false;

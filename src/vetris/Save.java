@@ -9,12 +9,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class Save {
+	public static final String PATH = System.getProperty("user.home") + "/.vetris";
 
 	public static int loadScore() {
 		int score;
 		try {
-			DataInputStream in = new DataInputStream(
-					new FileInputStream(new File(System.getProperty("user.home") + "/.vetris/score")));
+			DataInputStream in = new DataInputStream(new FileInputStream(new File(PATH + "/score")));
 			score = in.readInt();
 			in.close();
 		} catch (FileNotFoundException e) {
@@ -28,10 +28,9 @@ public class Save {
 
 	public static void saveScore(int score) {
 		try {
-			File file = new File(System.getProperty("user.home") + "/.vetris");
+			File file = new File(PATH);
 			file.mkdirs();
-			DataOutputStream out = new DataOutputStream(
-					new FileOutputStream(new File(System.getProperty("user.home") + "/.vetris/score")));
+			DataOutputStream out = new DataOutputStream(new FileOutputStream(new File(PATH + "/score")));
 			out.writeInt(score);
 			out.close();
 		} catch (IOException e) {

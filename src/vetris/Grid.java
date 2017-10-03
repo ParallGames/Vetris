@@ -3,7 +3,7 @@ package vetris;
 import java.util.Vector;
 
 public class Grid {
-	private static final boolean grid[][] = new boolean[10][20];
+	private static final boolean grid[][] = new boolean[12][20];
 	private static boolean gameOver = false;
 	private static boolean pause = false;
 	private static boolean tinyShape = false;
@@ -87,11 +87,12 @@ public class Grid {
 		gameOver = false;
 		pause = false;
 
-		for (byte a = 0; a < 10; a++) {
+		for (byte a = 0; a < 12; a++) {
 			for (byte b = 0; b < 20; b++) {
 				grid[a][b] = false;
 			}
 		}
+		Window.updateGrid();
 	}
 
 	public static void setPause(boolean p) {
@@ -122,35 +123,36 @@ public class Grid {
 	}
 
 	public static void update() {
+		Window.updateGrid();
 		boolean isLine;
 		for (int line = 0; line < 20; line++) {
 			isLine = true;
-			for (int a = 0; a < 10; a++) {
+			for (int a = 0; a < 12; a++) {
 				if (!grid[a][line]) {
 					isLine = false;
 				}
 			}
 			if (isLine) {
-				for (int a = 0; a < 10; a++) {
+				for (int a = 0; a < 12; a++) {
 					grid[a][line] = false;
 				}
 
 				SoundPlayer.playLine();
-				score += 10;
+				score += 12;
 				energy++;
 				if (energy > 10) {
 					energy = 10;
 				}
 
-				boolean fall[][] = new boolean[10][20];
-				for (int a = 0; a < 10; a++) {
+				boolean fall[][] = new boolean[12][20];
+				for (int a = 0; a < 12; a++) {
 					for (int b = 0; b < 20; b++) {
 						fall[a][b] = false;
 					}
 				}
 
 				for (int a = 0; a < line; a++) {
-					for (int b = 0; b < 10; b++) {
+					for (int b = 0; b < 12; b++) {
 						fall[b][a] = grid[b][a];
 						grid[b][a] = false;
 					}

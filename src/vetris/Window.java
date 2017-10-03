@@ -20,7 +20,7 @@ public class Window extends Application {
 	private static final Key key = new Key();
 
 	private static Stage primaryStage;
-	private static final Scene scene = new Scene(root, 22 * Grid.getSquareSize(), 20 * Grid.getSquareSize());
+	private static final Scene scene = new Scene(root, 24 * Grid.getSquareSize(), 20 * Grid.getSquareSize());
 
 	private static final Background background = new Background();
 	private static final Panel panel = new Panel();
@@ -36,12 +36,17 @@ public class Window extends Application {
 
 	public static void updateColor() {
 		background.updateColor();
+		panel.updateColor();
+	}
+
+	public static void updateGrid() {
+		panel.updateGrid();
 	}
 
 	private static void updateSize() {
 		background.updateSize();
-
 		foreground.updateSize();
+		panel.updateSize();
 	}
 
 	public void repaint() {
@@ -82,13 +87,11 @@ public class Window extends Application {
 		primaryStage.setFullScreenExitHint("");
 		primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
 
-		primaryStage.show();
-
 		ChangeListener<Number> resizeListener = new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> a, Number b, Number c) {
 				int height = (int) (scene.getHeight() / 20);
-				int width = (int) (scene.getWidth() / 22);
+				int width = (int) (scene.getWidth() / 24);
 				int size;
 
 				if (height < width) {
@@ -98,7 +101,7 @@ public class Window extends Application {
 				}
 
 				Grid.setSquareSize(size);
-				Grid.setTranslate(((int) scene.getWidth() - 22 * size) / 2);
+				Grid.setTranslate(((int) scene.getWidth() - 24 * size) / 2);
 
 				Window.updateSize();
 			}
@@ -106,6 +109,8 @@ public class Window extends Application {
 
 		scene.widthProperty().addListener(resizeListener);
 		scene.heightProperty().addListener(resizeListener);
+
+		primaryStage.show();
 
 		new Thread() {
 			@Override

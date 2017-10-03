@@ -11,7 +11,7 @@ public class Background extends Group {
 	private final Text score = new Text("Score");
 	private final Text record = new Text("Record");
 
-	private final Rectangle rectangles[] = new Rectangle[4];
+	private final Rectangle rectangles[] = new Rectangle[3];
 
 	Background() {
 		this.getChildren().add(score);
@@ -44,10 +44,10 @@ public class Background extends Group {
 		record.setFont(Font.font("Noto Mono", Grid.getSquareSize()));
 
 		rectangles[0].setTranslateX(Grid.getSquareSize() * 6 + Grid.getTranslate());
-		rectangles[0].setWidth(Grid.getSquareSize() * 10);
+		rectangles[0].setWidth(Grid.getSquareSize() * 12);
 		rectangles[0].setHeight(Grid.getSquareSize() * 20);
 
-		rectangles[1].setTranslateX(Grid.getSquareSize() * 17 + Grid.getTranslate() * 2);
+		rectangles[1].setTranslateX(Grid.getSquareSize() * 19 + Grid.getTranslate() * 2);
 		rectangles[1].setTranslateY(Grid.getSquareSize());
 		rectangles[1].setWidth(Grid.getSquareSize() * 4);
 		rectangles[1].setHeight(Grid.getSquareSize() * 18);

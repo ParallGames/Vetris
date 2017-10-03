@@ -11,15 +11,26 @@ public class Panel extends Group {
 
 	private double gEnergy = 0;
 
+	private final Text score = new Text();
+	private final Text record = new Text();
+
+	private final Group gridGroup = new Group();
+	private final Group updateGroup = new Group();
+
 	Panel() {
 		this.update();
+
+		this.getChildren().add(score);
+		this.getChildren().add(record);
+		this.getChildren().add(gridGroup);
+		this.getChildren().add(updateGroup);
 	}
 
 	public void update() {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				Panel.this.getChildren().clear();
+				updateGroup.getChildren().clear();
 
 				if (Grid.getEnergy() > gEnergy) {
 					gEnergy += 0.015625;
@@ -29,30 +40,18 @@ public class Panel extends Group {
 
 				Rectangle rectangle;
 
-				for (int x = 0; x < 10; x++) {
-					for (int y = 0; y < 20; y++) {
-						if (Grid.getSquare(x, y)) {
-							rectangle = new Rectangle(
-									x * Grid.getSquareSize() + Grid.getSquareSize() * 6 + Grid.getTranslate(),
-									y * Grid.getSquareSize(), Grid.getSquareSize(), Grid.getSquareSize());
-							rectangle.setFill(ColorManager.getColor());
-							Panel.this.getChildren().add(rectangle);
-						}
-					}
-				}
-
 				double gEnergy1 = (gEnergy < 5) ? gEnergy * Grid.getSquareSize() * 3.6 : 5 * Grid.getSquareSize() * 3.6;
 				double gEnergy2 = (gEnergy > 5) ? (gEnergy - 5) * Grid.getSquareSize() * 3.6 : 0;
 
-				rectangle = new Rectangle(Grid.getSquareSize() * 17 + Grid.getTranslate() * 2,
+				rectangle = new Rectangle(Grid.getSquareSize() * 19 + Grid.getTranslate() * 2,
 						Grid.getSquareSize() * 19 - gEnergy1, Grid.getSquareSize() * 2, gEnergy1);
 				rectangle.setFill((gEnergy < 5) ? ColorManager.getColor() : ColorManager.getDarkColor());
-				Panel.this.getChildren().add(rectangle);
+				updateGroup.getChildren().add(rectangle);
 
-				rectangle = new Rectangle(Grid.getSquareSize() * 19 + Grid.getTranslate() * 2,
+				rectangle = new Rectangle(Grid.getSquareSize() * 21 + Grid.getTranslate() * 2,
 						Grid.getSquareSize() * 19 - gEnergy2, Grid.getSquareSize() * 2, gEnergy2);
 				rectangle.setFill((gEnergy < 10) ? ColorManager.getColor() : ColorManager.getDarkColor());
-				Panel.this.getChildren().add(rectangle);
+				updateGroup.getChildren().add(rectangle);
 
 				for (int x = 0; x < 4; x++) {
 					for (int y = 0; y < 4; y++) {
@@ -67,7 +66,7 @@ public class Panel extends Group {
 							} else {
 								rectangle.setFill(Color.rgb(63, 63, 63));
 							}
-							Panel.this.getChildren().add(rectangle);
+							updateGroup.getChildren().add(rectangle);
 						}
 					}
 				}
@@ -87,13 +86,13 @@ public class Panel extends Group {
 									translateY + y * Grid.getSquareSize(), Grid.getSquareSize(), Grid.getSquareSize());
 
 							rectangle.setFill(ColorManager.getColor());
-							Panel.this.getChildren().add(rectangle);
+							updateGroup.getChildren().add(rectangle);
 						}
 					}
 				}
 
 				for (int a = 0; a < Grid.getFallingShapes().size(); a++) {
-					for (int x = 0; x < 10; x++) {
+					for (int x = 0; x < 12; x++) {
 						for (int y = 0; y < 20; y++) {
 							if (Grid.getFallingShapes().get(a).get(x, y)) {
 								rectangle = new Rectangle(
@@ -102,23 +101,53 @@ public class Panel extends Group {
 												+ Grid.getFallingShapes().get(a).getGY() * Grid.getSquareSize()),
 										Grid.getSquareSize(), Grid.getSquareSize());
 								rectangle.setFill(Color.rgb(63, 63, 63));
-								Panel.this.getChildren().add(rectangle);
+								updateGroup.getChildren().add(rectangle);
 							}
 						}
 					}
 				}
 
-				Text text = new Text(Grid.getSquareSize(), Grid.getSquareSize() * 2, String.valueOf(Grid.getScore()));
-				text.setFont(new Font("Noto Mono", Grid.getSquareSize()));
-				text.setFill(ColorManager.getColor());
-				Panel.this.getChildren().add(text);
+				score.setTranslateX(Grid.getSquareSize());
+				score.setTranslateY(Grid.getSquareSize() * 2);
+				score.setText(String.valueOf(Grid.getScore()));
+				score.setFont(new Font("Noto Mono", Grid.getSquareSize()));
+				score.setFill(ColorManager.getColor());
 
-				text = new Text(Grid.getSquareSize(), Grid.getSquareSize() * 5, String.valueOf(Grid.getRecord()));
-				text.setFont(new Font("Noto Mono", Grid.getSquareSize()));
-				text.setFill(ColorManager.getColor());
-				Panel.this.getChildren().add(text);
+				record.setTranslateX(Grid.getSquareSize());
+				record.setTranslateY(Grid.getSquareSize() * 5);
+				record.setText(String.valueOf(Grid.getRecord()));
+				record.setFont(new Font("Noto Mono", Grid.getSquareSize()));
+				record.setFill(ColorManager.getColor());
 			}
 		});
+	}
 
+	public void updateGrid() {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				gridGroup.getChildren().clear();
+				Rectangle rectangle;
+				for (int x = 0; x < 12; x++) {
+					for (int y = 0; y < 20; y++) {
+						if (Grid.getSquare(x, y)) {
+							rectangle = new Rectangle(
+									x * Grid.getSquareSize() + Grid.getSquareSize() * 6 + Grid.getTranslate(),
+									y * Grid.getSquareSize(), Grid.getSquareSize(), Grid.getSquareSize());
+							rectangle.setFill(ColorManager.getColor());
+							gridGroup.getChildren().add(rectangle);
+						}
+					}
+				}
+			}
+		});
+	}
+
+	public void updateSize() {
+		updateGrid();
+	}
+
+	public void updateColor() {
+		updateGrid();
 	}
 }

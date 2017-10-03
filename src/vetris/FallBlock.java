@@ -12,11 +12,16 @@ public class FallBlock {
 	private static Shape shape = new Shape();
 	private static Shape nextShape = new Shape();
 
+	static {
+		nextShape.setRandomShape();
+		nextShape.update();
+	}
+
 	public static synchronized boolean collision() {
 		for (int a = 0; a < 4; a++) {
 			for (int b = 0; b < 4; b++) {
 				if (shape.getShape()[a][b]
-						&& (a + x > 9 || a + x < 0 || b + y < 0 || b + y > 19 || Grid.getSquare(a + x, b + y))) {
+						&& (a + x > 11 || a + x < 0 || b + y < 0 || b + y > 19 || Grid.getSquare(a + x, b + y))) {
 					return true;
 				}
 			}
@@ -71,7 +76,7 @@ public class FallBlock {
 	public static synchronized void goRight() {
 		for (int b_x = 0; b_x < 4; b_x++) {
 			for (int b_y = 0; b_y < 4; b_y++) {
-				if (shape.getShape()[b_x][b_y] && ((x + b_x) > 8 || Grid.getSquare(x + b_x + 1, y + b_y))) {
+				if (shape.getShape()[b_x][b_y] && ((x + b_x) > 10 || Grid.getSquare(x + b_x + 1, y + b_y))) {
 					return;
 				}
 			}
@@ -105,7 +110,7 @@ public class FallBlock {
 	}
 
 	public static synchronized void moveRight() {
-		if (x > 8) {
+		if (x > 10) {
 			return;
 		}
 		x++;
@@ -123,7 +128,6 @@ public class FallBlock {
 	public static synchronized void reset() {
 		frameBeforeFall = 50;
 		shape = nextShape;
-		shape.update();
 		nextShape = new Shape();
 		nextShape.setRandomShape();
 		nextShape.update();
@@ -248,8 +252,8 @@ public class FallBlock {
 		}
 		if (x < 0) {
 			x = 0;
-		} else if (x > 9) {
-			x = 9;
+		} else if (x > 11) {
+			x = 11;
 		}
 	}
 }

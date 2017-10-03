@@ -48,8 +48,7 @@ public class ColorManager {
 
 	public static void loadColor() {
 		try {
-			DataInputStream in = new DataInputStream(
-					new FileInputStream(new File(System.getProperty("user.home") + "/.vetris/color")));
+			DataInputStream in = new DataInputStream(new FileInputStream(new File(Save.PATH + "/color")));
 			colorNumber = in.readByte();
 			in.close();
 		} catch (FileNotFoundException e) {
@@ -64,10 +63,9 @@ public class ColorManager {
 
 	public static void saveColor() {
 		try {
-			File file = new File(System.getProperty("user.home") + "/.vetris");
+			File file = new File(Save.PATH);
 			file.mkdirs();
-			DataOutputStream out = new DataOutputStream(
-					new FileOutputStream(new File(System.getProperty("user.home") + "/.vetris/color")));
+			DataOutputStream out = new DataOutputStream(new FileOutputStream(new File(Save.PATH + "/color")));
 			out.writeByte(colorNumber);
 			out.close();
 		} catch (IOException e) {

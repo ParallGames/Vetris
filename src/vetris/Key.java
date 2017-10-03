@@ -1,6 +1,5 @@
 package vetris;
 
-import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -19,6 +18,8 @@ public class Key extends Group {
 
 	private static boolean cDown = false;
 	private static boolean pDown = false;
+
+	private static boolean f11Down = false;
 
 	public static boolean isDownDown() {
 		return downDown;
@@ -106,22 +107,9 @@ public class Key extends Group {
 				Grid.setPause(!Grid.isPause());
 				pDown = true;
 			}
-			if (key.getCode() == KeyCode.F11) {
-				if (Window.getPrimaryStage().isFullScreen()) {
-					Platform.runLater(new Runnable() {
-						@Override
-						public void run() {
-							Window.getPrimaryStage().setFullScreen(false);
-						}
-					});
-				} else {
-					Platform.runLater(new Runnable() {
-						@Override
-						public void run() {
-							Window.getPrimaryStage().setFullScreen(true);
-						}
-					});
-				}
+			if (key.getCode() == KeyCode.F11 && !f11Down) {
+				Window.getPrimaryStage().setFullScreen(!Window.getPrimaryStage().isFullScreen());
+				f11Down = true;
 			}
 		});
 
@@ -153,6 +141,9 @@ public class Key extends Group {
 			}
 			if (key.getCode() == KeyCode.P) {
 				pDown = false;
+			}
+			if (key.getCode() == KeyCode.F11) {
+				f11Down = false;
 			}
 		});
 	}

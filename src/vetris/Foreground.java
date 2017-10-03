@@ -48,30 +48,30 @@ public class Foreground extends Group {
 		background.setWidth(Window.getScene().getWidth());
 		background.setHeight(Window.getScene().getHeight());
 
-		pause[0].setTranslateX(Grid.getSquareSize() * 8 + Grid.getTranslate());
+		pause[0].setTranslateX(Grid.getSquareSize() * 9 + Grid.getTranslate());
 		pause[0].setTranslateY(Grid.getSquareSize() * 7);
 		pause[0].setWidth(Grid.getSquareSize() * 6);
 		pause[0].setHeight(Grid.getSquareSize() * 6);
 
-		pause[1].setTranslateX(Grid.getSquareSize() * 9 + Grid.getTranslate());
+		pause[1].setTranslateX(Grid.getSquareSize() * 10 + Grid.getTranslate());
 		pause[1].setTranslateY(Grid.getSquareSize() * 8);
 		pause[1].setWidth(Grid.getSquareSize());
 		pause[1].setHeight(Grid.getSquareSize() * 4);
 
-		pause[2].setTranslateX(Grid.getSquareSize() * 12 + Grid.getTranslate());
+		pause[2].setTranslateX(Grid.getSquareSize() * 13 + Grid.getTranslate());
 		pause[2].setTranslateY(Grid.getSquareSize() * 8);
 		pause[2].setWidth(Grid.getSquareSize());
 		pause[2].setHeight(Grid.getSquareSize() * 4);
 
-		gameOver.setTranslateX(Grid.getSquareSize() * 3 + Grid.getTranslate());
+		gameOver.setTranslateX(Grid.getSquareSize() * 4 + Grid.getTranslate());
 		gameOver.setTranslateY(Grid.getSquareSize() * 6);
 		gameOver.setFont(Font.font("Noto Mono", Grid.getSquareSize() * 3));
 
-		score.setTranslateX(Grid.getSquareSize() * 6 + Grid.getTranslate());
+		score.setTranslateX(Grid.getSquareSize() * 7 + Grid.getTranslate());
 		score.setTranslateY(Grid.getSquareSize() * 10);
 		score.setFont(Font.font("Noto Mono", Grid.getSquareSize() * 2));
 
-		record.setTranslateX(Grid.getSquareSize() * 5 + Grid.getTranslate());
+		record.setTranslateX(Grid.getSquareSize() * 6 + Grid.getTranslate());
 		record.setTranslateY(Grid.getSquareSize() * 13);
 		record.setFont(Font.font("Noto Mono", Grid.getSquareSize() * 2));
 
