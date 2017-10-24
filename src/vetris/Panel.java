@@ -9,13 +9,13 @@ import javafx.scene.text.Text;
 
 public class Panel extends Group {
 
-	private double gEnergy = 0;
+	private static double gEnergy = 0;
 
-	private final Text score = new Text();
-	private final Text record = new Text();
+	private static final Text score = new Text();
+	private static final Text record = new Text();
 
-	private final Group gridGroup = new Group();
-	private final Group updateGroup = new Group();
+	private static final Group gridGroup = new Group();
+	private static final Group updateGroup = new Group();
 
 	Panel() {
 		this.update();

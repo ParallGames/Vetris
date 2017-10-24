@@ -8,10 +8,10 @@ import javafx.scene.text.Text;
 
 public class Background extends Group {
 
-	private final Text score = new Text("Score");
-	private final Text record = new Text("Record");
+	private static final Text score = new Text("Score");
+	private static final Text record = new Text("Record");
 
-	private final Rectangle rectangles[] = new Rectangle[3];
+	private static final Rectangle rectangles[] = new Rectangle[3];
 
 	Background() {
 		this.getChildren().add(score);

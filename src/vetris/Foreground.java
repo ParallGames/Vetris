@@ -8,16 +8,16 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class Foreground extends Group {
-	private double opacity = 0.9;
+	private static double opacity = 0.9;
 
-	private final Rectangle background = new Rectangle();
-	private final Rectangle pause[] = new Rectangle[3];
-	private final Text gameOver = new Text("Game Over");
-	private final Text score = new Text();
-	private final Text record = new Text();
+	private static final Rectangle background = new Rectangle();
+	private static final Rectangle pause[] = new Rectangle[3];
+	private static final Text gameOver = new Text("Game Over");
+	private static final Text score = new Text();
+	private static final Text record = new Text();
 
-	private final Group pauseGroup = new Group();
-	private final Group gameOverGroup = new Group();
+	private static final Group pauseGroup = new Group();
+	private static final Group gameOverGroup = new Group();
 
 	Foreground() {
 		background.setTranslateX(0);
