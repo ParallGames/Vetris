@@ -9,6 +9,8 @@ import javafx.scene.text.Text;
 
 public class Foreground extends Group {
 	private static double opacity = 0.9;
+	private static double gameOverOpacity = 0;
+	private static double pauseOpacity = 0;
 
 	private static final Rectangle background = new Rectangle();
 	private static final Rectangle pause[] = new Rectangle[3];
@@ -16,37 +18,31 @@ public class Foreground extends Group {
 	private static final Text score = new Text();
 	private static final Text record = new Text();
 
-	private static final Group pauseGroup = new Group();
-	private static final Group gameOverGroup = new Group();
-
 	Foreground() {
 		background.setTranslateX(0);
 		background.setTranslateY(0);
 		this.getChildren().add(background);
 
 		pause[0] = new Rectangle();
-		pauseGroup.getChildren().add(pause[0]);
+		this.getChildren().add(pause[0]);
 
 		pause[1] = new Rectangle();
-		pauseGroup.getChildren().add(pause[1]);
+		this.getChildren().add(pause[1]);
 
 		pause[2] = new Rectangle();
-		pauseGroup.getChildren().add(pause[2]);
+		this.getChildren().add(pause[2]);
 
-		gameOverGroup.getChildren().add(score);
-		gameOverGroup.getChildren().add(record);
-		gameOverGroup.getChildren().add(gameOver);
+		this.getChildren().add(score);
+		this.getChildren().add(record);
+		this.getChildren().add(gameOver);
 
-		this.getChildren().add(pauseGroup);
-		this.getChildren().add(gameOverGroup);
-
-		this.updateSize();
-		this.update();
+		updateSize();
+		update();
 	}
 
-	public void updateSize() {
-		background.setWidth(Window.getScene().getWidth());
-		background.setHeight(Window.getScene().getHeight());
+	public static synchronized void updateSize() {
+		background.setWidth(Window.getWidth());
+		background.setHeight(Window.getHeight());
 
 		pause[0].setTranslateX(Grid.getSquareSize() * 9 + Grid.getTranslate());
 		pause[0].setTranslateY(Grid.getSquareSize() * 7);
@@ -74,15 +70,14 @@ public class Foreground extends Group {
 		record.setTranslateX(Grid.getSquareSize() * 6 + Grid.getTranslate());
 		record.setTranslateY(Grid.getSquareSize() * 13);
 		record.setFont(Font.font("Noto Mono", Grid.getSquareSize() * 2));
-
 	}
 
-	public void updateGameOver() {
+	public static synchronized void updateGameOver() {
 		score.setText("Score:" + String.valueOf(Grid.getScore()));
 		record.setText("Record:" + String.valueOf(Grid.getRecord()));
 	}
 
-	public void update() {
+	public static synchronized void update() {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
@@ -97,34 +92,42 @@ public class Foreground extends Group {
 						opacity = 0.0;
 					}
 				}
-
 				background.setFill(Color.rgb(0, 0, 0, opacity));
 
-				Color color = Color.color(ColorManager.getColor().getRed(), ColorManager.getColor().getGreen(),
-						ColorManager.getColor().getBlue(), opacity);
-
-				Foreground.this.getChildren().remove(gameOverGroup);
-				Foreground.this.getChildren().remove(pauseGroup);
-
 				if (Grid.isGameOver()) {
-
-					Foreground.this.getChildren().add(gameOverGroup);
-
-					gameOver.setFill(color);
-
-					score.setFill(color);
-
-					record.setFill(color);
-				} else if (Grid.isPause()) {
-
-					Foreground.this.getChildren().add(pauseGroup);
-
-					pause[0].setFill(Color.rgb(63, 63, 63, opacity));
-
-					pause[1].setFill(color);
-
-					pause[2].setFill(color);
+					gameOverOpacity += 0.01;
+					if (gameOverOpacity > 0.9) {
+						gameOverOpacity = 0.9;
+					}
+				} else {
+					gameOverOpacity -= 0.01;
+					if (gameOverOpacity < 0.0) {
+						gameOverOpacity = 0.0;
+					}
 				}
+				Color color = Color.color(ColorManager.getColor().getRed(), ColorManager.getColor().getGreen(),
+						ColorManager.getColor().getBlue(), gameOverOpacity);
+
+				gameOver.setFill(color);
+				score.setFill(color);
+				record.setFill(color);
+
+				if (Grid.isPause()) {
+					pauseOpacity += 0.01;
+					if (pauseOpacity > 0.9) {
+						pauseOpacity = 0.9;
+					}
+				} else {
+					pauseOpacity -= 0.01;
+					if (pauseOpacity < 0.0) {
+						pauseOpacity = 0.0;
+					}
+				}
+				color = Color.color(ColorManager.getColor().getRed(), ColorManager.getColor().getGreen(),
+						ColorManager.getColor().getBlue(), pauseOpacity);
+				pause[0].setFill(Color.rgb(63, 63, 63, pauseOpacity));
+				pause[1].setFill(color);
+				pause[2].setFill(color);
 			}
 		});
 	}

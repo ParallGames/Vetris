@@ -34,7 +34,7 @@ public class Background extends Group {
 		updateColor();
 	}
 
-	public void updateSize() {
+	public static synchronized void updateSize() {
 		score.setTranslateX(Grid.getSquareSize());
 		score.setTranslateY(Grid.getSquareSize());
 		score.setFont(Font.font("Noto Mono", Grid.getSquareSize()));
@@ -58,7 +58,7 @@ public class Background extends Group {
 		rectangles[2].setHeight(Grid.getSquareSize() * 4);
 	}
 
-	public void updateColor() {
+	public static synchronized void updateColor() {
 		score.setFill(ColorManager.getColor());
 		record.setFill(ColorManager.getColor());
 	}

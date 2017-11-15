@@ -30,28 +30,32 @@ public class Window extends Application {
 		return primaryStage;
 	}
 
-	public static Scene getScene() {
-		return scene;
+	public static double getHeight() {
+		return scene.getHeight();
+	}
+
+	public static double getWidth() {
+		return scene.getWidth();
 	}
 
 	public static void updateColor() {
-		background.updateColor();
-		panel.updateColor();
+		Background.updateColor();
+		Panel.updateColor();
 	}
 
 	public static void updateGrid() {
-		panel.updateGrid();
+		Panel.updateGrid();
 	}
 
 	private static void updateSize() {
-		background.updateSize();
-		foreground.updateSize();
-		panel.updateSize();
+		Background.updateSize();
+		Foreground.updateSize();
+		Panel.updateSize();
 	}
 
-	public void repaint() {
-		panel.update();
-		foreground.update();
+	public static void repaint() {
+		Panel.update();
+		Foreground.update();
 
 		long sleep = time - System.nanoTime() + interval;
 
@@ -66,7 +70,7 @@ public class Window extends Application {
 	}
 
 	@Override
-	public synchronized void start(Stage p) {
+	public void start(Stage p) {
 		primaryStage = p;
 		Grid.reset();
 		FallBlock.reset();
@@ -111,7 +115,7 @@ public class Window extends Application {
 		scene.heightProperty().addListener(resizeListener);
 
 		primaryStage.show();
-
+ 
 		new Thread() {
 			@Override
 			public void run() {
@@ -130,14 +134,14 @@ public class Window extends Application {
 						}
 					}
 
-					Window.this.repaint();
+					repaint();
 
 					if (Grid.isGameOver()) {
 						SoundPlayer.playGameOver();
-						foreground.updateGameOver();
+						Foreground.updateGameOver();
 
 						while (primaryStage.isShowing() && Grid.isGameOver()) {
-							Window.this.repaint();
+							repaint();
 						}
 					} else if (!primaryStage.isFocused()) {
 						Grid.setPause(true);

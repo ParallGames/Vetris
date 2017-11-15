@@ -18,15 +18,14 @@ public class Panel extends Group {
 	private static final Group updateGroup = new Group();
 
 	Panel() {
-		this.update();
-
+		update();
 		this.getChildren().add(score);
 		this.getChildren().add(record);
 		this.getChildren().add(gridGroup);
 		this.getChildren().add(updateGroup);
 	}
 
-	public void update() {
+	public static synchronized void update() {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
@@ -122,7 +121,7 @@ public class Panel extends Group {
 		});
 	}
 
-	public void updateGrid() {
+	public static synchronized void updateGrid() {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
@@ -143,11 +142,11 @@ public class Panel extends Group {
 		});
 	}
 
-	public void updateSize() {
+	public static synchronized void updateSize() {
 		updateGrid();
 	}
 
-	public void updateColor() {
+	public static synchronized void updateColor() {
 		updateGrid();
 	}
 }

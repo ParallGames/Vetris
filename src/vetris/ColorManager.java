@@ -58,6 +58,10 @@ public class ColorManager {
 			colorNumber = 0;
 			saveColor();
 		}
+		if (colorNumber > 2) {
+			colorNumber = 0;
+			saveColor();
+		}
 		updateColor();
 	}
 
