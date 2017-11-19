@@ -115,7 +115,7 @@ public class Window extends Application {
 		scene.heightProperty().addListener(resizeListener);
 
 		primaryStage.show();
- 
+
 		new Thread() {
 			@Override
 			public void run() {

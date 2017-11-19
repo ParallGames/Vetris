@@ -29,14 +29,6 @@ public class FallBlock {
 		return false;
 	}
 
-	public static synchronized boolean fall() {
-		if (y > 18 || Grid.getSquare(x, y + 1)) {
-			return false;
-		}
-		y++;
-		return true;
-	}
-
 	public static synchronized double getGX() {
 		return gX;
 	}
