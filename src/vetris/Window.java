@@ -41,6 +41,7 @@ public class Window extends Application {
 	public static void updateColor() {
 		Background.updateColor();
 		Panel.updateColor();
+		Panel.update();
 	}
 
 	public static void updateGrid() {
@@ -54,7 +55,6 @@ public class Window extends Application {
 	}
 
 	public static void repaint() {
-		Panel.update();
 		Foreground.update();
 
 		long sleep = time - System.nanoTime() + interval;
@@ -132,6 +132,7 @@ public class Window extends Application {
 							FallBlock.tick();
 							Grid.addSpeed();
 						}
+						Panel.update();
 					}
 
 					repaint();

@@ -21,6 +21,9 @@ public class Grid {
 
 	public static void addSpeed() {
 		speed += speed / 16384;
+		if (speed > 0.24) {
+			speed = 0.24;
+		}
 	}
 
 	public static int getEnergy() {

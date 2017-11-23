@@ -10,6 +10,7 @@ import javafx.scene.text.Text;
 public class Panel extends Group {
 
 	private static double gEnergy = 0;
+	private static double energySpeed = 0;
 
 	private static final Text score = new Text();
 	private static final Text record = new Text();
@@ -31,10 +32,20 @@ public class Panel extends Group {
 			public void run() {
 				updateGroup.getChildren().clear();
 
-				if (Grid.getEnergy() > gEnergy) {
-					gEnergy += 0.015625;
-				} else if (Grid.getEnergy() < gEnergy) {
-					gEnergy -= 0.015625;
+				if (Grid.getEnergy() > gEnergy + 0.001) {
+					energySpeed += 0.0005;
+				} else if (Grid.getEnergy() < gEnergy - 0.001) {
+					energySpeed -= 0.0005;
+				} else if (energySpeed < 0.001) {
+					energySpeed = 0;
+					gEnergy = Grid.getEnergy();
+				}
+				energySpeed -= energySpeed / 128;
+				gEnergy += energySpeed;
+				if (gEnergy < 0) {
+					gEnergy = 0;
+				} else if (gEnergy > 10) {
+					gEnergy = 10;
 				}
 
 				Rectangle rectangle;
@@ -44,12 +55,12 @@ public class Panel extends Group {
 
 				rectangle = new Rectangle(Grid.getSquareSize() * 19 + Grid.getTranslate() * 2,
 						Grid.getSquareSize() * 19 - gEnergy1, Grid.getSquareSize() * 2, gEnergy1);
-				rectangle.setFill((gEnergy < 5) ? ColorManager.getColor() : ColorManager.getDarkColor());
+				rectangle.setFill((Grid.getEnergy() < 5) ? ColorManager.getColor() : ColorManager.getDarkColor());
 				updateGroup.getChildren().add(rectangle);
 
 				rectangle = new Rectangle(Grid.getSquareSize() * 21 + Grid.getTranslate() * 2,
 						Grid.getSquareSize() * 19 - gEnergy2, Grid.getSquareSize() * 2, gEnergy2);
-				rectangle.setFill((gEnergy < 10) ? ColorManager.getColor() : ColorManager.getDarkColor());
+				rectangle.setFill((Grid.getEnergy() < 10) ? ColorManager.getColor() : ColorManager.getDarkColor());
 				updateGroup.getChildren().add(rectangle);
 
 				for (int x = 0; x < 4; x++) {
