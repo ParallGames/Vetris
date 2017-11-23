@@ -32,11 +32,11 @@ public class Panel extends Group {
 			public void run() {
 				updateGroup.getChildren().clear();
 
-				if (Grid.getEnergy() > gEnergy + 0.001) {
+				if (Grid.getEnergy() > gEnergy + 0.01) {
 					energySpeed += 0.0005;
-				} else if (Grid.getEnergy() < gEnergy - 0.001) {
+				} else if (Grid.getEnergy() < gEnergy - 0.01) {
 					energySpeed -= 0.0005;
-				} else if (energySpeed < 0.001) {
+				} else if (Math.abs(energySpeed) < 0.01) {
 					energySpeed = 0;
 					gEnergy = Grid.getEnergy();
 				}
@@ -44,8 +44,10 @@ public class Panel extends Group {
 				gEnergy += energySpeed;
 				if (gEnergy < 0) {
 					gEnergy = 0;
+					energySpeed = -energySpeed;
 				} else if (gEnergy > 10) {
 					gEnergy = 10;
+					energySpeed = -energySpeed;
 				}
 
 				Rectangle rectangle;

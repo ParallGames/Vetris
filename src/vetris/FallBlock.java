@@ -7,8 +7,6 @@ public class FallBlock {
 	private static int x = 0;
 	private static int y = 0;
 
-	private static int frameBeforeFall = 50;
-
 	private static Shape shape = new Shape();
 	private static Shape nextShape = new Shape();
 
@@ -118,7 +116,6 @@ public class FallBlock {
 	}
 
 	public static synchronized void reset() {
-		frameBeforeFall = 50;
 		shape = nextShape;
 		nextShape = new Shape();
 		nextShape.setRandomShape();
@@ -144,11 +141,8 @@ public class FallBlock {
 
 	public static synchronized void tick() {
 		if (Key.isDownDown()) {
-			frameBeforeFall = 0;
 			gY += Grid.getSpeed() * 4;
-		} else if (frameBeforeFall > 0) {
-			frameBeforeFall--;
-		} else {
+		} else if (Grid.getFallingShapes().size() == 0) {
 			gY += Grid.getSpeed();
 		}
 

@@ -52,6 +52,7 @@ public class Window extends Application {
 		Background.updateSize();
 		Foreground.updateSize();
 		Panel.updateSize();
+		Panel.update();
 	}
 
 	public static void repaint() {
