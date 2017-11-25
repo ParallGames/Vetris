@@ -8,7 +8,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class Foreground extends Group {
-	private static double opacity = 0.9;
 	private static double gameOverOpacity = 0;
 	private static double pauseOpacity = 0;
 
@@ -21,9 +20,11 @@ public class Foreground extends Group {
 	Foreground() {
 		background.setTranslateX(0);
 		background.setTranslateY(0);
+		background.setFill(Color.rgb(0, 0, 0));
 		this.getChildren().add(background);
 
 		pause[0] = new Rectangle();
+		pause[0].setFill(Color.rgb(63, 63, 63));
 		this.getChildren().add(pause[0]);
 
 		pause[1] = new Rectangle();
@@ -37,7 +38,17 @@ public class Foreground extends Group {
 		this.getChildren().add(gameOver);
 
 		updateSize();
+		updateColor();
 		update();
+	}
+
+	public static synchronized void updateColor() {
+		pause[1].setFill(ColorManager.getColor());
+		pause[2].setFill(ColorManager.getColor());
+
+		gameOver.setFill(ColorManager.getColor());
+		score.setFill(ColorManager.getColor());
+		record.setFill(ColorManager.getColor());
 	}
 
 	public static synchronized void updateSize() {
@@ -78,56 +89,40 @@ public class Foreground extends Group {
 	}
 
 	public static synchronized void update() {
+		if (Grid.isGameOver()) {
+			gameOverOpacity += 0.01;
+			if (gameOverOpacity > 0.9) {
+				gameOverOpacity = 0.9;
+			}
+		} else {
+			gameOverOpacity -= 0.01;
+			if (gameOverOpacity < 0.0) {
+				gameOverOpacity = 0.0;
+			}
+		}
+		if (Grid.isPause()) {
+			pauseOpacity += 0.01;
+			if (pauseOpacity > 0.9) {
+				pauseOpacity = 0.9;
+			}
+		} else {
+			pauseOpacity -= 0.01;
+			if (pauseOpacity < 0.0) {
+				pauseOpacity = 0.0;
+			}
+		}
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				if (Grid.isGameOver() || Grid.isPause()) {
-					opacity += 0.01;
-					if (opacity > 0.9) {
-						opacity = 0.9;
-					}
-				} else {
-					opacity -= 0.01;
-					if (opacity < 0.0) {
-						opacity = 0.0;
-					}
-				}
-				background.setFill(Color.rgb(0, 0, 0, opacity));
+				background.setOpacity((pauseOpacity > gameOverOpacity) ? pauseOpacity : gameOverOpacity);
 
-				if (Grid.isGameOver()) {
-					gameOverOpacity += 0.01;
-					if (gameOverOpacity > 0.9) {
-						gameOverOpacity = 0.9;
-					}
-				} else {
-					gameOverOpacity -= 0.01;
-					if (gameOverOpacity < 0.0) {
-						gameOverOpacity = 0.0;
-					}
-				}
-				Color color = Color.color(ColorManager.getColor().getRed(), ColorManager.getColor().getGreen(),
-						ColorManager.getColor().getBlue(), gameOverOpacity);
+				gameOver.setOpacity(gameOverOpacity);
+				score.setOpacity(gameOverOpacity);
+				record.setOpacity(gameOverOpacity);
 
-				gameOver.setFill(color);
-				score.setFill(color);
-				record.setFill(color);
-
-				if (Grid.isPause()) {
-					pauseOpacity += 0.01;
-					if (pauseOpacity > 0.9) {
-						pauseOpacity = 0.9;
-					}
-				} else {
-					pauseOpacity -= 0.01;
-					if (pauseOpacity < 0.0) {
-						pauseOpacity = 0.0;
-					}
-				}
-				color = Color.color(ColorManager.getColor().getRed(), ColorManager.getColor().getGreen(),
-						ColorManager.getColor().getBlue(), pauseOpacity);
-				pause[0].setFill(Color.rgb(63, 63, 63, pauseOpacity));
-				pause[1].setFill(color);
-				pause[2].setFill(color);
+				pause[0].setOpacity(pauseOpacity);
+				pause[1].setOpacity(pauseOpacity);
+				pause[2].setOpacity(pauseOpacity);
 			}
 		});
 	}

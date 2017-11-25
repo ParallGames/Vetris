@@ -42,6 +42,7 @@ public class Window extends Application {
 		Background.updateColor();
 		Panel.updateColor();
 		Panel.update();
+		Foreground.updateColor();
 	}
 
 	public static void updateGrid() {
