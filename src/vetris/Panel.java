@@ -2,7 +2,6 @@ package vetris;
 
 import javafx.application.Platform;
 import javafx.scene.Group;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -88,7 +87,7 @@ public class Panel extends Group {
 							if (Grid.getSquare(FallBlock.getX() + x, FallBlock.getY() + y)) {
 								rectangle.setFill(ColorManager.getDarkColor());
 							} else {
-								rectangle.setFill(Color.rgb(63, 63, 63));
+								rectangle.setFill(ColorManager.GRAY);
 							}
 							updateGroup.getChildren().add(rectangle);
 						}
@@ -114,7 +113,7 @@ public class Panel extends Group {
 								rectangle = new Rectangle((x + 6) * Grid.getSquareSize() + Grid.getTranslate(),
 										(int) ((y + Grid.getFallingShapes().get(a).getGY()) * Grid.getSquareSize()),
 										Grid.getSquareSize(), Grid.getSquareSize());
-								rectangle.setFill(Color.rgb(63, 63, 63));
+								rectangle.setFill(ColorManager.GRAY);
 								updateGroup.getChildren().add(rectangle);
 							}
 						}

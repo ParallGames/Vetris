@@ -11,6 +11,8 @@ import java.io.IOException;
 import javafx.scene.paint.Color;
 
 public class ColorManager {
+	public static final Color GRAY = Color.rgb(63, 63, 63);
+
 	private static Color color;
 	private static Color darkColor;
 	private static int colorNumber;
@@ -56,11 +58,9 @@ public class ColorManager {
 			saveColor();
 		} catch (IOException e) {
 			colorNumber = 0;
-			saveColor();
 		}
 		if (colorNumber > 2) {
 			colorNumber = 0;
-			saveColor();
 		}
 		updateColor();
 	}

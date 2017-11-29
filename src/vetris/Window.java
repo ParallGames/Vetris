@@ -150,10 +150,6 @@ public class Window extends Application {
 						Grid.setPause(true);
 					}
 				}
-				if (Grid.getScore() > Grid.getRecord()) {
-					Save.saveScore(Grid.getScore());
-				}
-				ColorManager.saveColor();
 			}
 		}.start();
 	}

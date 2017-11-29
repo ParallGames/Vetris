@@ -24,7 +24,7 @@ public class Foreground extends Group {
 		this.getChildren().add(background);
 
 		pause[0] = new Rectangle();
-		pause[0].setFill(Color.rgb(63, 63, 63));
+		pause[0].setFill(ColorManager.GRAY);
 		this.getChildren().add(pause[0]);
 
 		pause[1] = new Rectangle();
