@@ -5,9 +5,12 @@ public class FallingShape {
 
 	private double gY = 0;
 
+	private boolean isFromPlayer;
+
 	FallingShape(boolean shape[][]) {
 		clear();
 		this.shape = shape;
+		isFromPlayer = true;
 	}
 
 	FallingShape(boolean shape[][], int x, double gY) {
@@ -21,6 +24,11 @@ public class FallingShape {
 				}
 			}
 		}
+		isFromPlayer = false;
+	}
+
+	public boolean isFromPlayer() {
+		return isFromPlayer;
 	}
 
 	private void clear() {

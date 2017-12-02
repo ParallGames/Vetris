@@ -113,7 +113,12 @@ public class Panel extends Group {
 								rectangle = new Rectangle((x + 6) * Grid.getSquareSize() + Grid.getTranslate(),
 										(int) ((y + Grid.getFallingShapes().get(a).getGY()) * Grid.getSquareSize()),
 										Grid.getSquareSize(), Grid.getSquareSize());
-								rectangle.setFill(ColorManager.GRAY);
+								if (Grid.getFallingShapes().get(a).isFromPlayer()) {
+									rectangle.setFill(ColorManager.getColor());
+								} else {
+									rectangle.setFill(ColorManager.GRAY);
+								}
+
 								updateGroup.getChildren().add(rectangle);
 							}
 						}

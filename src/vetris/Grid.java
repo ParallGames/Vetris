@@ -154,13 +154,19 @@ public class Grid {
 					}
 				}
 
+				boolean somethingToFall = false;
 				for (int a = 0; a < line; a++) {
 					for (int b = 0; b < 12; b++) {
-						fall[b][a] = grid[b][a];
-						grid[b][a] = false;
+						if (grid[b][a]) {
+							somethingToFall = true;
+							fall[b][a] = grid[b][a];
+							grid[b][a] = false;
+						}
 					}
 				}
-				fallingShapes.add(new FallingShape(fall));
+				if (somethingToFall) {
+					fallingShapes.add(new FallingShape(fall));
+				}
 				return;
 			}
 		}
