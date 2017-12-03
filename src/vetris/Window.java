@@ -41,19 +41,21 @@ public class Window extends Application {
 	public static void updateColor() {
 		Background.updateColor();
 		Panel.updateColor();
-		Panel.update();
 		Foreground.updateColor();
 	}
 
 	public static void updateGrid() {
 		Panel.updateGrid();
 	}
+	
+	public static void updateNextShape() {
+		Panel.updateNextShape();
+	}
 
 	private static void updateSize() {
 		Background.updateSize();
 		Foreground.updateSize();
 		Panel.updateSize();
-		Panel.update();
 	}
 
 	public static void repaint() {

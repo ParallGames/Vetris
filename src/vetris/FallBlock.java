@@ -126,6 +126,8 @@ public class FallBlock {
 
 		gX = x;
 		gY = y;
+		
+		Window.updateNextShape();
 	}
 
 	public static synchronized void rotate() {
@@ -182,8 +184,8 @@ public class FallBlock {
 							}
 						}
 						SoundPlayer.playShock();
-						Grid.update();
 						reset();
+						Grid.update();
 						return;
 					}
 				}
