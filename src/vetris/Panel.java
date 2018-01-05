@@ -158,18 +158,19 @@ public class Panel extends Group {
 	public static synchronized void updateColor() {
 		score.setFill(ColorManager.getColor());
 		record.setFill(ColorManager.getColor());
-		
+
 		update();
 		updateGrid();
 		updateNextShape();
 	}
-	
+
 	public static synchronized void updateNextShape() {
 		int translateX = (5 - FallBlock.getNextShape().maxLeft() - FallBlock.getNextShape().maxRight())
 				* Grid.getSquareSize() / 2;
 		int translateY = (33 - FallBlock.getNextShape().maxUp() - FallBlock.getNextShape().maxDown())
 				* Grid.getSquareSize() / 2;
 		Platform.runLater(new Runnable() {
+			@Override
 			public void run() {
 				nextShapeGroup.getChildren().clear();
 				for (int x = 0; x < 4; x++) {

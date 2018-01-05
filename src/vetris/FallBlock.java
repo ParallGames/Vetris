@@ -126,7 +126,7 @@ public class FallBlock {
 
 		gX = x;
 		gY = y;
-		
+
 		Window.updateNextShape();
 	}
 

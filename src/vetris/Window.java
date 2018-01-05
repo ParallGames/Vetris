@@ -20,6 +20,7 @@ public class Window extends Application {
 	private static final Key key = new Key();
 
 	private static Stage primaryStage;
+
 	private static final Scene scene = new Scene(root, 24 * Grid.getSquareSize(), 20 * Grid.getSquareSize());
 
 	private static final Background background = new Background();
@@ -47,7 +48,7 @@ public class Window extends Application {
 	public static void updateGrid() {
 		Panel.updateGrid();
 	}
-	
+
 	public static void updateNextShape() {
 		Panel.updateNextShape();
 	}
@@ -76,6 +77,7 @@ public class Window extends Application {
 	@Override
 	public void start(Stage p) {
 		primaryStage = p;
+
 		Grid.reset();
 		FallBlock.reset();
 

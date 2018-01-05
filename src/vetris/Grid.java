@@ -126,49 +126,98 @@ public class Grid {
 	}
 
 	public static void update() {
-		Window.updateGrid();
 		boolean isLine;
+		boolean playSound = false;
 		for (int line = 0; line < 20; line++) {
 			isLine = true;
-			for (int a = 0; a < 12; a++) {
-				if (!grid[a][line]) {
+			for (int x = 0; x < 12; x++) {
+				if (!grid[x][line]) {
 					isLine = false;
 				}
 			}
 			if (isLine) {
-				for (int a = 0; a < 12; a++) {
-					grid[a][line] = false;
+				for (int x = 0; x < 12; x++) {
+					grid[x][line] = false;
 				}
 
-				SoundPlayer.playLine();
+				playSound = true;
 				score += 12;
 				energy++;
 				if (energy > 10) {
 					energy = 10;
 				}
-
-				boolean fall[][] = new boolean[12][20];
-				for (int a = 0; a < 12; a++) {
-					for (int b = 0; b < 20; b++) {
-						fall[a][b] = false;
-					}
-				}
-
-				boolean somethingToFall = false;
-				for (int a = 0; a < line; a++) {
-					for (int b = 0; b < 12; b++) {
-						if (grid[b][a]) {
-							somethingToFall = true;
-							fall[b][a] = grid[b][a];
-							grid[b][a] = false;
-						}
-					}
-				}
-				if (somethingToFall) {
-					fallingShapes.add(new FallingShape(fall));
-				}
-				return;
 			}
 		}
+		if (playSound) {
+			SoundPlayer.playLine();
+		}
+
+		boolean possiblyFall[][] = new boolean[12][20];
+		for (int x = 0; x < 12; x++) {
+			for (int y = 0; y < 20; y++) {
+				possiblyFall[x][y] = grid[x][y];
+			}
+		}
+
+		for (int x = 0; x < 12; x++) {
+			for (int y = 0; y < 20; y++) {
+				if (possiblyFall[x][y]) {
+					boolean fall[][] = new boolean[12][20];
+					for (int a = 0; a < 12; a++) {
+						for (int b = 0; b < 20; b++) {
+							fall[a][b] = false;
+						}
+					}
+					fall[x][y] = true;
+					boolean change = true;
+					while (change) {
+						change = false;
+						for (int a = 0; a < 12; a++) {
+							for (int b = 0; b < 20; b++) {
+								if (possiblyFall[a][b] && !fall[a][b]) {
+									if (a < 11 && fall[a + 1][b]) {
+										fall[a][b] = true;
+										change = true;
+									} else if (a > 0 && fall[a - 1][b]) {
+										fall[a][b] = true;
+										change = true;
+									} else if (b < 19 && fall[a][b + 1]) {
+										fall[a][b] = true;
+										change = true;
+									} else if (b > 0 && fall[a][b - 1]) {
+										fall[a][b] = true;
+										change = true;
+									}
+								}
+							}
+						}
+					}
+					for (int a = 0; a < 12; a++) {
+						for (int b = 0; b < 20; b++) {
+							if (fall[a][b]) {
+								possiblyFall[a][b] = false;
+							}
+						}
+					}
+					boolean canFall = true;
+					for (int a = 0; a < 12; a++) {
+						if (fall[a][19]) {
+							canFall = false;
+						}
+					}
+					if (canFall) {
+						for (int a = 0; a < 12; a++) {
+							for (int b = 0; b < 20; b++) {
+								if (fall[a][b]) {
+									grid[a][b] = false;
+								}
+							}
+						}
+						fallingShapes.add(new FallingShape(fall));
+					}
+				}
+			}
+		}
+		Window.updateGrid();
 	}
 }
