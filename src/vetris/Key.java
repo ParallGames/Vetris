@@ -80,11 +80,13 @@ public class Key extends Group {
 					Grid.getFallingShapes().clear();
 					FallBlock.reset();
 				} else if (Grid.isTinyShape() && !FallBlock.collision()) {
+					SoundPlayer.playMove();
 					Grid.setTinyShape(false);
-					Grid.getFallingShapes().add(
-							new FallingShape(FallBlock.getShape().getShape(), FallBlock.getX(), FallBlock.getGY()));
+					Grid.setSquare(FallBlock.getX(), FallBlock.getY());
+					Grid.update();
 					FallBlock.reset();
 				} else if (Grid.hasEnoughEnergy()) {
+					SoundPlayer.playMove();
 					Grid.setTinyShape(true);
 					FallBlock.tinyShape();
 				}

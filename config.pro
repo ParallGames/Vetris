@@ -5,7 +5,7 @@
 -libraryjars <java.home>/lib/ext/jfxrt.jar
 
 
--optimizationpasses 1000 
+-optimizationpasses 10
 -overloadaggressively 
 -repackageclasses ''
 -allowaccessmodification

@@ -30,7 +30,7 @@ public class Grid {
 		return energy;
 	}
 
-	public static Vector<FallingShape> getFallingShapes() {
+	public static synchronized Vector<FallingShape> getFallingShapes() {
 		return fallingShapes;
 	}
 

@@ -46,7 +46,7 @@ public class Panel extends Group {
 			energySpeed = 0;
 			gEnergy = Grid.getEnergy();
 		}
-		energySpeed -= energySpeed / 128;
+		energySpeed *= 0.99;
 		gEnergy += energySpeed;
 		if (gEnergy < 0) {
 			gEnergy = 0;

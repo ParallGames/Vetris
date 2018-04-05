@@ -108,7 +108,7 @@ public class FallBlock {
 	}
 
 	public static synchronized void moveUp() {
-		if (y < 1) {
+		if (y < 2) {
 			return;
 		}
 		y--;
