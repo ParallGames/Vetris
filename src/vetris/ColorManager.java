@@ -15,7 +15,7 @@ public class ColorManager {
 
 	private static Color color;
 	private static Color darkColor;
-	private static int colorNumber;
+	private static byte colorNumber;
 
 	public static Color getColor() {
 		return color;

@@ -102,13 +102,7 @@ public class Window extends Application {
 			public void changed(ObservableValue<? extends Number> a, Number b, Number c) {
 				int height = (int) (scene.getHeight() / 20);
 				int width = (int) (scene.getWidth() / 24);
-				int size;
-
-				if (height < width) {
-					size = height;
-				} else {
-					size = width;
-				}
+				int size = Math.min(height, width);
 
 				Grid.setSquareSize(size);
 				Grid.setTranslate(((int) scene.getWidth() - 24 * size) / 2);

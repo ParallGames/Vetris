@@ -102,7 +102,7 @@ public class Grid {
 		pause = p;
 	}
 
-	public static void setSquare(int x, int y) {
+	public static synchronized void setSquare(int x, int y) {
 		if (y > 0) {
 			grid[x][y] = true;
 		} else if (!gameOver) {
@@ -125,7 +125,7 @@ public class Grid {
 		translate = t;
 	}
 
-	public static void update() {
+	public static synchronized void update() {
 		boolean isLine;
 		boolean playSound = false;
 		for (int line = 0; line < 20; line++) {

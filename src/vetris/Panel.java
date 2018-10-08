@@ -72,12 +72,10 @@ public class Panel extends Group {
 
 				updateGroup.getChildren().clear();
 
-				Rectangle rectangle;
-
 				for (int x = 0; x < 4; x++) {
 					for (int y = 0; y < 4; y++) {
 						if (FallBlock.isSquare(x, y)) {
-							rectangle = new Rectangle(
+							Rectangle rectangle = new Rectangle(
 									(int) ((FallBlock.getGX() + x + 6) * Grid.getSquareSize() + Grid.getTranslate()),
 									(int) ((FallBlock.getGY() + y) * Grid.getSquareSize()), Grid.getSquareSize(),
 									Grid.getSquareSize());
@@ -95,7 +93,8 @@ public class Panel extends Group {
 					for (int x = 0; x < 12; x++) {
 						for (int y = 0; y < 20; y++) {
 							if (Grid.getFallingShapes().get(a).get(x, y)) {
-								rectangle = new Rectangle((x + 6) * Grid.getSquareSize() + Grid.getTranslate(),
+								Rectangle rectangle = new Rectangle(
+										(x + 6) * Grid.getSquareSize() + Grid.getTranslate(),
 										(int) ((y + Grid.getFallingShapes().get(a).getGY()) * Grid.getSquareSize()),
 										Grid.getSquareSize(), Grid.getSquareSize());
 								if (Grid.getFallingShapes().get(a).isFromPlayer()) {

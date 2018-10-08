@@ -6,7 +6,7 @@ public class Main {
 	public static void main(String args[]) {
 		ColorManager.loadColor();
 
-		Application.launch(Window.class, args);
+		Application.launch(Window.class);
 
 		if (Grid.getScore() > Grid.getRecord()) {
 			Save.saveScore(Grid.getScore());
