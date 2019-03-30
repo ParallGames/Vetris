@@ -42,7 +42,7 @@ public class Key extends Group {
 	}
 
 	Key() {
-		this.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+		this.addEventHandler(KeyEvent.KEY_PRESSED, key -> {
 			if (key.getCode() == KeyCode.LEFT && !Grid.isPause() && !leftDown) {
 				leftDown = true;
 				if (Grid.isTinyShape()) {
@@ -80,13 +80,11 @@ public class Key extends Group {
 					Grid.getFallingShapes().clear();
 					FallBlock.reset();
 				} else if (Grid.isTinyShape() && !FallBlock.collision()) {
-					SoundPlayer.playMove();
 					Grid.setTinyShape(false);
 					Grid.setSquare(FallBlock.getX(), FallBlock.getY());
 					Grid.update();
 					FallBlock.reset();
 				} else if (Grid.hasEnoughEnergy()) {
-					SoundPlayer.playMove();
 					Grid.setTinyShape(true);
 					FallBlock.tinyShape();
 				}

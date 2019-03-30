@@ -61,7 +61,6 @@ public class FallingShape {
 								}
 							}
 						}
-						SoundPlayer.playShock();
 						Grid.update();
 						return true;
 					}

@@ -1,5 +1,9 @@
 package vetris;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -12,8 +16,6 @@ import javafx.stage.Stage;
 
 public class Window extends Application {
 	private static final int fps = 100;
-
-	private static long time = System.nanoTime();
 	private static final long interval = 1_000_000_000 / fps;
 
 	private static final Group root = new Group();
@@ -59,21 +61,6 @@ public class Window extends Application {
 		Panel.updateSize();
 	}
 
-	public static void repaint() {
-		Foreground.update();
-
-		long sleep = time - System.nanoTime() + interval;
-
-		if (sleep > 0) {
-			try {
-				Thread.sleep(sleep / 1000000, (int) (sleep % 1000000));
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-		time = System.nanoTime();
-	}
-
 	@Override
 	public void start(Stage p) {
 		primaryStage = p;
@@ -116,39 +103,39 @@ public class Window extends Application {
 
 		primaryStage.show();
 
-		new Thread() {
+		ScheduledExecutorService gameLoop = Executors.newSingleThreadScheduledExecutor();
+
+		gameLoop.scheduleAtFixedRate(new Runnable() {
 			@Override
 			public void run() {
-				while (primaryStage.isShowing()) {
-					if (!Grid.isPause()) {
-						for (int a = 0; a < Grid.getFallingShapes().size(); a++) {
-							if (Grid.getFallingShapes().get(a).tick()) {
-								Grid.getFallingShapes().remove(a);
-							}
-						}
-						if (Grid.isTinyShape()) {
-							FallBlock.tickTinyShape();
-						} else {
-							FallBlock.tick();
-							Grid.addSpeed();
-						}
-						Panel.update();
-					}
-
-					repaint();
-
-					if (Grid.isGameOver()) {
-						SoundPlayer.playGameOver();
-						Foreground.updateGameOver();
-
-						while (primaryStage.isShowing() && Grid.isGameOver()) {
-							repaint();
-						}
-					} else if (!primaryStage.isFocused()) {
-						Grid.setPause(true);
-					}
+				if (!primaryStage.isShowing()) {
+					gameLoop.shutdown();
 				}
+
+				if (!Grid.isPause() && !Grid.isGameOver()) {
+					for (int a = 0; a < Grid.getFallingShapes().size(); a++) {
+						if (Grid.getFallingShapes().get(a).tick()) {
+							Grid.getFallingShapes().remove(a);
+						}
+					}
+
+					if (Grid.isTinyShape()) {
+						FallBlock.tickTinyShape();
+					} else {
+						FallBlock.tick();
+						Grid.addSpeed();
+					}
+					Panel.update();
+				}
+
+				if (Grid.isGameOver()) {
+					Foreground.updateGameOver();
+				} else if (!primaryStage.isFocused()) {
+					Grid.setPause(true);
+				}
+
+				Foreground.update();
 			}
-		}.start();
+		}, 0, interval, TimeUnit.NANOSECONDS);
 	}
 }

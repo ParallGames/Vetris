@@ -22,10 +22,9 @@ public class Panel extends Group {
 
 	Panel() {
 		powerBar[0] = new Rectangle();
-		this.getChildren().add(powerBar[0]);
 		powerBar[1] = new Rectangle();
-		this.getChildren().add(powerBar[1]);
 
+		this.getChildren().addAll(powerBar);
 		this.getChildren().add(score);
 		this.getChildren().add(record);
 		this.getChildren().add(gridGroup);

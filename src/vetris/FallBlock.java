@@ -60,7 +60,6 @@ public class FallBlock {
 			}
 		}
 		x--;
-		SoundPlayer.playMove();
 	}
 
 	public static synchronized void goRight() {
@@ -72,7 +71,6 @@ public class FallBlock {
 			}
 		}
 		x++;
-		SoundPlayer.playMove();
 	}
 
 	public static synchronized boolean isNextSquare(int p_x, int p_y) {
@@ -88,7 +86,6 @@ public class FallBlock {
 			return;
 		}
 		y++;
-		SoundPlayer.playMove();
 	}
 
 	public static synchronized void moveLeft() {
@@ -96,7 +93,6 @@ public class FallBlock {
 			return;
 		}
 		x--;
-		SoundPlayer.playMove();
 	}
 
 	public static synchronized void moveRight() {
@@ -104,7 +100,6 @@ public class FallBlock {
 			return;
 		}
 		x++;
-		SoundPlayer.playMove();
 	}
 
 	public static synchronized void moveUp() {
@@ -112,7 +107,6 @@ public class FallBlock {
 			return;
 		}
 		y--;
-		SoundPlayer.playMove();
 	}
 
 	public static synchronized void reset() {
@@ -136,8 +130,6 @@ public class FallBlock {
 		if (collision()) {
 			shape.unrotate();
 			shape.update();
-		} else {
-			SoundPlayer.playMove();
 		}
 	}
 
@@ -183,7 +175,6 @@ public class FallBlock {
 								}
 							}
 						}
-						SoundPlayer.playShock();
 						reset();
 						Grid.update();
 						return;

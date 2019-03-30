@@ -127,7 +127,6 @@ public class Grid {
 
 	public static synchronized void update() {
 		boolean isLine;
-		boolean playSound = false;
 		for (int line = 0; line < 20; line++) {
 			isLine = true;
 			for (int x = 0; x < 12; x++) {
@@ -139,17 +138,12 @@ public class Grid {
 				for (int x = 0; x < 12; x++) {
 					grid[x][line] = false;
 				}
-
-				playSound = true;
 				score += 12;
 				energy++;
 				if (energy > 10) {
 					energy = 10;
 				}
 			}
-		}
-		if (playSound) {
-			SoundPlayer.playLine();
 		}
 
 		boolean possiblyFall[][] = new boolean[12][20];
